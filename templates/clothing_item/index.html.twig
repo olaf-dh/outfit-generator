@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% set message = 'templates.clothing_item.index' %}
+
+{% block title %}{{ (message ~ '.title')|trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1 class="mb-4">{{ (message ~ '.title')|trans }}</h1>
+
+        {% set grouped = {} %}
+        {% for item in items %}
+            {% set c = item.subCategory.category.name %}
+            {% set grouped = grouped|merge({ (c): (grouped[c]|default([]))|merge([item]) }) %}
+        {% endfor %}
+
+        {# 🔹 Tab Navigation #}
+        {% set activeCategory = app.request.query.get('category')|default('') %}
+        <ul class="nav nav-tabs" id="categoryTabs" role="tablist">
+            {% for categoryName, gruppe in grouped %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {% if activeCategory == categoryName|lower %}
+                    active{% elseif loop.first and not activeCategory %}active{% endif %}"
+                            id="tab-{{ loop.index }}-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#tab-{{ loop.index }}"
+                            type="button"
+                            role="tab"
+                            aria-controls="tab-{{ loop.index }}"
+                            aria-selected="{{ loop.first ? 'true' : 'false' }}">
+                        {{ categoryName }}
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {# 🔹 Tab Content #}
+        <div class="tab-content mt-3" id="categoryTabsContent">
+            {% for categoryName, gruppe in grouped %}
+                <div class="tab-pane fade {% if activeCategory == categoryName|lower %}
+                show active{% elseif loop.first and not activeCategory %}show active{% endif %}"
+                     id="tab-{{ loop.index }}"
+                     role="tabpanel"
+                     aria-labelledby="tab-{{ loop.index }}-tab">
+
+                    <table class="table table-striped rounded-4 overflow-hidden shadow-sm">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>{{ (message ~ '.table_head.subcategory')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.preview')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.name')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.style')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.color')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.pattern')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.material')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.season')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.layer_depth')|trans }}</th>
+                            <th>{{ (message ~ '.table_head.action')|trans }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in gruppe %}
+                            <tr>
+                                <td>{{ item.subCategory }}</td>
+                                <td>
+{#                                    {% if item.primaryImage %}#}
+{#                                        <img src="{{ asset('uploads/clothing/' ~ item.primaryImage.fileName) }}"#}
+{#                                             alt="{{ item.primaryImage.altText }}"#}
+{#                                             class="img-thumbnail"#}
+{#                                             style="max-width: 80px;">#}
+{#                                    {% else %}#}
+                                        <span class="text-muted">
+                                            {{ (message ~ '.table_body.no_photo')|trans }}
+                                        </span>
+{#                                    {% endif %}#}
+                                </td>
+                                <td><strong>{{ item.name }}</strong></td>
+                                <td>
+                                    {% for style in item.styles %}
+                                        {{ ('enum.style.' ~ style) | trans }}{% if not loop.last %}, {% endif %}
+                                    {% else %}
+                                        {{ (message ~ '.table_body.no_style')|trans }}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% set colorCount = item.itemColors|length %}
+                                    {% for itemColor in item.itemColors %}
+                                        {% set color = itemColor.color %}
+                                        {% if color %}
+                                            {{ color.name }}<br>
+                                            <span class="d-inline-block rounded-circle border"
+                                                  style="width: 18px; height: 18px; background-color: {{ color.hexCode }}">
+                                            </span><br>
+                                            {% if itemColor.isPrimary and colorCount > 1 %}
+                                                ({{ (message ~ '.table_body.primary_color')|trans }})
+                                            {% endif %}
+                                            <br>
+                                        {% endif %}
+                                    {% else %}
+                                        {{ (message ~ '.table_body.no_color')|trans }}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for pattern in item.patterns %}
+                                        {{ ('enum.pattern_type.' ~ pattern) | trans }}{% if not loop.last %}, {% endif %}
+                                    {% else %}
+                                        {{ (message ~ '.table_body.no_pattern')|trans }}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for itemMaterial in item.itemMaterials %}
+                                        {% set material = itemMaterial.material %}
+                                        {% if material %}
+                                            {{ material }} ({{ itemMaterial.percentage }}%)<br>
+                                        {% endif %}
+                                    {% else %}
+                                        {{ (message ~ '.table_body.no_material')|trans }}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% for season in item.seasons %}
+                                        {{ ('enum.season.' ~ season) |trans }}{% if not loop.last %}, {% endif %}
+                                    {% else %}
+                                        {{ (message ~ '.table_body.no_season')|trans }}
+                                    {% endfor %}
+                                </td>
+                                <td>
+                                    {% if item.minLayerDepth is null or item.maxLayerDepth is null %}
+                                        {{ (message ~ '.table_body.no_layer_depth')|trans }}
+                                    {% else %}
+                                        {% if item.minLayerDepth < item.maxLayerDepth %}
+                                            {{ item.minLayerDepth }} - {{ item.maxLayerDepth }}
+                                        {% else %}
+                                            {{ item.minLayerDepth }}
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ path('app_clothing_item_edit', {id: item.id}) }}"
+                                       class="btn btn-sm btn-primary">
+                                        {{ (message ~ '.action.edit')|trans }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{{ path('app_clothing_item_new') }}" class="btn btn-success mt-3">
+            {{ (message ~ '.action.new')|trans }}
+        </a>
+
+    </div>
+{% endblock %}

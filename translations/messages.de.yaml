@@ -1,0 +1,226 @@
+enum:
+    style:
+        casual: Casual
+        smart_casual: Smart Casual
+        business: Business
+        formal: Formal
+        sporty: Sportlich
+
+    body_zone:
+        upper_body: Oberkörper
+        lower_body: Unterkörper
+        full_body: Ganzkörper
+        outer_layer: Außenschicht
+        footwear: Schuhe
+        head: Kopf
+        accessory: Accessoire
+
+    season:
+        spring: Frühling
+        summer: Sommer
+        autumn: Herbst
+        winter: Winter
+
+    weather_condition:
+        sunny: Sonnig
+        rainy: Regnerisch
+        windy: Windig
+        cold: Kalt
+        mild: Mild
+        hot: Heiß
+
+    color_family:
+        black: Schwarz
+        white: Weiß
+        gray: Grau
+        navy: Navy
+        beige: Beige
+        brown: Braun
+        red: Rot
+        blue: Blau
+        green: Grün
+        yellow: Gelb
+        orange: Orange
+        taupe: Taupe
+
+    color_tone:
+        light: Hell
+        medium: Mittel
+        dark: Dunkel
+
+    color_temperature:
+        warm: Warm
+        cool: Kühl
+        neutral: Neutral
+
+    color_saturation:
+        muted: Gedeckt
+        normal: Normal
+        vivid: Kräftig
+
+    pattern_type:
+        solid: Einfarbig
+        vertical_stripes: Längsstreifen
+        horizontal_stripes: Querstreifen
+        checked: Kariert
+        dotted: Gepunktet
+        floral: Blütenmuster
+        leaf: Blattmuster
+        print: Aufdruck
+        novelty: Novelty Print
+        multicolor: Mehrfarbig
+
+clothing_item:
+    list:
+        title: Meine Kleidungsstücke
+        empty: Noch keine Kleidungsstücke vorhanden
+    add:
+        title: Kleidungsstück anlegen
+        button: Anlegen
+    edit:
+        title: Kleidungsstück bearbeiten
+        button: Speichern
+    delete:
+        button: Löschen
+        confirm: Möchten Sie dieses Kleidungsstück wirklich löschen?
+    photo:
+        upload: Foto hochladen
+        analyze: KI-Analyse starten
+        analyzing: Wird analysiert…
+    form:
+        choose_prim_color: Hauptfarbe wählen
+        cancel: Abbrechen
+        label:
+            name: Name
+            category: Kategorie
+            subcategory: Unterkategorie
+            body_zone: Körperzone
+            min_layer_depth: Mindest-Schichttiefe
+            max_layer_depth: Maximale Schichttiefe
+            colors: Farben
+            primary_color: Hauptfarbe
+            materials: Materialien
+            patterns: Muster
+            styles: Stile
+            seasons: Jahreszeiten
+            weather_conditions: Wetterbedingungen
+            notes: Notizen
+            photo: Foto
+        placeholder:
+            name: Bezeichnung
+            select: Bitte wählen…
+            notes: Optionale Anmerkungen zum Kleidungsstück
+        error:
+            required: Dieses Feld ist erforderlich.
+            invalid_image: Bitte ein gültiges Bild hochladen (JPG, PNG).
+            image_too_large: Das Bild darf maximal 10 MB groß sein.
+
+category:
+    list:
+        title: Kategorien
+    add:
+        title: Kategorie hinzufügen
+        button: Hinzufügen
+
+subcategory:
+    list:
+        title: Unterkategorien
+    add:
+        title: Unterkategorie hinzufügen
+        button: Hinzufügen
+
+outfit:
+    generator:
+        title: Outfit-Generator
+        seed_items: Ausgewählte Kleidungsstücke
+        style_label: Stil
+        season_label: Jahreszeit
+        weather_label: Wetter (optional)
+        generate_button: Outfits vorschlagen
+        suggestions_title: Vorschläge
+        no_suggestions: Keine passenden Outfits gefunden. Bitte andere Einstellungen wählen.
+    suggestion:
+        items_label: Kleidungsstücke
+        save_button: Outfit speichern
+
+flash:
+    clothing_item:
+        created: Kleidungsstück wurde erfolgreich angelegt.
+        updated: Kleidungsstück wurde erfolgreich aktualisiert.
+        deleted: Kleidungsstück wurde erfolgreich gelöscht.
+    category:
+        created: Kategorie wurde erfolgreich angelegt.
+        deleted: Kategorie wurde erfolgreich gelöscht.
+    outfit:
+        saved: Outfit wurde erfolgreich gespeichert.
+
+registration:
+    controller:
+        success: Registrierung erfolgreich. Bitte einloggen.
+    form:
+        agreement: Sie sollten unsere Nutzungsbedingungen und Datenschutzrichtlinien akzeptieren.
+        password:
+            not_blank: Bitte ein Passwort eingeben.
+            min_length: Das Passwort muss mindestens 8 Zeichen lang sein.
+
+templates:
+    base:
+        title: Outfit KI
+        login: Anmelden
+        logout: Abmelden
+        site_name: Outfit-Manager
+    dashboard:
+        index:
+            title: Startseite
+            welcome: Willkommen zurück, {{ user }}!
+            last_items: Letzte Kleidungsstücke
+            no_items: Keine Kleidungsstücke vorhanden
+        card:
+            clothing:
+                title: Kleidung
+                text: Du hast {{ count }} Kleidungstücke gespeichert.
+                button: Anzeigen
+            outfit:
+                title: Outfit zusammenstellen
+                text: Stelle ein Outfit aus Deinen vorhandenen Kleidungsstücken zusammen.
+                button: Starten
+    clothing_item:
+        index:
+            title: Meine Kleidung
+            table_head:
+                subcategory: Unterkategorie
+                preview: Vorschau
+                name: Name
+                style: Stil
+                color: Farbe
+                pattern: Muster
+                material: Material
+                season: Jahreszeit
+                layer_depth: Schichttiefe
+                action: Aktion
+            table_body:
+                no_photo: Kein Bild vorhanden
+                no_style: Kein Stil definiert
+                no_pattern: Kein Muster definiert
+                no_material: Kein Material definiert
+                no_season: Keine Jahreszeit definiert
+                no_color: Keine Farbe definiert
+                no_layer_depth: Keine Schicht definiert
+                primary_color: Hauptfarbe
+            action:
+                edit: Bearbeiten
+                new: Neues Kleidungsstück anlegen
+    security:
+        login:
+            title: Anmelden
+            please: Bitte anmelden
+            email: E-Mail
+            password: Passwort
+            remember_me: Angemeldet bleiben
+            submit: Anmelden
+            error:
+                invalid_credentials: Falscher Benutzername oder Passwort.
+                locked: Ihr Konto ist gesperrt.
+                expired: Ihr Konto ist abgelaufen.
+            message:
+                logged_in: Sie sind eingeloggt als

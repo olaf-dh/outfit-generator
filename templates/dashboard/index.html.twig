@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'templates.dashboard.index.title'|trans }}{% endblock %}
+
+{% block body %}
+    {% for label, messages in app.flashes %}
+        <div class="alert alert-{{ label }}">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="container py-5">
+        <h1 class="mb-4">👋 {{ 'templates.dashboard.index.welcome'|trans({'{{ user }}': app.user.firstName}) }}</h1>
+
+        <div class="row g-4">
+            {% set cardClothingTitle = 'templates.dashboard.card.clothing.title'|trans %}
+            {% set cardClothingText = 'templates.dashboard.card.clothing.text'|trans({'{{ count }}': clothingItems|length}) %}
+            {% set cardClothingButton = 'templates.dashboard.card.clothing.button'|trans %}
+            {% include 'dashboard/_card.html.twig' with {
+                icon: '🧺',
+                title: cardClothingTitle,
+                text: cardClothingText,
+                route: 'app_clothing_item_index',
+                button: cardClothingButton,
+                buttonClass: 'btn-outline-primary'
+            } %}
+
+{#            {% include 'dashboard/_card.html.twig' with {#}
+{#                icon: '🎯',#}
+{#                title: 'Outfit zusammenstellen',#}
+{#                text: 'Stelle ein Outfit aus deinen vorhandenen Kleidungsstücken zusammen.',#}
+{#                route: 'app_outfit_form',#}
+{#                button: 'Starten',#}
+{#                buttonClass: 'btn-success'#}
+{#            } %}#}
+
+{#            {% include 'dashboard/_card.html.twig' with {#}
+{#                icon: '🧑‍🎨',#}
+{#                title: 'Eigenschaften verwalten',#}
+{#                text: 'Bearbeite alle Eigenschaften wie Farbe, Stil, usw.',#}
+{#                route: 'app_property_index',#}
+{#                button: 'Bearbeiten',#}
+{#                buttonClass: 'btn-outline-secondary'#}
+{#            } %}#}
+
+
+        </div>
+
+        <hr class="my-5">
+
+        <h4>🕘 {{ 'templates.dashboard.index.last_items'|trans }}</h4>
+        <ul class="list-group list-group-flush">
+            {% for item in recentItems %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ item.name }} ({{ item.subCategory.category }})
+                </li>
+            {% else %}
+                <li class="list-group-item">{{ 'templates.dashboard.index.no_items'|trans }}.</li>
+            {% endfor %}
+        </ul>
+
+        <p><a href="{{ path('app_logout') }}">{{ 'templates.base.logout'|trans }}</a></p>
+    </div>
+{% endblock %}

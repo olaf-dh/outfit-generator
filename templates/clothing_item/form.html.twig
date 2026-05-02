@@ -1,0 +1,242 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card shadow border-0 rounded-4">
+            <div class="card-header">
+                <h1>{{ title|trans }}</h1>
+            </div>
+            <div class="card-body p-4">
+                {{ form_start(form, {'method': 'POST', 'attr': {'enctype': 'multipart/form-data'}}) }}
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.name'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-2 bg-light">
+                            {{ form_widget(form.name) }}
+                        </div>
+                        {{ form_errors(form.name) }}
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.subcategory'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-2 bg-light">
+                            {{ form_widget(form.subCategory) }}
+                        </div>
+                        {{ form_errors(form.subCategory) }}
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    {% if isEdit == true %}
+                        {% set colorCount = form.primaryColor|length %}
+                        <div class="col-md-4">
+                            <div class="flex-grow-1">
+                                <label class="form-label fw-bold">
+                                    {% if colorCount > 1 %}
+                                        {{ 'clothing_item.form.choose_prim_color'|trans }}
+                                    {% else %}
+                                        {{ 'clothing_item.form.label.primary_color'|trans }}
+                                    {% endif %}
+                                </label>
+                                {% for choice in form.primaryColor %}
+                                    <label class="form-check-label d-flex align-items-center" style="gap: 0.5rem;">
+                                        {{ form_widget(choice, { attr: { class: 'form-check-input' } }) }}
+                                        {{ choice.vars.label|raw }}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+{#                            {% if form.vars.value and form.vars.value.primaryImage %}#}
+{#                                <div style="max-width: 160px;">#}
+{#                                    <img src="{{ asset('uploads/clothing/' ~ form.vars.value.primaryImage.fileName) }}"#}
+{#                                         class="img-thumbnail"#}
+{#                                         alt="{{ form.vars.value.primaryImage.altText ?? 'Bild' }}">#}
+{#                                    <small class="text-muted d-block text-center mt-1">#}
+{#                                        {{ form.vars.value.primaryImage.altText }}#}
+{#                                    </small>#}
+{#                                </div>#}
+{#                            {% endif %}#}
+                        </div>
+                    {% endif %}
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.styles'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.styles) }}
+                        </div>
+                        {{ form_errors(form.styles) }}
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.photo'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-2 bg-light">
+                            {{ form_widget(form.photo) }}
+                        </div>
+                        {{ form_errors(form.photo) }}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.seasons'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.seasons) }}
+                        </div>
+                        {{ form_errors(form.seasons) }}
+                    </div>
+
+                    <div class="col-md-5">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.weather_conditions'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.weatherConditions) }}
+                        </div>
+                        {{ form_errors(form.weatherConditions) }}
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <label class="form-label fw-bold">
+                        {{ 'clothing_item.form.label.patterns'|trans }}
+                    </label>
+
+                    <div class="border rounded-3 p-3 bg-light">
+                        {{ form_widget(form.patterns) }}
+                    </div>
+                    {{ form_errors(form.patterns) }}
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.min_layer_depth'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.minLayerDepth) }}
+                        </div>
+                        {{ form_errors(form.minLayerDepth) }}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.max_layer_depth'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.maxLayerDepth) }}
+                        </div>
+                        {{ form_errors(form.maxLayerDepth) }}
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.notes'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-1 bg-light">
+                            {{ form_widget(form.notes) }}
+                        </div>
+                        {{ form_errors(form.notes) }}
+                    </div>
+                </div>
+
+                <div class="mb-3">
+{#                    <div id="item_materials_wrapper"#}
+{#                         data-prototype="{{ form_widget(form.itemMaterials.vars.prototype)|e('html_attr') }}"#}
+{#                         data-index="{{ form.itemMaterials|length }}">#}
+
+{#                        {% for materialForm in form.itemMaterials %}#}
+{#                            <div class="material-entry mb-2">#}
+{#                                {{ form_row(materialForm) }}#}
+{#                            </div>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+
+                    <button type="button" class="btn btn-primary btn-sm mt-2" id="add_material_button">
+                        Neues Material hinzufügen
+                    </button>
+                    <br>
+                </div>
+                {{ form_end(form) }}
+                <a href="{{ path(list_path) }}" class="btn btn-link mt-3">Zurück zur Übersicht</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.getElementById('item_materials_wrapper');
+
+            function updateRemoveButtonsVisibility() {
+                const entries = wrapper.querySelectorAll('.material-entry');
+                const showRemove = entries.length > 1;
+
+                entries.forEach(entry => {
+                    const removeBtn = entry.querySelector('.remove-material');
+                    if (removeBtn) {
+                        removeBtn.style.display = showRemove ? 'inline-block' : 'none';
+                    }
+                });
+            }
+
+            // Function to add the Remove button
+            function addRemoveButton(entryDiv) {
+                let removeBtn = entryDiv.querySelector('.remove-material');
+
+                if (!removeBtn) {
+                    removeBtn = document.createElement('button');
+                    removeBtn.type = 'button';
+                    removeBtn.className = 'btn btn-danger btn-sm remove-material ms-2';
+                    removeBtn.textContent = 'Entfernen';
+
+                    removeBtn.addEventListener('click', () => {
+                        wrapper.removeChild(entryDiv);
+                        updateRemoveButtonsVisibility();
+                    });
+
+                    entryDiv.appendChild(removeBtn);
+                }
+
+                updateRemoveButtonsVisibility();
+            }
+
+            // Initialize existing entries
+            wrapper.querySelectorAll('.material-entry').forEach(entry => {
+                addRemoveButton(entry);
+            });
+
+            // "Add"-Button"
+            const addBtn = document.getElementById('add_material_button');
+            if (addBtn) {
+                addBtn.addEventListener('click', () => {
+                    const prototype = wrapper.dataset.prototype;
+                    const index = parseInt(wrapper.dataset.index);
+                    const newFormHtml = prototype.replace(/__name__/g, index);
+                    wrapper.dataset.index = index + 1;
+
+                    const div = document.createElement('div');
+                    div.classList.add('material-entry', 'mb-2');
+                    div.innerHTML = newFormHtml;
+
+                    addRemoveButton(div);
+                    wrapper.appendChild(div);
+                });
+            }
+        });
+    </script>
+{% endblock %}
