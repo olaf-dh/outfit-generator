@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Dto\OutfitSuggestion;
+use App\Domain\Outfit\DTO\OutfitSuggestion;
 use App\Entity\ClothingItem;
 use App\Entity\Style;
 use App\Enum\BodyZone;

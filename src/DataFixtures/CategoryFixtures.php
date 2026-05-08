@@ -25,13 +25,13 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $categories = [
-            self::UPPER_BODY  => ['name' => 'Oberkörper',   'zone' => BodyZone::UPPER_BODY],
-            self::LOWER_BODY  => ['name' => 'Unterkörper',  'zone' => BodyZone::LOWER_BODY],
-            self::FULL_BODY   => ['name' => 'Ganzkörper',   'zone' => BodyZone::FULL_BODY],
-            self::OUTER_LAYER => ['name' => 'Außenschicht', 'zone' => BodyZone::OUTER_LAYER],
-            self::FOOTWEAR    => ['name' => 'Schuhe',       'zone' => BodyZone::FOOTWEAR],
-            self::HEAD        => ['name' => 'Kopf',         'zone' => BodyZone::HEAD],
-            self::ACCESSORY   => ['name' => 'Accessoire',   'zone' => BodyZone::ACCESSORY],
+            self::UPPER_BODY  => ['name' => 'upper_body',  'zone' => BodyZone::UPPER_BODY],
+            self::LOWER_BODY  => ['name' => 'lower_body',  'zone' => BodyZone::LOWER_BODY],
+            self::FULL_BODY   => ['name' => 'full_body',   'zone' => BodyZone::FULL_BODY],
+            self::OUTER_LAYER => ['name' => 'outer_layer', 'zone' => BodyZone::OUTER_LAYER],
+            self::FOOTWEAR    => ['name' => 'footwear',    'zone' => BodyZone::FOOTWEAR],
+            self::HEAD        => ['name' => 'head',        'zone' => BodyZone::HEAD],
+            self::ACCESSORY   => ['name' => 'accessory',   'zone' => BodyZone::ACCESSORY],
         ];
 
         foreach ($categories as $reference => $data) {

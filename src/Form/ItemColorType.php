@@ -26,4 +26,3 @@ class ItemColorType extends AbstractType
         ;
     }
 }
-

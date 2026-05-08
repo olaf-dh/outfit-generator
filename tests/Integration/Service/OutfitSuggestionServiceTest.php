@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Integration\Service;
 
+use App\DataFixtures\CategoryFixtures;
 use App\DataFixtures\ClothingItemFixtures;
 use App\DataFixtures\LookupFixtures;
 use App\DataFixtures\SubCategoryFixtures;
-use App\DataFixtures\CategoryFixtures;
-use App\Dto\OutfitSuggestion;
+use App\Domain\Outfit\DTO\OutfitSuggestion;
 use App\Entity\ClothingItem;
 use App\Enum\BodyZone;
 use App\Enum\SeasonType;
@@ -24,7 +24,6 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OutfitSuggestionServiceTest extends KernelTestCase
 {
@@ -144,7 +143,7 @@ class OutfitSuggestionServiceTest extends KernelTestCase
     public function testSeedItemsAreAlwaysIncludedInSuggestion(): void
     {
         $pullover = $this->getItem(ClothingItemFixtures::RED_PULLOVER);
-        $shoes    = $this->getItem(ClothingItemFixtures::COGNAC_SHOES);
+        $shoes    = $this->getItem(ClothingItemFixtures::CAMEL_SHOES);
 
         $suggestions = $this->service->suggest(
             [$pullover, $shoes],
@@ -265,7 +264,7 @@ class OutfitSuggestionServiceTest extends KernelTestCase
                 $allItems
             );
 
-            $this->assertTrue(in_array('Beiger Trenchcoat', $itemNames) || in_array('Grauer Wollmantel', $itemNames));
+            $this->assertTrue(in_array('Beige Trenchcoat', $itemNames) || in_array('Grey Wool Coat', $itemNames));
         }
     }
 
@@ -299,5 +298,25 @@ class OutfitSuggestionServiceTest extends KernelTestCase
         } else {
             $this->markTestSkipped('Not enough clothing items for two different suggestions.');
         }
+    }
+
+    public function testReasonIsAddedOnlyOnce(): void
+    {
+        $suggestion = new OutfitSuggestion();
+
+        $suggestion
+            ->addReason('material.good')
+            ->addReason('material.good');
+
+        self::assertCount(1, $suggestion->getReasons());
+    }
+
+    public function testAddReason(): void
+    {
+        $suggestions = new OutfitSuggestion();
+
+        $suggestions->addReason('test');
+
+        self::assertSame('test', $suggestions->getReasons()[0]);
     }
 }

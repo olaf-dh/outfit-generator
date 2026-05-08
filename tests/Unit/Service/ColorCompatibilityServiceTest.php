@@ -38,13 +38,13 @@ class ColorCompatibilityServiceTest extends TestCase
     }
 
     // -------------------------------------------------------
-    // Neutral-Rule: Black, White, Gray, Navy, Beige
+    // Neutral-Rule: Black, White, Grey, Brown, Beige
     // fit to any other color
     // -------------------------------------------------------
 
-    public function testGrayIsCompatibleWithBrown(): void
+    public function testGreyIsCompatibleWithBrown(): void
     {
-        $anthracite = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $anthracite = $this->makeColor(ColorFamily::GREY, ColorTone::DARK, ColorTemperature::COOL);
         $cognac    = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
 
         $this->assertTrue($this->service->areCompatible($anthracite, $cognac));
@@ -58,12 +58,12 @@ class ColorCompatibilityServiceTest extends TestCase
         $this->assertTrue($this->service->areCompatible($black, $red));
     }
 
-    public function testNavyIsCompatibleWithGreen(): void
+    public function testGreyIsCompatibleWithGreen(): void
     {
-        $navy  = $this->makeColor(ColorFamily::NAVY, ColorTone::DARK, ColorTemperature::COOL);
+        $grey  = $this->makeColor(ColorFamily::GREY, ColorTone::DARK, ColorTemperature::COOL);
         $olive = $this->makeColor(ColorFamily::GREEN, ColorTone::MEDIUM, ColorTemperature::WARM);
 
-        $this->assertTrue($this->service->areCompatible($navy, $olive));
+        $this->assertTrue($this->service->areCompatible($grey, $olive));
     }
 
     // -------------------------------------------------------
@@ -74,18 +74,18 @@ class ColorCompatibilityServiceTest extends TestCase
 
     public function testSameFamilyDifferentToneIsCompatible(): void
     {
-        $lightGray  = $this->makeColor(ColorFamily::GRAY, ColorTone::LIGHT, ColorTemperature::COOL);
-        $anthracite = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $lightGrey  = $this->makeColor(ColorFamily::GREY, ColorTone::LIGHT, ColorTemperature::COOL);
+        $anthracite = $this->makeColor(ColorFamily::GREY, ColorTone::DARK, ColorTemperature::COOL);
 
-        $this->assertTrue($this->service->areCompatible($lightGray, $anthracite));
+        $this->assertTrue($this->service->areCompatible($lightGrey, $anthracite));
     }
 
     public function testSameFamilySameToneIsNotCompatible(): void
     {
-        $gray1 = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
-        $gray2 = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $grey1 = $this->makeColor(ColorFamily::GREY, ColorTone::DARK, ColorTemperature::COOL);
+        $grey2 = $this->makeColor(ColorFamily::GREY, ColorTone::DARK, ColorTemperature::COOL);
 
-        $this->assertFalse($this->service->areCompatible($gray1, $gray2));
+        $this->assertFalse($this->service->areCompatible($grey1, $grey2));
     }
 
     // -------------------------------------------------------
@@ -105,18 +105,18 @@ class ColorCompatibilityServiceTest extends TestCase
 
     public function testCoolColorsAreCompatible(): void
     {
-        $navy    = $this->makeColor(ColorFamily::NAVY, ColorTone::DARK, ColorTemperature::COOL);
-        $gray    = $this->makeColor(ColorFamily::GRAY, ColorTone::MEDIUM, ColorTemperature::COOL);
+        $blue    = $this->makeColor(ColorFamily::BLUE, ColorTone::DARK, ColorTemperature::COOL);
+        $grey    = $this->makeColor(ColorFamily::GREY, ColorTone::MEDIUM, ColorTemperature::COOL);
 
-        $this->assertTrue($this->service->areCompatible($navy, $gray));
+        $this->assertTrue($this->service->areCompatible($blue, $grey));
     }
 
-    public function testNavyIsCompatibleWithBrown(): void
+    public function testBlueIsCompatibleWithBrown(): void
     {
         $cognac = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
-        $navy   = $this->makeColor(ColorFamily::NAVY, ColorTone::DARK, ColorTemperature::COOL);
+        $blue   = $this->makeColor(ColorFamily::BLUE, ColorTone::DARK, ColorTemperature::COOL);
 
-        $this->assertTrue($this->service->areCompatible($cognac, $navy));
+        $this->assertTrue($this->service->areCompatible($cognac, $blue));
     }
 
     // -------------------------------------------------------
@@ -127,7 +127,7 @@ class ColorCompatibilityServiceTest extends TestCase
     public function testCompatibilityIsSymmetric(): void
     {
         $cognac    = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
-        $anthracite = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $anthracite = $this->makeColor(ColorFamily::GREY, ColorTone::DARK, ColorTemperature::COOL);
 
         $this->assertEquals(
             $this->service->areCompatible($cognac, $anthracite),
@@ -153,14 +153,14 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorTemperature::WARM,
             ColorSaturation::MUTED
         );
-        $mutedNavy = $this->makeColor(
-            ColorFamily::NAVY,
+        $mutedBrown = $this->makeColor(
+            ColorFamily::BROWN,
             ColorTone::MEDIUM,
             ColorTemperature::COOL,
             ColorSaturation::MUTED
         );
 
-        $this->assertTrue($this->service->areCompatible($mutedRed, $mutedNavy));
+        $this->assertTrue($this->service->areCompatible($mutedRed, $mutedBrown));
     }
 
     public function testMutedAndNormalIsCompatible(): void
@@ -188,14 +188,14 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorTemperature::WARM,
             ColorSaturation::VIVID
         );
-        $mutedGray = $this->makeColor(
-            ColorFamily::GRAY,
+        $mutedGrey = $this->makeColor(
+            ColorFamily::GREY,
             ColorTone::MEDIUM,
             ColorTemperature::COOL,
             ColorSaturation::MUTED
         );
 
-        $this->assertTrue($this->service->areCompatible($vividRed, $mutedGray));
+        $this->assertTrue($this->service->areCompatible($vividRed, $mutedGrey));
     }
 
     public function testVividAndNormalIsCompatible(): void
@@ -223,14 +223,14 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorTemperature::WARM,
             ColorSaturation::VIVID
         );
-        $vividNavy = $this->makeColor(
-            ColorFamily::NAVY,
+        $vividBlue = $this->makeColor(
+            ColorFamily::BLUE,
             ColorTone::MEDIUM,
             ColorTemperature::COOL,
             ColorSaturation::VIVID
         );
 
-        $this->assertFalse($this->service->areCompatible($vividRed, $vividNavy));
+        $this->assertFalse($this->service->areCompatible($vividRed, $vividBlue));
     }
 
     public function testTwoVividNeutralsAreStillIncompatible(): void
@@ -241,13 +241,13 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorTemperature::NEUTRAL,
             ColorSaturation::VIVID
         );
-        $vividNavy  = $this->makeColor(
-            ColorFamily::NAVY,
+        $vividBlue  = $this->makeColor(
+            ColorFamily::BLUE,
             ColorTone::MEDIUM,
             ColorTemperature::COOL,
             ColorSaturation::VIVID
         );
 
-        $this->assertFalse($this->service->areCompatible($vividWhite, $vividNavy));
+        $this->assertFalse($this->service->areCompatible($vividWhite, $vividBlue));
     }
 }

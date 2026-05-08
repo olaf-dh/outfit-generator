@@ -22,8 +22,8 @@ class Color
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    #[ORM\Column(length: 100, unique: true)]
+    private string $name;
 
     #[ORM\Column(length: 7, nullable: true)]
     #[Assert\Regex(
@@ -60,7 +60,7 @@ class Color
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -146,8 +146,8 @@ class Color
         );
     }
 
-    public function __toString(): string
-    {
-        return $this->name . ($this->hexCode ? ' (' . $this->hexCode . ')' : '');
-    }
+//    public function __toString(): string
+//    {
+//        return $this->name . ($this->hexCode ? ' (' . $this->hexCode . ')' : '');
+//    }
 }

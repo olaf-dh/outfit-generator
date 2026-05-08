@@ -3,8 +3,16 @@ enum:
         casual: Casual
         smart_casual: Smart Casual
         business: Business
-        formal: Formal
+        business_casual: Business Casual
+        elegant: Elegant
         sporty: Sportlich
+        streetwear: Streetwear
+        minimalist: Minimalistisch
+        vintage: Vintage
+        outdoor: Outdoor
+        fashion: Fashion
+        boho: Boho
+        preppy: Preppy
 
     body_zone:
         upper_body: Oberkörper
@@ -30,18 +38,17 @@ enum:
         hot: Heiß
 
     color_family:
-        black: Schwarz
-        white: Weiß
-        gray: Grau
-        navy: Navy
-        beige: Beige
-        brown: Braun
-        red: Rot
         blue: Blau
+        red: Rot
         green: Grün
         yellow: Gelb
         orange: Orange
-        taupe: Taupe
+        purple: Lila
+        brown: Braun
+        black: Schwarz
+        white: Weiß
+        grey: Grau
+        beige: Beige
 
     color_tone:
         light: Hell
@@ -69,6 +76,127 @@ enum:
         print: Aufdruck
         novelty: Novelty Print
         multicolor: Mehrfarbig
+        camouflage: Camouflage
+        paisley: Paisley
+        houndstooth: Hahnentritt
+        chevron: Chevron
+        argyle: Argyle
+        zigzag: Zickzack
+        geometric: Geometrisch
+        abstract: Abstrakt
+        tie_dye: Batik
+        marl: Mehliert
+
+color:
+    name:
+        navy: Navy
+        dark_blue: Dunkelblau
+        blue: Blau
+        royal_blue: Königsblau
+        steel_blue: Stahlblau
+        light_blue: Hellblau
+        dusty_blue: Staubblau
+
+        burgundy: Burgunderrot
+        dark_red: Dunkelrot
+        red: Rot
+        cherry: Kirschrot
+        brick: Ziegelrot
+        light_red: Hellrot
+        dusty_red: Staubrot
+
+        dark_green: Dunkelgrün
+        forest_green: Waldgrün
+        green: Grün
+        emerald: Smaragdgrün
+        olive: Olivgrün
+        light_green: Hellgrün
+        sage: Salbeigrün
+
+        mustard: Senfgelb
+        dark_yellow: Dunkelgelb
+        yellow: Gelb
+        gold: Gold
+        sand_yellow: Sandgelb
+        light_yellow: Hellgelb
+        dusty_yellow: Staubgelb
+
+        burnt_orange: Gebranntes Orange
+        dark_orange: Dunkelorange
+        orange: Orange
+        coral: Koralle
+        light_orange: Hellorange
+        terracotta: Terrakotta
+        dusty_orange: Stauborange
+
+        dark_purple: Dunkellila
+        eggplant: Aubergine
+        purple: Lila
+        violet: Violett
+        plum: Pflaume
+        lavender: Lavendel
+        dusty_purple: Staublila
+
+        dark_brown: Dunkelbraun
+        chocolate: Schokolade
+        brown: Braun
+        chestnut: Kastanienbraun
+        taupe: Taupe
+        light_brown: Hellbraun
+        camel: Kamel
+
+        charcoal: Anthrazit
+        dark_grey: Dunkelgrau
+        grey: Grau
+        cool_grey: Kühles Grau
+        warm_grey: Warmes Grau
+        light_grey: Hellgrau
+        silver: Silber
+
+        white: Weiß
+        off_white: Off-White
+        ivory: Elfenbein
+        cream: Creme
+        soft_white: Weichweiß
+        cool_white: Kaltweiß
+        pearl: Perlweiß
+
+        black: Schwarz
+        softy_black: Weichschwarz
+        charcoal_black: Kohleschwarz
+        warm_black: Warmes Schwarz
+        faded_black: Ausgewaschenes Schwarz
+        cool_black: Kühles Schwarz
+        matte_black: Mattes Schwarz
+
+        beige: Beige
+        sand: Sand
+        nude: Hautfarben
+        taupe_light: Helles Taupe
+        stone: Stein
+        warm_beige: Warmes Beige
+        cool_beige: Kühles Beige
+
+material:
+    name:
+        cotton: Baumwolle
+        linen: Leinen
+        wool: Wolle
+        cashmere: Kashmir
+        leather: Leder
+        denim: Denim
+        polyester: Polyester
+        silk: Seide
+        nylon: Nylon
+        elastane: Elastan
+        viscose: Viskose
+        fleece: Fleece
+        suede: Wildleder
+        corduroy: Cord
+        velvet: Samt
+        down: Daune
+        gore_tex: Gore-Tex
+        softshell: Softshell
 
 clothing_item:
     list:
@@ -116,6 +244,14 @@ clothing_item:
             image_too_large: Das Bild darf maximal 10 MB groß sein.
 
 category:
+    name:
+        upper_body: Oberkörper
+        lower_body: Unterkörper
+        full_body: Ganzkörper
+        outer_layer: Außenschicht
+        footwear: Schuhe
+        head: Kopf
+        accessory: Accessoire
     list:
         title: Kategorien
     add:
@@ -123,6 +259,62 @@ category:
         button: Hinzufügen
 
 subcategory:
+    name:
+        t_shirt: T-Shirt
+        polo_shirt: Polo-Shirt
+        button_down: Hemd
+        hoodie: Kapuzen-Shirt
+        pullover: Pullover
+        vest: Weste
+        long_sleeve: Langarm-Shirt
+        tank_top: Armlos-Shirt
+        blouse: Bluse
+        sweater: Sweatshirt
+        cardigan: Strickjacke
+        turtleneck: Rollkragen
+        crop_top: Belly-Shirt
+        tunica: Tunika
+        kimono: Kimono
+        poncho: Poncho
+        jeans: Jeans
+        chino: Chino
+        trousers: Hose
+        shorts: kurze Hose
+        sweat_pants: Jogging-Hose
+        cargo_pants: Cargohose
+        skirt: Rock
+        maxi_skirt: Maxi-Rock
+        suit: Anzug
+        jumpsuit: Jumpsuit
+        dress: Kleid
+        sportswear: Sportkleidung
+        pyjama: Schlafanzug
+        coat: Mantel
+        jacket: Jacke/Sakko
+        trenchcoat: Trenchcoat
+        blazer: Blazer
+        parka: Parka
+        sneaker: Sneaker
+        loafer: Loafer
+        business_shoes: Business-Schuhe
+        boots: Stiefel
+        sandals: Sandalen
+        high_heels: Absatzschuhe
+        sport_shoes: Sportschuhe
+        chelsea_boots: Chelsea-Stiefel
+        moccasins: Mokassins
+        espadrilles: Espadrilles
+        cap: Schirmmütze
+        beanie: Mütze
+        hat: Hut
+        scarf: Schal
+        belt: Gürtel
+        bag: Tasche
+        shoulder_bag: Schultertasche
+        backpack: Rucksack
+        necktie: Krawatte
+        sun_glasses: Sonnenbrille
+        gloves: Handschuhe
     list:
         title: Unterkategorien
     add:

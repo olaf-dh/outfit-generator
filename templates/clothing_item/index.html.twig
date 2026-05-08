@@ -29,7 +29,7 @@
                             role="tab"
                             aria-controls="tab-{{ loop.index }}"
                             aria-selected="{{ loop.first ? 'true' : 'false' }}">
-                        {{ categoryName }}
+                        {{ ('category.name.' ~ categoryName)|trans }}
                     </button>
                 </li>
             {% endfor %}
@@ -62,7 +62,7 @@
                         <tbody>
                         {% for item in gruppe %}
                             <tr>
-                                <td>{{ item.subCategory }}</td>
+                                <td>{{ ('subcategory.name.' ~ item.subCategory)|trans }}</td>
                                 <td>
 {#                                    {% if item.primaryImage %}#}
 {#                                        <img src="{{ asset('uploads/clothing/' ~ item.primaryImage.fileName) }}"#}
@@ -78,7 +78,7 @@
                                 <td><strong>{{ item.name }}</strong></td>
                                 <td>
                                     {% for style in item.styles %}
-                                        {{ ('enum.style.' ~ style) | trans }}{% if not loop.last %}, {% endif %}
+                                        {{ ('enum.style.' ~ style)|trans }}{% if not loop.last %}, {% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_style')|trans }}
                                     {% endfor %}
@@ -88,7 +88,7 @@
                                     {% for itemColor in item.itemColors %}
                                         {% set color = itemColor.color %}
                                         {% if color %}
-                                            {{ color.name }}<br>
+                                            {{ ('color.name.' ~ color.name)|trans }}<br>
                                             <span class="d-inline-block rounded-circle border"
                                                   style="width: 18px; height: 18px; background-color: {{ color.hexCode }}">
                                             </span><br>
@@ -103,7 +103,7 @@
                                 </td>
                                 <td>
                                     {% for pattern in item.patterns %}
-                                        {{ ('enum.pattern_type.' ~ pattern) | trans }}{% if not loop.last %}, {% endif %}
+                                        {{ ('enum.pattern_type.' ~ pattern)|trans }}{% if not loop.last %}, {% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_pattern')|trans }}
                                     {% endfor %}
@@ -112,7 +112,7 @@
                                     {% for itemMaterial in item.itemMaterials %}
                                         {% set material = itemMaterial.material %}
                                         {% if material %}
-                                            {{ material }} ({{ itemMaterial.percentage }}%)<br>
+                                            {{ ('material.name.' ~ material)|trans }} ({{ itemMaterial.percentage }}%)<br>
                                         {% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_material')|trans }}

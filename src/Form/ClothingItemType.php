@@ -24,12 +24,17 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @extends AbstractType<ClothingItem>
  */
 class ClothingItemType extends AbstractType
 {
+    public function __construct(private readonly TranslatorInterface $translator)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $isEdit = $options['isEdit'] ?? false;
@@ -44,7 +49,11 @@ class ClothingItemType extends AbstractType
             ->add('subCategory', EntityType::class, [
                 'label' => 'clothing_item.form.label.subcategory',
                 'class' => SubCategory::class,
-                'choice_label' => fn (SubCategory $sub) => $sub->getCategory() . ' - ' . $sub->getName(),
+                'choice_label' => fn (SubCategory $sub) =>
+                    $this->translator->trans('category.name.' . $sub->getCategory())
+                    . ' - '
+                    . $this->translator->trans('subcategory.name.' . $sub->getName()),
+                'choice_translation_domain' => false, // don't translate again
                 'placeholder' => 'clothing_item.form.placeholder.select',
                 'constraints' => [new NotBlank()],
                 'attr' => ['class' => 'form-select form-select'],
@@ -134,7 +143,7 @@ class ClothingItemType extends AbstractType
                         '<div class="d-flex align-items-center gap-2">
 <span class="badge rounded-circle" style="background-color: %s;">&nbsp;&nbsp;</span>%s</div>',
                         $color->getHexCode(),
-                        $color->getName()
+                        $this->translator->trans('color.name.' . $color->getName())
                     );
                 },
                 'choice_value' => fn(?Color $color) => $color?->getId(),

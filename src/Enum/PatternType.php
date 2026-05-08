@@ -16,4 +16,14 @@ enum PatternType: string
     case PRINT = 'print';
     case NOVELTY = 'novelty';
     case MULTICOLOR = 'multicolor';
+    case CAMOUFLAGE = 'camouflage';
+    case PAISLEY = 'paisley';
+    case HOUNDSTOOTH = 'houndstooth';
+    case CHEVRON = 'chevron';
+    case ARGYLE = 'argyle';
+    case ZIGZAG = 'zigzag';
+    case GEOMETRIC = 'geometric';
+    case ABSTRACT = 'abstract';
+    case TIE_DYE = 'tie_dye';
+    case MARL = 'marl';
 }

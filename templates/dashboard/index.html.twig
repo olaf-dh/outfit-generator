@@ -53,7 +53,7 @@
         <ul class="list-group list-group-flush">
             {% for item in recentItems %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ item.name }} ({{ item.subCategory.category }})
+                    {{ item.name }} ({{ ('category.name.' ~ item.subCategory.category)|trans }})
                 </li>
             {% else %}
                 <li class="list-group-item">{{ 'templates.dashboard.index.no_items'|trans }}.</li>

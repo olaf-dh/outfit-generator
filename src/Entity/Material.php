@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Enum\BreathabilityLevel;
+use App\Enum\MaterialCategory;
+use App\Enum\WarmthLevel;
 use App\Repository\MaterialRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -23,11 +26,23 @@ class Material
     #[Assert\NotBlank]
     private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
+    #[ORM\Column(enumType: MaterialCategory::class)]
+    private MaterialCategory $category;
 
-    #[ORM\Column(options: ['default' => false])]
-    private ?bool $isWarm = false;
+    #[ORM\Column(enumType: WarmthLevel::class)]
+    private WarmthLevel $warmth;
+
+    #[ORM\Column(enumType: BreathabilityLevel::class)]
+    private BreathabilityLevel $breathability;
+
+    #[ORM\Column]
+    private bool $waterproof = false;
+
+    #[ORM\Column]
+    private bool $stretch = false;
+
+    #[ORM\Column]
+    private bool $windproof = false;
 
     public function getId(): ?int
     {
@@ -46,29 +61,66 @@ class Material
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getCategory(): MaterialCategory
     {
-        return $this->description;
+        return $this->category;
     }
 
-    public function setDescription(?string $description): static
+    public function setCategory(MaterialCategory $category): void
     {
-        $this->description = $description;
-
-        return $this;
+        $this->category = $category;
     }
 
-    public function isWarm(): ?bool
+    public function getWarmth(): WarmthLevel
     {
-        return $this->isWarm;
+        return $this->warmth;
     }
 
-    public function setIsWarm(bool $isWarm): static
+    public function setWarmth(WarmthLevel $warmth): void
     {
-        $this->isWarm = $isWarm;
-
-        return $this;
+        $this->warmth = $warmth;
     }
+
+    public function getBreathability(): BreathabilityLevel
+    {
+        return $this->breathability;
+    }
+
+    public function setBreathability(BreathabilityLevel $breathability): void
+    {
+        $this->breathability = $breathability;
+    }
+
+    public function isWaterproof(): bool
+    {
+        return $this->waterproof;
+    }
+
+    public function setWaterproof(bool $waterproof): void
+    {
+        $this->waterproof = $waterproof;
+    }
+
+    public function isStretch(): bool
+    {
+        return $this->stretch;
+    }
+
+    public function setStretch(bool $stretch): void
+    {
+        $this->stretch = $stretch;
+    }
+
+    public function isWindproof(): bool
+    {
+        return $this->windproof;
+    }
+
+    public function setWindproof(bool $windproof): void
+    {
+        $this->windproof = $windproof;
+    }
+
 
     public function __toString(): string
     {

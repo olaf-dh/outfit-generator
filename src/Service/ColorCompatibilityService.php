@@ -12,8 +12,8 @@ class ColorCompatibilityService
     private const array NEUTRAL_FAMILIES = [
         ColorFamily::BLACK,
         ColorFamily::WHITE,
-        ColorFamily::GRAY,
-        ColorFamily::NAVY,
+        ColorFamily::GREY,
+        ColorFamily::BROWN,
         ColorFamily::BEIGE,
     ];
 

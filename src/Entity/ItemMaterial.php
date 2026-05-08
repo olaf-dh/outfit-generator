@@ -22,7 +22,7 @@ class ItemMaterial
 
     #[ORM\ManyToOne(targetEntity: Material::class, inversedBy: 'itemMaterials')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Material $material = null;
+    private Material $material;
 
     #[ORM\Column(nullable: true)]
     #[Assert\GreaterThanOrEqual(0)]
@@ -58,12 +58,12 @@ class ItemMaterial
         return $this;
     }
 
-    public function getMaterial(): ?Material
+    public function getMaterial(): Material
     {
         return $this->material;
     }
 
-    public function setMaterial(?Material $material): static
+    public function setMaterial(Material $material): static
     {
         $this->material = $material;
 
@@ -89,10 +89,6 @@ class ItemMaterial
 
     public function __toString(): string
     {
-        if ($this->material === null) {
-            throw new \LogicException('Material must not be null in ItemMaterial::__toString().');
-        }
-
         return sprintf('%s (%s%%)', $this->material->getName(), $this->percentage ?? 0);
     }
 }

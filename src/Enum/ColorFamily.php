@@ -6,12 +6,15 @@ namespace App\Enum;
 
 enum ColorFamily: string
 {
-    case GRAY = 'gray';
-    case BROWN = 'brown';
+    case BLUE = 'blue';
     case RED = 'red';
-    case BLACK = 'black';
-    case NAVY = 'navy';
     case GREEN = 'green';
+    case YELLOW = 'yellow';
+    case ORANGE = 'orange';
+    case PURPLE = 'purple';
+    case BROWN = 'brown';
+    case BLACK = 'black';
     case WHITE = 'white';
+    case GREY = 'grey';
     case BEIGE = 'beige';
 }

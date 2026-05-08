@@ -26,13 +26,13 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
     public const string RED_PULLOVER      = 'item-red-pullover';
     public const string BLUE_STRIPE_SHIRT = 'item-blue-stripe-shirt';
     public const string ANTHRACITE_PANTS  = 'item-anthracite-pants';
-    public const string COGNAC_CHINO      = 'item-cognac-chino';
+    public const string MUSTARD_CHINO      = 'item-mustard-chino';
     public const string DARK_BLUE_JEANS   = 'item-dark-blue-jeans';
-    public const string GRAY_COAT         = 'item-gray-coat';
+    public const string GREY_COAT         = 'item-grey-coat';
     public const string BEIGE_TRENCH      = 'item-beige-trench';
-    public const string COGNAC_SHOES      = 'item-cognac-shoes';
+    public const string CAMEL_SHOES      = 'item-camel-shoes';
     public const string WHITE_SNEAKERS    = 'item-white-sneakers';
-    public const string GRAY_SCARF        = 'item-gray-scarf';
+    public const string GREY_SCARF        = 'item-grey-scarf';
     public const string BROWN_BELT        = 'item-brown-belt';
 
     public function __construct(private readonly UserPasswordHasherInterface $hasher)
@@ -126,12 +126,12 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
         return [
             // --- Upper body ---
             self::WHITE_SHIRT => [
-                'name'        => 'Weißes Businesshemd',
+                'name'        => 'White Business Shirt',
                 'subcategory' => SubCategoryFixtures::BUTTON_DOWN,
                 'min_layer'   => 2,
                 'max_layer'   => 2,
-                'primary_color' => LookupFixtures::COLOR_WHITE,
-                'materials'   => [LookupFixtures::MATERIAL_COTTON => 100.0],
+                'primary_color' => ColorFixtures::COLOR_WHITE,
+                'materials'   => [MaterialFixtures::MATERIAL_COTTON => 100.0],
                 'patterns'    => [LookupFixtures::PATTERN_SOLID],
                 'styles'      => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'     => [
@@ -141,24 +141,24 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 ],
             ],
             self::RED_PULLOVER => [
-                'name'          => 'Roter Cashmerepullover',
+                'name'          => 'Red Cashmere Pullover',
                 'subcategory'   => SubCategoryFixtures::PULLOVER,
                 'min_layer'     => 2,
                 'max_layer'     => 3,
-                'primary_color' => LookupFixtures::COLOR_RED_VIVID,
-                'materials'     => [LookupFixtures::MATERIAL_CASHMERE => 100.0],
+                'primary_color' => ColorFixtures::COLOR_RED,
+                'materials'     => [MaterialFixtures::MATERIAL_CASHMERE => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
                 'seasons'       => [LookupFixtures::SEASON_AUTUMN, LookupFixtures::SEASON_WINTER],
             ],
             self::BLUE_STRIPE_SHIRT => [
-                'name'             => 'Blaues Streifenhemd',
+                'name'             => 'Blue Stripe Shirt',
                 'subcategory'      => SubCategoryFixtures::BUTTON_DOWN,
                 'min_layer'        => 2,
                 'max_layer'        => 2,
-                'primary_color'    => LookupFixtures::COLOR_DARK_BLUE,
-                'secondary_colors' => [LookupFixtures::COLOR_WHITE],
-                'materials'        => [LookupFixtures::MATERIAL_COTTON => 100.0],
+                'primary_color'    => ColorFixtures::COLOR_DARK_BLUE,
+                'secondary_colors' => [ColorFixtures::COLOR_WHITE],
+                'materials'        => [MaterialFixtures::MATERIAL_COTTON => 100.0],
                 'patterns'         => [LookupFixtures::PATTERN_VERTICAL_STRIPES],
                 'styles'           => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
                 'seasons'          => [LookupFixtures::SEASON_SPRING, LookupFixtures::SEASON_SUMMER],
@@ -166,12 +166,12 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
 
             // --- Lower body ---
             self::ANTHRACITE_PANTS => [
-                'name'          => 'Anthrazit Anzughose',
-                'subcategory'   => SubCategoryFixtures::DRESS_TROUSERS,
+                'name'          => 'Anthracite Pants',
+                'subcategory'   => SubCategoryFixtures::TROUSERS,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => LookupFixtures::COLOR_ANTHRACITE,
-                'materials'     => [LookupFixtures::MATERIAL_WOOL => 100.0],
+                'primary_color' => ColorFixtures::COLOR_CHARCOAL,
+                'materials'     => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'       => [
@@ -180,50 +180,50 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                     LookupFixtures::SEASON_WINTER
                 ],
             ],
-            self::COGNAC_CHINO => [
-                'name'          => 'Cognacbraune Chinohose',
+            self::MUSTARD_CHINO => [
+                'name'          => 'Mustard Chino',
                 'subcategory'   => SubCategoryFixtures::CHINO,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => LookupFixtures::COLOR_COGNAC,
-                'materials'     => [LookupFixtures::MATERIAL_COTTON => 100.0],
+                'primary_color' => ColorFixtures::COLOR_MUSTARD,
+                'materials'     => [MaterialFixtures::MATERIAL_COTTON => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
                 'seasons'       => [LookupFixtures::SEASON_SPRING, LookupFixtures::SEASON_AUTUMN],
             ],
             self::DARK_BLUE_JEANS => [
-                'name'          => 'Dunkelblaue Jeans',
+                'name'          => 'Dark Blue Jeans',
                 'subcategory'   => SubCategoryFixtures::JEANS,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => LookupFixtures::COLOR_DARK_BLUE,
-                'materials'     => [LookupFixtures::MATERIAL_DENIM => 100.0],
+                'primary_color' => ColorFixtures::COLOR_DARK_BLUE,
+                'materials'     => [MaterialFixtures::MATERIAL_DENIM => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
-                'seasons'       => [], // no Saison = universal
+                'seasons'       => [], // no Season = universal
             ],
 
             // --- Outer layer ---
-            self::GRAY_COAT => [
-                'name'          => 'Grauer Wollmantel',
+            self::GREY_COAT => [
+                'name'          => 'Grey Wool Coat',
                 'subcategory'   => SubCategoryFixtures::COAT,
                 'min_layer'     => 4,
                 'max_layer'     => 5,
-                'primary_color' => LookupFixtures::COLOR_MEDIUM_GRAY,
-                'materials'     => [LookupFixtures::MATERIAL_WOOL => 100.0],
+                'primary_color' => ColorFixtures::COLOR_WARM_GREY,
+                'materials'     => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'       => [LookupFixtures::SEASON_AUTUMN, LookupFixtures::SEASON_WINTER],
             ],
             self::BEIGE_TRENCH => [
-                'name'               => 'Beiger Trenchcoat',
+                'name'               => 'Beige Trenchcoat',
                 'subcategory'        => SubCategoryFixtures::TRENCH_COAT,
                 'min_layer'          => 4,
                 'max_layer'          => 5,
-                'primary_color'      => LookupFixtures::COLOR_BEIGE,
+                'primary_color'      => ColorFixtures::COLOR_BEIGE,
                 'materials'          => [
-                    LookupFixtures::MATERIAL_COTTON    => 65.0,
-                    LookupFixtures::MATERIAL_POLYESTER => 35.0,
+                    MaterialFixtures::MATERIAL_COTTON    => 65.0,
+                    MaterialFixtures::MATERIAL_POLYESTER => 35.0,
                 ],
                 'patterns'           => [LookupFixtures::PATTERN_SOLID],
                 'styles'             => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_BUSINESS],
@@ -232,49 +232,49 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             // --- Shoes ---
-            self::COGNAC_SHOES => [
-                'name'          => 'Cognacfarbene Lederschuhe',
-                'subcategory'   => SubCategoryFixtures::LEATHER_SHOE,
+            self::CAMEL_SHOES => [
+                'name'          => 'Camel Leather Shoes',
+                'subcategory'   => SubCategoryFixtures::BUSINESS_SHOES,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => LookupFixtures::COLOR_COGNAC,
-                'materials'     => [LookupFixtures::MATERIAL_LEATHER => 100.0],
+                'primary_color' => ColorFixtures::COLOR_CAMEL,
+                'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_BUSINESS],
                 'seasons'       => [],
             ],
             self::WHITE_SNEAKERS => [
-                'name'          => 'Weiße Sneaker',
+                'name'          => 'White Sneaker',
                 'subcategory'   => SubCategoryFixtures::SNEAKER,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => LookupFixtures::COLOR_WHITE,
-                'materials'     => [LookupFixtures::MATERIAL_COTTON => 100.0],
+                'primary_color' => ColorFixtures::COLOR_WHITE,
+                'materials'     => [MaterialFixtures::MATERIAL_COTTON => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_CASUAL],
                 'seasons'       => [],
             ],
 
             // --- Accessory ---
-            self::GRAY_SCARF => [
-                'name'               => 'Grauer Wollschal',
+            self::GREY_SCARF => [
+                'name'               => 'Grey Wool Scarf',
                 'subcategory'        => SubCategoryFixtures::SCARF,
                 'min_layer'          => 1,
                 'max_layer'          => 1,
-                'primary_color'      => LookupFixtures::COLOR_LIGHT_GRAY,
-                'materials'          => [LookupFixtures::MATERIAL_WOOL => 100.0],
+                'primary_color'      => ColorFixtures::COLOR_LIGHT_GREY,
+                'materials'          => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'patterns'           => [LookupFixtures::PATTERN_SOLID],
                 'styles'             => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'            => [LookupFixtures::SEASON_AUTUMN, LookupFixtures::SEASON_WINTER],
                 'weather_conditions' => [LookupFixtures::WEATHER_COLD, LookupFixtures::WEATHER_WINDY],
             ],
             self::BROWN_BELT => [
-                'name'          => 'Brauner Ledergürtel',
+                'name'          => 'Brown Leather Belt',
                 'subcategory'   => SubCategoryFixtures::BELT,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => LookupFixtures::COLOR_COGNAC,
-                'materials'     => [LookupFixtures::MATERIAL_LEATHER => 100.0],
+                'primary_color' => ColorFixtures::COLOR_TAUPE,
+                'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [
                     LookupFixtures::STYLE_CASUAL,
@@ -289,6 +289,8 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [
+            ColorFixtures::class,
+            MaterialFixtures::class,
             SubCategoryFixtures::class,
             LookupFixtures::class,
         ];
