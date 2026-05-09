@@ -9,11 +9,11 @@ use App\DataFixtures\ClothingItemFixtures;
 use App\DataFixtures\LookupFixtures;
 use App\DataFixtures\SubCategoryFixtures;
 use App\Domain\Outfit\DTO\OutfitSuggestion;
+use App\Domain\Outfit\Enum\BodyZone;
+use App\Domain\Outfit\Enum\SeasonType;
+use App\Domain\Outfit\Enum\StyleType;
+use App\Domain\Outfit\Enum\WeatherConditionType;
 use App\Entity\ClothingItem;
-use App\Enum\BodyZone;
-use App\Enum\SeasonType;
-use App\Enum\StyleType;
-use App\Enum\WeatherConditionType;
 use App\Service\OutfitSuggestionService;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
@@ -264,7 +264,7 @@ class OutfitSuggestionServiceTest extends KernelTestCase
                 $allItems
             );
 
-            $this->assertTrue(in_array('Beige Trenchcoat', $itemNames) || in_array('Grey Wool Coat', $itemNames));
+            $this->assertTrue(in_array('Beige Trenchcoat', $itemNames) || in_array('Gray Wool Coat', $itemNames));
         }
     }
 

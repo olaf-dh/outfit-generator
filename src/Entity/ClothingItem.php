@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Enum\BodyZone;
+use App\Domain\Outfit\Enum\ClothingItemStatus;
 use App\Repository\ClothingItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -93,6 +93,9 @@ class ClothingItem
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'clothingItems')]
     #[ORM\JoinColumn(nullable: false)]
     private User $owner;
+
+    #[ORM\Column(enumType: ClothingItemStatus::class)]
+    private ClothingItemStatus $status = ClothingItemStatus::PENDING;
 
     public function __construct()
     {
@@ -353,9 +356,23 @@ class ClothingItem
         return $this->owner;
     }
 
-    public function setOwner(User $owner): void
+    public function setOwner(User $owner): static
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getStatus(): ClothingItemStatus
+    {
+        return $this->status;
+    }
+
+    public function setStatus(ClothingItemStatus $status): static
+    {
+        $this->status = $status;
+
+        return $this;
     }
 
     public function __toString(): string

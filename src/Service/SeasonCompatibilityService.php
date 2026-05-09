@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Domain\Outfit\Enum\SeasonType;
+use App\Domain\Outfit\Enum\WeatherConditionType;
 use App\Entity\ClothingItem;
 use App\Entity\Season;
 use App\Entity\WeatherCondition;
-use App\Enum\SeasonType;
-use App\Enum\WeatherConditionType;
 
 class SeasonCompatibilityService
 {

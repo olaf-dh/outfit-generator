@@ -28,11 +28,11 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
     public const string ANTHRACITE_PANTS  = 'item-anthracite-pants';
     public const string MUSTARD_CHINO      = 'item-mustard-chino';
     public const string DARK_BLUE_JEANS   = 'item-dark-blue-jeans';
-    public const string GREY_COAT         = 'item-grey-coat';
+    public const string GRAY_COAT         = 'item-gray-coat';
     public const string BEIGE_TRENCH      = 'item-beige-trench';
     public const string CAMEL_SHOES      = 'item-camel-shoes';
     public const string WHITE_SNEAKERS    = 'item-white-sneakers';
-    public const string GREY_SCARF        = 'item-grey-scarf';
+    public const string GRAY_SCARF        = 'item-gray-scarf';
     public const string BROWN_BELT        = 'item-brown-belt';
 
     public function __construct(private readonly UserPasswordHasherInterface $hasher)
@@ -204,12 +204,12 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             // --- Outer layer ---
-            self::GREY_COAT => [
-                'name'          => 'Grey Wool Coat',
+            self::GRAY_COAT => [
+                'name'          => 'Gray Wool Coat',
                 'subcategory'   => SubCategoryFixtures::COAT,
                 'min_layer'     => 4,
                 'max_layer'     => 5,
-                'primary_color' => ColorFixtures::COLOR_WARM_GREY,
+                'primary_color' => ColorFixtures::COLOR_WARM_GRAY,
                 'materials'     => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'patterns'      => [LookupFixtures::PATTERN_SOLID],
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
@@ -256,12 +256,12 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
             ],
 
             // --- Accessory ---
-            self::GREY_SCARF => [
-                'name'               => 'Grey Wool Scarf',
+            self::GRAY_SCARF => [
+                'name'               => 'Gray Wool Scarf',
                 'subcategory'        => SubCategoryFixtures::SCARF,
                 'min_layer'          => 1,
                 'max_layer'          => 1,
-                'primary_color'      => ColorFixtures::COLOR_LIGHT_GREY,
+                'primary_color'      => ColorFixtures::COLOR_LIGHT_GRAY,
                 'materials'          => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'patterns'           => [LookupFixtures::PATTERN_SOLID],
                 'styles'             => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
+use App\Domain\Outfit\Enum\BodyZone;
 use App\Entity\Category;
 use App\Entity\ClothingItem;
 use App\Entity\SubCategory;
-use App\Enum\BodyZone;
 use App\Service\ZoneResolverService;
 use PHPUnit\Framework\TestCase;
 

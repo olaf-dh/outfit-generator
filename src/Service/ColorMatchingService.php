@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use App\Entity\Color;
@@ -56,7 +58,7 @@ class ColorMatchingService
 
     /**
      * Calculates the Delta-E color difference between two HexCodes.
-     * Uses the CIE76 formula for color difference, which is sufficient for clothing colors.
+     * Uses the CIE76 formula for color difference, which is enough for clothing colors.
      */
     public function calculateDistance(string $hexA, string $hexB): float
     {
@@ -72,6 +74,7 @@ class ColorMatchingService
 
     /**
      * Converts HexCode → RGB → XYZ → LAB
+     * @return array<string, float>
      */
     private function hexToLab(string $hex): array
     {
@@ -82,20 +85,22 @@ class ColorMatchingService
 
     /**
      * HexCode → RGB (0-255)
+     * @return array<string, int>
      */
     private function hexToRgb(string $hex): array
     {
         $hex = ltrim($hex, '#');
 
         return [
-            'r' => hexdec(substr($hex, 0, 2)),
-            'g' => hexdec(substr($hex, 2, 2)),
-            'b' => hexdec(substr($hex, 4, 2)),
+            'r' => (int) hexdec(substr($hex, 0, 2)),
+            'g' => (int) hexdec(substr($hex, 2, 2)),
+            'b' => (int) hexdec(substr($hex, 4, 2)),
         ];
     }
 
     /**
      * RGB → XYZ (D65 Illuminant)
+     * @return array<string, float>
      */
     private function rgbToXyz(int $r, int $g, int $b): array
     {
@@ -121,6 +126,7 @@ class ColorMatchingService
 
     /**
      * XYZ → LAB (D65 Reference Values)
+     * @return array<string, float>
      */
     private function xyzToLab(float $x, float $y, float $z): array
     {

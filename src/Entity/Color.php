@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Enum\ColorFamily;
-use App\Enum\ColorSaturation;
-use App\Enum\ColorTemperature;
-use App\Enum\ColorTone;
+use App\Domain\Outfit\Enum\ColorFamily;
+use App\Domain\Outfit\Enum\ColorSaturation;
+use App\Domain\Outfit\Enum\ColorTemperature;
+use App\Domain\Outfit\Enum\ColorTone;
 use App\Repository\ColorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,12 +25,12 @@ class Color
     #[ORM\Column(length: 100, unique: true)]
     private string $name;
 
-    #[ORM\Column(length: 7, nullable: true)]
+    #[ORM\Column(length: 7, nullable: false)]
     #[Assert\Regex(
         pattern: '/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/',
         message: 'The value {{ value }} is not a valid hex code.'
     )]
-    private ?string $hexCode = null;
+    private string $hexCode;
 
     #[ORM\Column(enumType: ColorFamily::class)]
     private ColorFamily $family;
@@ -72,12 +72,12 @@ class Color
         return $this;
     }
 
-    public function getHexCode(): ?string
+    public function getHexCode(): string
     {
         return $this->hexCode;
     }
 
-    public function setHexCode(?string $hexCode): static
+    public function setHexCode(string $hexCode): static
     {
         $this->hexCode = $hexCode;
 

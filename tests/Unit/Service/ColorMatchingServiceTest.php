@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
+use App\Domain\Outfit\Enum\ColorFamily;
+use App\Domain\Outfit\Enum\ColorSaturation;
+use App\Domain\Outfit\Enum\ColorTemperature;
+use App\Domain\Outfit\Enum\ColorTone;
 use App\Entity\Color;
-use App\Enum\ColorFamily;
-use App\Enum\ColorSaturation;
-use App\Enum\ColorTemperature;
-use App\Enum\ColorTone;
 use App\Service\ColorMatchingService;
 use PHPUnit\Framework\TestCase;
 
@@ -28,7 +28,7 @@ class ColorMatchingServiceTest extends TestCase
         $color = new Color();
         $color->setName($name);
         $color->setHexCode($hexCode);
-        $color->setFamily(ColorFamily::GREY);
+        $color->setFamily(ColorFamily::GRAY);
         $color->setTone(ColorTone::MEDIUM);
         $color->setTemperature(ColorTemperature::NEUTRAL);
         $color->setSaturation(ColorSaturation::NORMAL);
@@ -43,7 +43,7 @@ class ColorMatchingServiceTest extends TestCase
     {
         $colors = [
             $this->makeColor('Anthracite', '#383838'),
-            $this->makeColor('Light Grey', '#C8C8C8'),
+            $this->makeColor('Light Gray', '#C8C8C8'),
             $this->makeColor('Navy', '#1B2A4A'),
         ];
 
@@ -61,7 +61,7 @@ class ColorMatchingServiceTest extends TestCase
     {
         $colors = [
             $this->makeColor('Anthracite', '#383838'),
-            $this->makeColor('Light Grey', '#C8C8C8'),
+            $this->makeColor('Light Gray', '#C8C8C8'),
             $this->makeColor('Navy', '#1B2A4A'),
         ];
 
@@ -72,18 +72,18 @@ class ColorMatchingServiceTest extends TestCase
         $this->assertEquals('Anthracite', $result->getName());
     }
 
-    public function testLightGreyIsCloserThanDarkGrey(): void
+    public function testLightGrayIsCloserThanDarkGray(): void
     {
         $colors = [
             $this->makeColor('Anthracite', '#2F2F2F'),
-            $this->makeColor('Light Grey', '#D0D0D0'),
+            $this->makeColor('Light Gray', '#D0D0D0'),
         ];
 
-        // #C8C8C8 is very close to light grey
+        // #C8C8C8 is very close to light gray
         $result = $this->service->findClosest('#C8C8C8', $colors);
 
         $this->assertNotNull($result);
-        $this->assertEquals('Light Grey', $result->getName());
+        $this->assertEquals('Light Gray', $result->getName());
     }
 
     // -------------------------------------------------------
@@ -141,7 +141,7 @@ class ColorMatchingServiceTest extends TestCase
 
     public function testColorDistanceIsSymmetric(): void
     {
-        $colors1 = [$this->makeColor('Light Grey', '#C8C8C8')];
+        $colors1 = [$this->makeColor('Light Gray', '#C8C8C8')];
         $colors2 = [$this->makeColor('Anthracite', '#383838')];
 
         $distance1 = $this->service->calculateDistance('#383838', '#C8C8C8');

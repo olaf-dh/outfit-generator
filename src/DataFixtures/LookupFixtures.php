@@ -4,20 +4,14 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Color;
-use App\Entity\Material;
+use App\Domain\Outfit\Enum\PatternType;
+use App\Domain\Outfit\Enum\SeasonType;
+use App\Domain\Outfit\Enum\StyleType;
+use App\Domain\Outfit\Enum\WeatherConditionType;
 use App\Entity\Pattern;
 use App\Entity\Season;
 use App\Entity\Style;
 use App\Entity\WeatherCondition;
-use App\Enum\ColorFamily;
-use App\Enum\ColorSaturation;
-use App\Enum\ColorTemperature;
-use App\Enum\ColorTone;
-use App\Enum\PatternType;
-use App\Enum\SeasonType;
-use App\Enum\StyleType;
-use App\Enum\WeatherConditionType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

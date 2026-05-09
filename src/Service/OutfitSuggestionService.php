@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Domain\Outfit\DTO\OutfitSuggestion;
+use App\Domain\Outfit\Enum\BodyZone;
+use App\Domain\Outfit\Enum\SeasonType;
+use App\Domain\Outfit\Enum\StyleType;
+use App\Domain\Outfit\Enum\WeatherConditionType;
 use App\Entity\ClothingItem;
 use App\Entity\Style;
-use App\Enum\BodyZone;
-use App\Enum\SeasonType;
-use App\Enum\StyleType;
-use App\Enum\WeatherConditionType;
 use App\Repository\ClothingItemRepository;
 
 class OutfitSuggestionService

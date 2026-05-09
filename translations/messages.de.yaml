@@ -47,7 +47,7 @@ enum:
         brown: Braun
         black: Schwarz
         white: Weiß
-        grey: Grau
+        gray: Grau
         beige: Beige
 
     color_tone:
@@ -146,11 +146,11 @@ color:
         camel: Kamel
 
         charcoal: Anthrazit
-        dark_grey: Dunkelgrau
-        grey: Grau
-        cool_grey: Kühles Grau
-        warm_grey: Warmes Grau
-        light_grey: Hellgrau
+        dark_gray: Dunkelgrau
+        gray: Grau
+        cool_gray: Kühles Grau
+        warm_gray: Warmes Grau
+        light_gray: Hellgrau
         silver: Silber
 
         white: Weiß
@@ -218,6 +218,7 @@ clothing_item:
     form:
         choose_prim_color: Hauptfarbe wählen
         cancel: Abbrechen
+        back_to_dashboard: Zurück zur Übersicht
         label:
             name: Name
             category: Kategorie

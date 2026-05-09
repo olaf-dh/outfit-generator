@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Domain\Outfit\Enum\StyleType;
 use App\Entity\Style;
-use App\Enum\StyleType;
 
 class StyleCompatibilityService
 {

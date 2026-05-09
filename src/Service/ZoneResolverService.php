@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
+use App\Domain\Outfit\Enum\BodyZone;
 use App\Entity\ClothingItem;
-use App\Enum\BodyZone;
 
 class ZoneResolverService
 {

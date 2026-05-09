@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Domain\Outfit\Generator;
 
-use App\Enum\SeasonType;
-use App\Enum\WeatherConditionType;
+use App\Domain\Outfit\Enum\SeasonType;
+use App\Domain\Outfit\Enum\WeatherConditionType;
 
 final class OutfitContext
 {

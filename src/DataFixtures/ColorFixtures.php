@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Domain\Outfit\Enum\ColorFamily;
+use App\Domain\Outfit\Enum\ColorSaturation;
+use App\Domain\Outfit\Enum\ColorTemperature;
+use App\Domain\Outfit\Enum\ColorTone;
 use App\Entity\Color;
-use App\Enum\ColorFamily;
-use App\Enum\ColorSaturation;
-use App\Enum\ColorTemperature;
-use App\Enum\ColorTone;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -65,11 +65,11 @@ class ColorFixtures extends Fixture
     public const string COLOR_LIGHT_BROWN    = 'color-light-brown';
     public const string COLOR_CAMEL          = 'color-camel';
     public const string COLOR_CHARCOAL       = 'color-charcoal';
-    public const string COLOR_DARK_GREY      = 'color-dark-grey';
-    public const string COLOR_GREY           = 'color-grey';
-    public const string COLOR_COOL_GREY      = 'color-cool-grey';
-    public const string COLOR_WARM_GREY      = 'color-warm-grey';
-    public const string COLOR_LIGHT_GREY     = 'color-light-grey';
+    public const string COLOR_DARK_GRAY      = 'color-dark-gray';
+    public const string COLOR_GRAY           = 'color-gray';
+    public const string COLOR_COOL_GRAY      = 'color-cool-gray';
+    public const string COLOR_WARM_GRAY      = 'color-warm-gray';
+    public const string COLOR_LIGHT_GRAY     = 'color-light-gray';
     public const string COLOR_SILVER         = 'color-silver';
     public const string COLOR_WHITE          = 'color-white';
     public const string COLOR_OFF_WHITE      = 'color-off-white';
@@ -502,51 +502,51 @@ class ColorFixtures extends Fixture
                 'sat'    => ColorSaturation::NORMAL
             ],
 
-            // ⚪ GREY
+            // ⚪ GRAY
             self::COLOR_CHARCOAL => [
                 'name'   => 'anthracite',
                 'hex'    => '#374151',
-                'family' => ColorFamily::GREY,
+                'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::COOL,
                 'sat'    => ColorSaturation::NORMAL
             ],
-            self::COLOR_DARK_GREY => [
-                'name'   => 'dark_grey',
+            self::COLOR_DARK_GRAY => [
+                'name'   => 'dark_gray',
                 'hex'    => '#4B5563',
-                'family' => ColorFamily::GREY,
+                'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::COOL,
                 'sat'    => ColorSaturation::NORMAL
             ],
-            self::COLOR_GREY => [
-                'name'   => 'grey',
+            self::COLOR_GRAY => [
+                'name'   => 'gray',
                 'hex'    => '#9CA3AF',
-                'family' => ColorFamily::GREY,
+                'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::COOL,
                 'sat'    => ColorSaturation::NORMAL
             ],
-            self::COLOR_COOL_GREY => [
-                'name'   => 'cool_grey',
+            self::COLOR_COOL_GRAY => [
+                'name'   => 'cool_gray',
                 'hex'    => '#94A3B8',
-                'family' => ColorFamily::GREY,
+                'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::COOL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_WARM_GREY => [
-                'name'   => 'warm_grey',
+            self::COLOR_WARM_GRAY => [
+                'name'   => 'warm_gray',
                 'hex'    => '#A8A29E',
-                'family' => ColorFamily::GREY,
+                'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::WARM,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_LIGHT_GREY => [
-                'name'   => 'light_grey',
+            self::COLOR_LIGHT_GRAY => [
+                'name'   => 'light_gray',
                 'hex'    => '#E5E7EB',
-                'family' => ColorFamily::GREY,
+                'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::COOL,
                 'sat'    => ColorSaturation::NORMAL
@@ -554,7 +554,7 @@ class ColorFixtures extends Fixture
             self::COLOR_SILVER => [
                 'name'   => 'silver',
                 'hex'    => '#D1D5DB',
-                'family' => ColorFamily::GREY,
+                'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::COOL,
                 'sat'    => ColorSaturation::VIVID

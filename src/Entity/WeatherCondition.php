@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Enum\WeatherConditionType;
+use App\Domain\Outfit\Enum\WeatherConditionType;
 use App\Repository\WeatherConditionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

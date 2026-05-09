@@ -2,17 +2,17 @@
 
 namespace App\Service;
 
+use App\Domain\Outfit\Enum\ColorFamily;
+use App\Domain\Outfit\Enum\ColorSaturation;
+use App\Domain\Outfit\Enum\ColorTemperature;
 use App\Entity\Color;
-use App\Enum\ColorFamily;
-use App\Enum\ColorSaturation;
-use App\Enum\ColorTemperature;
 
 class ColorCompatibilityService
 {
     private const array NEUTRAL_FAMILIES = [
         ColorFamily::BLACK,
         ColorFamily::WHITE,
-        ColorFamily::GREY,
+        ColorFamily::GRAY,
         ColorFamily::BROWN,
         ColorFamily::BEIGE,
     ];

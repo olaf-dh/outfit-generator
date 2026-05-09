@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Domain\Outfit\Enum\BreathabilityLevel;
+use App\Domain\Outfit\Enum\MaterialCategory;
+use App\Domain\Outfit\Enum\WarmthLevel;
 use App\Entity\Material;
-use App\Enum\MaterialCategory;
-use App\Enum\WarmthLevel;
-use App\Enum\BreathabilityLevel;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

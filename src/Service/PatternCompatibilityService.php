@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use App\Domain\Outfit\Enum\PatternType;
 use App\Entity\Pattern;
-use App\Enum\PatternType;
 
 class PatternCompatibilityService
 {

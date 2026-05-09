@@ -167,7 +167,9 @@
                     <br>
                 </div>
                 {{ form_end(form) }}
-                <a href="{{ path(list_path) }}" class="btn btn-link mt-3">Zurück zur Übersicht</a>
+                <a href="{{ path(list_path) }}" class="btn btn-link mt-3">
+                    {{ 'clothing_item.form.back_to_dashboard'|trans }}
+                </a>
             </div>
         </div>
     </div>

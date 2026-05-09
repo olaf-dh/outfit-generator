@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\Service;
 
+use App\Domain\Outfit\Enum\StyleType;
 use App\Entity\Style;
-use App\Enum\StyleType;
 use App\Service\StyleCompatibilityService;
 use PHPUnit\Framework\TestCase;
 

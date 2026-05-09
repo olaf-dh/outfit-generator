@@ -2,8 +2,8 @@
 
 namespace App\Tests\Unit\Service;
 
+use App\Domain\Outfit\Enum\PatternType;
 use App\Entity\Pattern;
-use App\Enum\PatternType;
 use App\Service\PatternCompatibilityService;
 use PHPUnit\Framework\TestCase;
 

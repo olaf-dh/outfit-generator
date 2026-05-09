@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace App\Domain\Outfit\Rule;
 
 use App\Domain\Outfit\DTO\OutfitSuggestion;
+use App\Domain\Outfit\Enum\WarmthLevel;
 use App\Domain\Outfit\Generator\OutfitContext;
-use App\Entity\ClothingItem;
 use App\Entity\ItemMaterial;
-use App\Enum\WarmthLevel;
 
 /**
  * Evaluates materials according to:

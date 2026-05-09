@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Enum;
+namespace App\Domain\Outfit\Enum;
 
 enum ColorFamily: string
 {
@@ -15,6 +15,6 @@ enum ColorFamily: string
     case BROWN = 'brown';
     case BLACK = 'black';
     case WHITE = 'white';
-    case GREY = 'grey';
+    case GRAY = 'gray';
     case BEIGE = 'beige';
 }
