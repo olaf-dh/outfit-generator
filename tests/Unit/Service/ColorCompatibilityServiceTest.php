@@ -44,10 +44,10 @@ class ColorCompatibilityServiceTest extends TestCase
 
     public function testGrayIsCompatibleWithBrown(): void
     {
-        $anthracite = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $charcoal = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
         $cognac    = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
 
-        $this->assertTrue($this->service->areCompatible($anthracite, $cognac));
+        $this->assertTrue($this->service->areCompatible($charcoal, $cognac));
     }
 
     public function testBlackIsCompatibleWithRed(): void
@@ -75,9 +75,9 @@ class ColorCompatibilityServiceTest extends TestCase
     public function testSameFamilyDifferentToneIsCompatible(): void
     {
         $lightGray  = $this->makeColor(ColorFamily::GRAY, ColorTone::LIGHT, ColorTemperature::COOL);
-        $anthracite = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $charcoal = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
 
-        $this->assertTrue($this->service->areCompatible($lightGray, $anthracite));
+        $this->assertTrue($this->service->areCompatible($lightGray, $charcoal));
     }
 
     public function testSameFamilySameToneIsNotCompatible(): void
@@ -127,11 +127,11 @@ class ColorCompatibilityServiceTest extends TestCase
     public function testCompatibilityIsSymmetric(): void
     {
         $cognac    = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
-        $anthracite = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $charcoal = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
 
         $this->assertEquals(
-            $this->service->areCompatible($cognac, $anthracite),
-            $this->service->areCompatible($anthracite, $cognac)
+            $this->service->areCompatible($cognac, $charcoal),
+            $this->service->areCompatible($charcoal, $cognac)
         );
     }
 

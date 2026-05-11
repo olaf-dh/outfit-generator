@@ -14,7 +14,9 @@ use App\Service\ColorMatchingService;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 readonly class AnalyzeClothingItemHandler
 {
     public function __construct(
@@ -34,6 +36,13 @@ readonly class AnalyzeClothingItemHandler
 
         // Item isn't found or no photo → skip
         if ($item === null || $item->getPhotoPath() === null) {
+            return;
+        }
+
+        // No photo → set status to COMPLETE, no analysis needed
+        if ($item->getPhotoPath() == null) {
+            $item->setStatus(ClothingItemStatus::COMPLETE);
+            $this->entityManager->flush();
             return;
         }
 

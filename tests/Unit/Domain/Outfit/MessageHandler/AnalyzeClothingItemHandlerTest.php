@@ -149,7 +149,7 @@ class AnalyzeClothingItemHandlerTest extends TestCase
     public function testHandlerSetsStatusToAnalyzed(): void
     {
         $item  = $this->makeClothingItem(1);
-        $color = $this->makeColor('anthracite', '#383838');
+        $color = $this->makeColor('charcoal', '#383838');
 
         $this->clothingItemRepository
             ->expects($this->once())
@@ -197,7 +197,7 @@ class AnalyzeClothingItemHandlerTest extends TestCase
     public function testHandlerSetsPrimaryColor(): void
     {
         $item  = $this->makeClothingItem(1);
-        $color = $this->makeColor('anthracite', '#383838');
+        $color = $this->makeColor('charcoal', '#383838');
 
         $this->clothingItemRepository
             ->expects($this->once())
@@ -241,7 +241,7 @@ class AnalyzeClothingItemHandlerTest extends TestCase
         );
 
         $this->assertCount(1, $primaryColors);
-        $this->assertEquals('anthracite', array_values($primaryColors)[0]->getColor()->getName());
+        $this->assertEquals('charcoal', array_values($primaryColors)[0]->getColor()->getName());
     }
 
     // -------------------------------------------------------
@@ -251,7 +251,7 @@ class AnalyzeClothingItemHandlerTest extends TestCase
     public function testHandlerSetsSecondaryColors(): void
     {
         $item       = $this->makeClothingItem(1);
-        $primary    = $this->makeColor('anthracite', '#383838');
+        $primary    = $this->makeColor('charcoal', '#383838');
         $secondary  = $this->makeColor('light_gray', '#C8C8C8');
 
         $this->clothingItemRepository

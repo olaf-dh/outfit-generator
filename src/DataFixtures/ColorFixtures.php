@@ -504,7 +504,7 @@ class ColorFixtures extends Fixture
 
             // ⚪ GRAY
             self::COLOR_CHARCOAL => [
-                'name'   => 'anthracite',
+                'name'   => 'charcoal',
                 'hex'    => '#374151',
                 'family' => ColorFamily::GRAY,
                 'tone'   => ColorTone::DARK,

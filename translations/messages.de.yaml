@@ -162,7 +162,7 @@ color:
         pearl: Perlweiß
 
         black: Schwarz
-        softy_black: Weichschwarz
+        soft_black: Weichschwarz
         charcoal_black: Kohleschwarz
         warm_black: Warmes Schwarz
         faded_black: Ausgewaschenes Schwarz
@@ -209,16 +209,21 @@ clothing_item:
         title: Kleidungsstück bearbeiten
         button: Speichern
     delete:
-        button: Löschen
+        button: Entfernen
         confirm: Möchten Sie dieses Kleidungsstück wirklich löschen?
     photo:
         upload: Foto hochladen
         analyze: KI-Analyse starten
         analyzing: Wird analysiert…
     form:
-        choose_prim_color: Hauptfarbe wählen
-        cancel: Abbrechen
         back_to_dashboard: Zurück zur Übersicht
+        button:
+            cancel: Abbrechen
+            add_material: Material hinzufügen
+            remove_material: Material entfernen
+        materials:
+            total: Gesamt
+            not_100: Materialanteile müssen 100% ergeben.
         label:
             name: Name
             category: Kategorie
@@ -379,7 +384,7 @@ templates:
                 button: Starten
     clothing_item:
         index:
-            title: Meine Kleidung
+            title: Meine Kleidungsstücke
             table_head:
                 subcategory: Unterkategorie
                 preview: Vorschau
@@ -393,16 +398,17 @@ templates:
                 action: Aktion
             table_body:
                 no_photo: Kein Bild vorhanden
-                no_style: Kein Stil definiert
-                no_pattern: Kein Muster definiert
                 no_material: Kein Material definiert
-                no_season: Keine Jahreszeit definiert
                 no_color: Keine Farbe definiert
-                no_layer_depth: Keine Schicht definiert
                 primary_color: Hauptfarbe
             action:
                 edit: Bearbeiten
                 new: Neues Kleidungsstück anlegen
+                delete: Entfernen
+                delete_confirm: Möchten Sie dieses Kleidungsstück wirklich löschen?
+            status:
+                analyzing: "%count% Foto(s) werden gerade analysiert..."
+                needs_review: "%count% Kleidungsstück(e) warten auf deine Bestätigung."
     security:
         login:
             title: Anmelden

@@ -32,19 +32,60 @@
                     </div>
                 </div>
 
-                <div class="row g-3 mt-1">
-                    {% if isEdit == true %}
-                        {% set colorCount = form.primaryColor|length %}
+                {% if isEdit == true %}
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.materials'|trans }}
+                            </label>
+
+                            <div id="item_materials_wrapper"
+                                 data-prototype="{{ form_widget(form.itemMaterials.vars.prototype)|e('html_attr') }}"
+                                 data-index="{{ form.itemMaterials|length }}">
+
+                                {% for materialForm in form.itemMaterials %}
+                                    <div class="material-entry row g-2 align-items-center mb-2">
+                                        <div class="col-md-6">
+                                            {{ form_widget(materialForm.material) }}
+                                            {{ form_errors(materialForm.material) }}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-group">
+                                                {{ form_widget(materialForm.percentage) }}
+                                                <span class="input-group-text">%</span>
+                                            </div>
+                                            {{ form_errors(materialForm.percentage) }}
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-danger btn-sm remove-material w-100">
+                                                {{ 'clothing_item.form.button.remove_material'|trans }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {# Gesamt-Prozent Anzeige #}
+                            <div class="d-flex align-items-center gap-3 mt-2">
+                                <button type="button" id="add_material_button" class="btn btn-outline-secondary btn-sm">
+                                    + {{ 'clothing_item.form.button.add_material'|trans }}
+                                </button>
+                                <span class="text-muted small">
+                                    {{ 'clothing_item.form.materials.total'|trans }}:
+                                    <strong id="total_percentage">0</strong>%
+                                    <span id="percentage_warning" class="text-danger ms-2 d-none">
+                                        {{ 'clothing_item.form.materials.not_100'|trans }}
+                                    </span>
+                                    <span id="percentage_ok" class="text-success ms-2 d-none">✓</span>
+                                </span>
+                            </div>
+                        </div>
+
                         <div class="col-md-4">
                             <div class="flex-grow-1">
                                 <label class="form-label fw-bold">
-                                    {% if colorCount > 1 %}
-                                        {{ 'clothing_item.form.choose_prim_color'|trans }}
-                                    {% else %}
-                                        {{ 'clothing_item.form.label.primary_color'|trans }}
-                                    {% endif %}
+                                    {{ 'clothing_item.form.label.primary_color'|trans }}
                                 </label>
-                                {% for choice in form.primaryColor %}
+                                {% for choice in form.itemColors %}
                                     <label class="form-check-label d-flex align-items-center" style="gap: 0.5rem;">
                                         {{ form_widget(choice, { attr: { class: 'form-check-input' } }) }}
                                         {{ choice.vars.label|raw }}
@@ -54,20 +95,20 @@
                         </div>
 
                         <div class="col-md-4">
-{#                            {% if form.vars.value and form.vars.value.primaryImage %}#}
-{#                                <div style="max-width: 160px;">#}
-{#                                    <img src="{{ asset('uploads/clothing/' ~ form.vars.value.primaryImage.fileName) }}"#}
-{#                                         class="img-thumbnail"#}
-{#                                         alt="{{ form.vars.value.primaryImage.altText ?? 'Bild' }}">#}
-{#                                    <small class="text-muted d-block text-center mt-1">#}
-{#                                        {{ form.vars.value.primaryImage.altText }}#}
-{#                                    </small>#}
-{#                                </div>#}
-{#                            {% endif %}#}
+                            {% if form.vars.value and form.vars.value.photoPath %}
+                                <div style="max-width: 160px;">
+                                    <img src="{{ asset('uploads/clothing/' ~ form.vars.value.photoPath) }}"
+                                         class="img-thumbnail"
+                                         alt="{{ form.vars.value.name ?? 'Bild' }}">
+                                    <small class="text-muted d-block text-center mt-1">
+                                        {{ form.vars.value.name }}
+                                    </small>
+                                </div>
+                            {% endif %}
                         </div>
-                    {% endif %}
+                    </div>
 
-                    <div class="col-md-4">
+                    <div class="mt-4">
                         <label class="form-label fw-bold">
                             {{ 'clothing_item.form.label.styles'|trans }}
                         </label>
@@ -76,7 +117,39 @@
                         </div>
                         {{ form_errors(form.styles) }}
                     </div>
-                </div>
+
+                    <div class="mt-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.patterns'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.patterns) }}
+                        </div>
+                        {{ form_errors(form.patterns) }}
+                    </div>
+
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.seasons'|trans }}
+                            </label>
+                            <div class="border rounded-3 p-3 bg-light">
+                                {{ form_widget(form.seasons) }}
+                            </div>
+                            {{ form_errors(form.seasons) }}
+                        </div>
+
+                        <div class="col-md-5">
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.weather_conditions'|trans }}
+                            </label>
+                            <div class="border rounded-3 p-3 bg-light">
+                                {{ form_widget(form.weatherConditions) }}
+                            </div>
+                            {{ form_errors(form.weatherConditions) }}
+                        </div>
+                    </div>
+                {% endif %}
 
                 <div class="row g-3 mt-1">
                     <div class="col-md-3">
@@ -89,40 +162,7 @@
                         {{ form_errors(form.photo) }}
                     </div>
 
-                    <div class="col-md-4">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.seasons'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-3 bg-light">
-                            {{ form_widget(form.seasons) }}
-                        </div>
-                        {{ form_errors(form.seasons) }}
-                    </div>
-
-                    <div class="col-md-5">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.weather_conditions'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-3 bg-light">
-                            {{ form_widget(form.weatherConditions) }}
-                        </div>
-                        {{ form_errors(form.weatherConditions) }}
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <label class="form-label fw-bold">
-                        {{ 'clothing_item.form.label.patterns'|trans }}
-                    </label>
-
-                    <div class="border rounded-3 p-3 bg-light">
-                        {{ form_widget(form.patterns) }}
-                    </div>
-                    {{ form_errors(form.patterns) }}
-                </div>
-
-                <div class="row g-3 mt-1">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label fw-bold">
                             {{ 'clothing_item.form.label.min_layer_depth'|trans }}
                         </label>
@@ -132,7 +172,7 @@
                         {{ form_errors(form.minLayerDepth) }}
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label fw-bold">
                             {{ 'clothing_item.form.label.max_layer_depth'|trans }}
                         </label>
@@ -142,7 +182,7 @@
                         {{ form_errors(form.maxLayerDepth) }}
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label class="form-label fw-bold">
                             {{ 'clothing_item.form.label.notes'|trans }}
                         </label>
@@ -153,18 +193,16 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-{#                    <div id="item_materials_wrapper"#}
-{#                         data-prototype="{{ form_widget(form.itemMaterials.vars.prototype)|e('html_attr') }}"#}
-{#                         data-index="{{ form.itemMaterials|length }}">#}
+                <div class="row g-3 mt-1">
 
-{#                        {% for materialForm in form.itemMaterials %}#}
-{#                            <div class="material-entry mb-2">#}
-{#                                {{ form_row(materialForm) }}#}
-{#                            </div>#}
-{#                        {% endfor %}#}
-{#                    </div>#}
-                    <br>
+                </div>
+                <div class="mt-4 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        {{ (isEdit ? 'clothing_item.edit.button' : 'clothing_item.add.button')|trans }}
+                    </button>
+                    <a href="{{ path(list_path) }}" class="btn btn-outline-secondary">
+                        {{ 'clothing_item.form.button.cancel'|trans }}
+                    </a>
                 </div>
                 {{ form_end(form) }}
                 <a href="{{ path(list_path) }}" class="btn btn-link mt-3">
@@ -178,61 +216,135 @@
 {% block javascripts %}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const wrapper = document.getElementById('item_materials_wrapper');
+            const wrapper    = document.getElementById('item_materials_wrapper');
+            const addBtn     = document.getElementById('add_material_button');
+            const totalEl    = document.getElementById('total_percentage');
+            const warningEl  = document.getElementById('percentage_warning');
+            const okEl       = document.getElementById('percentage_ok');
 
-            function updateRemoveButtonsVisibility() {
-                const entries = wrapper.querySelectorAll('.material-entry');
+            // --- Percent-Calculations ---
+
+            function updateTotal() {
+                const inputs = wrapper.querySelectorAll('.percentage-input');
+                let total    = 0;
+
+                inputs.forEach(input => {
+                    const val = parseFloat(input.value);
+                    if (!isNaN(val)) {
+                        total += val;
+                    }
+                });
+
+                total = Math.round(total * 10) / 10;
+                totalEl.textContent = total;
+
+                if (total === 100) {
+                    warningEl.classList.add('d-none');
+                    okEl.classList.remove('d-none');
+                    addBtn.disabled = true;
+                    addBtn.title    = '';
+                } else {
+                    warningEl.classList.remove('d-none');
+                    okEl.classList.add('d-none');
+                    addBtn.disabled = false;
+                }
+            }
+
+            // --- Remove row ---
+
+            function addRemoveButton(entryDiv) {
+                const btn = entryDiv.querySelector('.remove-material');
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        entryDiv.remove();
+                        updateRemoveVisibility();
+                        updateTotal();
+                    });
+                }
+            }
+
+            function updateRemoveVisibility() {
+                const entries   = wrapper.querySelectorAll('.material-entry');
                 const showRemove = entries.length > 1;
-
                 entries.forEach(entry => {
-                    const removeBtn = entry.querySelector('.remove-material');
-                    if (removeBtn) {
-                        removeBtn.style.display = showRemove ? 'inline-block' : 'none';
+                    const btn = entry.querySelector('.remove-material');
+                    if (btn) {
+                        btn.style.display = showRemove ? 'inline-block' : 'none';
                     }
                 });
             }
 
-            // Function to add the Remove button
-            function addRemoveButton(entryDiv) {
-                let removeBtn = entryDiv.querySelector('.remove-material');
+            // --- Add new row ---
 
-                if (!removeBtn) {
-                    removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.className = 'btn btn-danger btn-sm remove-material ms-2';
-                    removeBtn.textContent = 'Entfernen';
+            function addMaterialEntry() {
+                const prototype = wrapper.dataset.prototype;
+                const index     = parseInt(wrapper.dataset.index);
+                const html      = prototype.replace(/__name__/g, index);
 
-                    removeBtn.addEventListener('click', () => {
-                        wrapper.removeChild(entryDiv);
-                        updateRemoveButtonsVisibility();
-                    });
+                wrapper.dataset.index = index + 1;
 
-                    entryDiv.appendChild(removeBtn);
+                const div = document.createElement('div');
+                div.classList.add('material-entry', 'row', 'g-2', 'align-items-center', 'mb-2');
+                div.innerHTML = html;
+
+                // Percent-Input Listener
+                const percentInput = div.querySelector('.percentage-input');
+                if (percentInput) {
+                    percentInput.addEventListener('input', updateTotal);
                 }
 
-                updateRemoveButtonsVisibility();
+                addRemoveButton(div);
+                wrapper.appendChild(div);
+                updateRemoveVisibility();
+                updateTotal();
             }
 
-            // Initialize existing entries
+            // --- Initial ---
+
+            // Initialize existing rows
             wrapper.querySelectorAll('.material-entry').forEach(entry => {
                 addRemoveButton(entry);
+
+                const percentInput = entry.querySelector('.percentage-input');
+                if (percentInput) {
+                    percentInput.addEventListener('input', updateTotal);
+                }
             });
 
-            // "Add"-Button"
-            const addBtn = document.getElementById('add_material_button');
-            if (addBtn) {
-                addBtn.addEventListener('click', () => {
-                    const prototype = wrapper.dataset.prototype;
-                    const index = parseInt(wrapper.dataset.index);
-                    const newFormHtml = prototype.replace(/__name__/g, index);
-                    wrapper.dataset.index = index + 1;
+            // First entry: Hide remove button
+            updateRemoveVisibility();
 
-                    const div = document.createElement('div');
-                    div.classList.add('material-entry', 'mb-2');
-                    div.innerHTML = newFormHtml;
+            // Calculate initial total percentage
+            updateTotal();
 
-                    addRemoveButton(div);
-                    wrapper.appendChild(div);
+            // Add-Button
+            addBtn.addEventListener('click', addMaterialEntry);
+
+            // When no entries exist, automatically add a row
+            if (wrapper.querySelectorAll('.material-entry').length === 0) {
+                addMaterialEntry();
+            }
+
+            // --- Form-Submit: Warning if not 100% ---
+            const form = wrapper.closest('form');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    const inputs = wrapper.querySelectorAll('.percentage-input');
+                    if (inputs.length === 0) return; // no Materials = OK
+
+                    let total = 0;
+                    inputs.forEach(input => {
+                        const val = parseFloat(input.value);
+                        if (!isNaN(val)) total += val;
+                    });
+
+                    total = Math.round(total * 10) / 10;
+
+                    if (total !== 100) {
+                        e.preventDefault();
+                        warningEl.classList.remove('d-none');
+                        wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
                 });
             }
         });

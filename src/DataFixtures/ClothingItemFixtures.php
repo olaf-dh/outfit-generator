@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
+use App\Domain\Outfit\Enum\ClothingItemStatus;
 use App\Entity\ClothingItem;
 use App\Entity\Color;
 use App\Entity\ItemColor;
@@ -26,11 +27,11 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
     public const string RED_PULLOVER      = 'item-red-pullover';
     public const string BLUE_STRIPE_SHIRT = 'item-blue-stripe-shirt';
     public const string ANTHRACITE_PANTS  = 'item-anthracite-pants';
-    public const string MUSTARD_CHINO      = 'item-mustard-chino';
+    public const string MUSTARD_CHINO     = 'item-mustard-chino';
     public const string DARK_BLUE_JEANS   = 'item-dark-blue-jeans';
     public const string GRAY_COAT         = 'item-gray-coat';
     public const string BEIGE_TRENCH      = 'item-beige-trench';
-    public const string CAMEL_SHOES      = 'item-camel-shoes';
+    public const string CAMEL_SHOES       = 'item-camel-shoes';
     public const string WHITE_SNEAKERS    = 'item-white-sneakers';
     public const string GRAY_SCARF        = 'item-gray-scarf';
     public const string BROWN_BELT        = 'item-brown-belt';
@@ -53,12 +54,15 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
 
+        $status = ClothingItemStatus::COMPLETE;
+
         foreach ($this->getItemDefinitions() as $reference => $data) {
             $item = new ClothingItem();
             $item->setName($data['name']);
             $item->setSubCategory($this->getReference($data['subcategory'], SubCategory::class));
             $item->setMinLayerDepth($data['min_layer']);
             $item->setMaxLayerDepth($data['max_layer']);
+            $item->setStatus($status);
             $item->setOwner($owner);
 
             if (isset($data['notes'])) {
@@ -78,7 +82,11 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
             // Materials
             foreach ($data['materials'] as $materialRef => $percentage) {
                 $material = $this->getReference($materialRef, Material::class);
-                $item->addItemMaterial(new ItemMaterial($item, $material, $percentage));
+                $itemMaterial = new ItemMaterial();
+                $itemMaterial->setMaterial($material);
+                $itemMaterial->setPercentage($percentage);
+                $itemMaterial->setClothingItem($item);
+                $item->addItemMaterial($itemMaterial);
             }
 
             // Pattern, Style, Season, WeatherCondition
@@ -126,15 +134,15 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
         return [
             // --- Upper body ---
             self::WHITE_SHIRT => [
-                'name'        => 'White Business Shirt',
-                'subcategory' => SubCategoryFixtures::BUTTON_DOWN,
-                'min_layer'   => 2,
-                'max_layer'   => 2,
+                'name'          => 'White Business Shirt',
+                'subcategory'   => SubCategoryFixtures::BUTTON_DOWN,
+                'min_layer'     => 2,
+                'max_layer'     => 2,
                 'primary_color' => ColorFixtures::COLOR_WHITE,
-                'materials'   => [MaterialFixtures::MATERIAL_COTTON => 100.0],
-                'patterns'    => [LookupFixtures::PATTERN_SOLID],
-                'styles'      => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
-                'seasons'     => [
+                'materials'     => [MaterialFixtures::MATERIAL_COTTON => 100.0],
+                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
+                'seasons'       => [
                     LookupFixtures::SEASON_SPRING,
                     LookupFixtures::SEASON_SUMMER,
                     LookupFixtures::SEASON_AUTUMN

@@ -64,21 +64,21 @@
                             <tr>
                                 <td>{{ ('subcategory.name.' ~ item.subCategory)|trans }}</td>
                                 <td>
-{#                                    {% if item.primaryImage %}#}
-{#                                        <img src="{{ asset('uploads/clothing/' ~ item.primaryImage.fileName) }}"#}
-{#                                             alt="{{ item.primaryImage.altText }}"#}
-{#                                             class="img-thumbnail"#}
-{#                                             style="max-width: 80px;">#}
-{#                                    {% else %}#}
+                                    {% if item.photoPath %}
+                                        <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
+                                             alt="{{ item.name }}"
+                                             class="img-thumbnail"
+                                             style="max-width: 80px;">
+                                    {% else %}
                                         <span class="text-muted">
                                             {{ (message ~ '.table_body.no_photo')|trans }}
                                         </span>
-{#                                    {% endif %}#}
+                                    {% endif %}
                                 </td>
                                 <td><strong>{{ item.name }}</strong></td>
                                 <td>
                                     {% for style in item.styles %}
-                                        {{ ('enum.style.' ~ style)|trans }}{% if not loop.last %}, {% endif %}
+                                        {{ ('enum.style.' ~ style)|trans }}{% if not loop.last %},<br>{% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_style')|trans }}
                                     {% endfor %}
@@ -88,14 +88,19 @@
                                     {% for itemColor in item.itemColors %}
                                         {% set color = itemColor.color %}
                                         {% if color %}
-                                            {{ ('color.name.' ~ color.name)|trans }}<br>
-                                            <span class="d-inline-block rounded-circle border"
-                                                  style="width: 18px; height: 18px; background-color: {{ color.hexCode }}">
-                                            </span><br>
                                             {% if itemColor.isPrimary and colorCount > 1 %}
                                                 ({{ (message ~ '.table_body.primary_color')|trans }})
                                             {% endif %}
-                                            <br>
+
+                                            <div class="d-flex align-items-center gap-2">
+                                                <span style="display: inline-block;
+                                                    width: 2.5rem;
+                                                    height: 1rem;
+                                                    background-color: {{ color.hexCode }};
+                                                    border: 1px solid #aaa;
+                                                    border-radius: 3px;
+                                                    flex-shrink: 0;
+                                                ">&nbsp;&nbsp;</span>{{ ('color.name.' ~ color.name)|trans }}</div>
                                         {% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_color')|trans }}
@@ -103,7 +108,7 @@
                                 </td>
                                 <td>
                                     {% for pattern in item.patterns %}
-                                        {{ ('enum.pattern_type.' ~ pattern)|trans }}{% if not loop.last %}, {% endif %}
+                                        {{ ('enum.pattern_type.' ~ pattern)|trans }}{% if not loop.last %},<br>{% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_pattern')|trans }}
                                     {% endfor %}
@@ -112,7 +117,8 @@
                                     {% for itemMaterial in item.itemMaterials %}
                                         {% set material = itemMaterial.material %}
                                         {% if material %}
-                                            {{ ('material.name.' ~ material)|trans }} ({{ itemMaterial.percentage }}%)<br>
+                                            {{ ('material.name.' ~ material)|trans }} <br>
+                                            ({{ itemMaterial.percentage }}%)<br>
                                         {% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_material')|trans }}
@@ -120,7 +126,7 @@
                                 </td>
                                 <td>
                                     {% for season in item.seasons %}
-                                        {{ ('enum.season.' ~ season) |trans }}{% if not loop.last %}, {% endif %}
+                                        {{ ('enum.season.' ~ season) |trans }}{% if not loop.last %},<br>{% endif %}
                                     {% else %}
                                         {{ (message ~ '.table_body.no_season')|trans }}
                                     {% endfor %}
@@ -137,10 +143,22 @@
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a href="{{ path('app_clothing_item_edit', {id: item.id}) }}"
-                                       class="btn btn-sm btn-primary">
-                                        {{ (message ~ '.action.edit')|trans }}
-                                    </a>
+                                    <div class="d-flex flex-column gap-1">
+                                        <a href="{{ path('app_clothing_item_edit', {id: item.id}) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            {{ (message ~ '.action.edit')|trans }}
+                                        </a>
+
+                                        <form method="post"
+                                              action="{{ path('app_clothing_item_delete', {id: item.id}) }}"
+                                              onsubmit="return confirm('{{ (message ~ '.action.delete_confirm')|trans }}')">
+                                            <input type="hidden" name="_token"
+                                                   value="{{ csrf_token('delete' ~ item.id) }}">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger w-100">
+                                                {{ (message ~ '.action.delete')|trans }}
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}

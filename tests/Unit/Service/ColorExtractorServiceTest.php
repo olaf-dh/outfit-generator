@@ -180,10 +180,21 @@ class ColorExtractorServiceTest extends TestCase
 
     public function testIsGreenScreenReturnsFalseForNonGreenColors(): void
     {
-        $this->assertFalse($this->service->isGreenScreen('#383838')); // Anthracite
+        $this->assertFalse($this->service->isGreenScreen('#383838')); // Charcoal
         $this->assertFalse($this->service->isGreenScreen('#CC2200')); // Red
         $this->assertFalse($this->service->isGreenScreen('#1B2A4A')); // Navy
-        $this->assertFalse($this->service->isGreenScreen('#6B6B2A')); // Olive – similar green but no Green-Screen
+        $this->assertFalse($this->service->isGreenScreen('#6B3A2A')); // Brown-Red – clearly no Green-Screen
+    }
+
+    public function testDarkGreenScreenIsFiltered(): void
+    {
+        $this->assertTrue($this->service->isGreenScreen('#0F3C15'));
+        $this->assertTrue($this->service->isGreenScreen('#031D04'));
+    }
+
+    public function testWarmGrayIsNotFiltered(): void
+    {
+        $this->assertFalse($this->service->isGreenScreen('#79615F'));
     }
 
     // -------------------------------------------------------

@@ -29,18 +29,6 @@ class ItemMaterial
     #[Assert\LessThanOrEqual(100)]
     private ?float $percentage = null;
 
-    /**
-     * @param ClothingItem $clothingItem
-     * @param Material $material
-     * @param float|null $percentage
-     */
-    public function __construct(ClothingItem $clothingItem, Material $material, ?float $percentage = null)
-    {
-        $this->clothingItem = $clothingItem;
-        $this->material = $material;
-        $this->percentage = $percentage;
-    }
-
     public function getId(): ?int
     {
         return $this->id;

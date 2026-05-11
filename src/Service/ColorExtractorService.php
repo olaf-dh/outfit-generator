@@ -12,10 +12,10 @@ class ColorExtractorService
 {
     // Green-Screen color ranges: https://www.rapidtables.com/web/color/Green-Screen-Color-Ranges.html
     //  Typical Chroma-Key green tones: Hue 90°-150°, high saturation, medium lightness
-    private const int GREEN_SCREEN_HUE_MIN        = 90;
+    private const int GREEN_SCREEN_HUE_MIN        = 50;
     private const int GREEN_SCREEN_HUE_MAX        = 150;
-    private const float GREEN_SCREEN_SATURATION_MIN = 0.4;
-    private const float GREEN_SCREEN_LIGHTNESS_MIN  = 0.2;
+    private const float GREEN_SCREEN_SATURATION_MIN = 0.35;
+    private const float GREEN_SCREEN_LIGHTNESS_MIN  = 0.03;
     private const float GREEN_SCREEN_LIGHTNESS_MAX  = 0.8;
 
     /**

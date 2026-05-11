@@ -15,6 +15,7 @@ use App\Entity\WeatherCondition;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -76,41 +77,6 @@ class ClothingItemType extends AbstractType
                 )],
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('patterns', EntityType::class, [
-                'class' => Pattern::class,
-                'choice_label' => fn(Pattern $p) => 'enum.pattern_type.' . $p->getType()->value,
-                'choice_translation_domain' => 'messages',
-                'multiple' => true,
-                'expanded' => true,
-                'attr' => ['class' => 'd-flex flex-wrap gap-2'],
-            ])
-            ->add('seasons', EntityType::class, [
-                'label' => 'clothing_item.form.label.seasons',
-                'class' => Season::class,
-                'choice_label' => fn(Season $s) => 'enum.season.' . $s->getType()->value,
-                'choice_translation_domain' => 'messages',
-                'multiple' => true,
-                'expanded' => true,
-                'attr' => ['class' => 'd-flex flex-wrap gap-2'],
-            ])
-            ->add('styles', EntityType::class, [
-                'label' => 'clothing_item.form.label.styles',
-                'class' => Style::class,
-                'choice_label' => fn(Style $s) => 'enum.style.' . $s->getType()->value,
-                'choice_translation_domain' => 'messages',
-                'multiple' => true,
-                'expanded' => true,
-                'attr' => ['class' => 'd-flex flex-wrap gap-2'],
-            ])
-            ->add('weatherConditions', EntityType::class, [
-                'label' => 'clothing_item.form.label.weather_conditions',
-                'class' => WeatherCondition::class,
-                'choice_label' => fn(WeatherCondition $w) => 'enum.weather_condition.' . $w->getType()->value,
-                'choice_translation_domain' => 'messages',
-                'multiple' => true,
-                'expanded' => true,
-                'attr' => ['class' => 'd-flex flex-wrap gap-2'],
-            ])
             ->add('notes', TextareaType::class, [
                 'label' => 'clothing_item.form.label.notes',
                 'required' => false,
@@ -132,25 +98,91 @@ class ClothingItemType extends AbstractType
                 )],
                 'attr' => ['class' => 'form-control'],
             ])
-            ->add('primaryColor', ChoiceType::class, [
-                'label' => false,
-                'mapped' => false,
-                'expanded' => true,
-                'multiple' => false,
-                'choices' => $this->getItemColors($builder->getData()),
-                'choice_label' => function (Color $color) {
-                    return sprintf(
-                        '<div class="d-flex align-items-center gap-2">
-<span class="badge rounded-circle" style="background-color: %s;">&nbsp;&nbsp;</span>%s</div>',
-                        $color->getHexCode(),
-                        $this->translator->trans('color.name.' . $color->getName())
-                    );
-                },
-                'choice_value' => fn(?Color $color) => $color?->getId(),
-                'attr' => ['class' => 'd-flex flex-column gap-2'],
-                'label_html' => true,
-            ])
         ;
+
+        if ($isEdit) {
+            // Set the current primary color as the default value
+            $currentPrimary = null;
+            foreach ($builder->getData()?->getItemColors() ?? [] as $ic) {
+                if ($ic->isPrimary()) {
+                    $currentPrimary = $ic->getColor();
+                    break;
+                }
+            }
+
+            $builder
+                ->add('itemColors', ChoiceType::class, [
+                    'label'      => false,
+                    'mapped'     => false,
+                    'expanded'   => true,
+                    'multiple'   => false,
+                    'data'       => $currentPrimary, // ← pre-select the current primary color
+                    'choices'    => $this->getItemColors($builder->getData()),
+                    'choice_label' => function (Color $color) {
+                        return sprintf(
+                            '<div class="d-flex align-items-center gap-2">
+                                        <span style="
+                                            display: inline-block;
+                                            width: 2.5rem;
+                                            height: 1rem;
+                                            background-color: %s;
+                                            border: 1px solid #aaa;
+                                            border-radius: 3px;
+                                            flex-shrink: 0;
+                                        ">&nbsp;&nbsp;</span>%s</div>',
+                            $color->getHexCode(),
+                            $this->translator->trans('color.name.' . $color->getName())
+                        );
+                    },
+                    'choice_value' => fn(?Color $color) => $color?->getId(),
+                    'attr'         => ['class' => 'd-flex flex-column gap-2'],
+                    'label_html'   => true,
+                ])
+                ->add('itemMaterials', CollectionType::class, [
+                    'label'         => false,
+                    'entry_type'    => ItemMaterialType::class,
+                    'allow_add'     => true,
+                    'allow_delete'  => true,
+                    'by_reference'  => false,
+                    'entry_options' => ['label' => false],
+                ])
+                ->add('weatherConditions', EntityType::class, [
+                    'label' => 'clothing_item.form.label.weather_conditions',
+                    'class' => WeatherCondition::class,
+                    'choice_label' => fn(WeatherCondition $w) => 'enum.weather_condition.' . $w->getType()->value,
+                    'choice_translation_domain' => 'messages',
+                    'multiple' => true,
+                    'expanded' => true,
+                    'attr' => ['class' => 'd-flex flex-wrap gap-2'],
+                ])
+                ->add('patterns', EntityType::class, [
+                    'class' => Pattern::class,
+                    'choice_label' => fn(Pattern $p) => 'enum.pattern_type.' . $p->getType()->value,
+                    'choice_translation_domain' => 'messages',
+                    'multiple' => true,
+                    'expanded' => true,
+                    'attr' => ['class' => 'd-flex flex-wrap gap-2'],
+                ])
+                ->add('seasons', EntityType::class, [
+                    'label' => 'clothing_item.form.label.seasons',
+                    'class' => Season::class,
+                    'choice_label' => fn(Season $s) => 'enum.season.' . $s->getType()->value,
+                    'choice_translation_domain' => 'messages',
+                    'multiple' => true,
+                    'expanded' => true,
+                    'attr' => ['class' => 'd-flex flex-wrap gap-2'],
+                ])
+                ->add('styles', EntityType::class, [
+                    'label' => 'clothing_item.form.label.styles',
+                    'class' => Style::class,
+                    'choice_label' => fn(Style $s) => 'enum.style.' . $s->getType()->value,
+                    'choice_translation_domain' => 'messages',
+                    'multiple' => true,
+                    'expanded' => true,
+                    'attr' => ['class' => 'd-flex flex-wrap gap-2'],
+                ])
+            ;
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -173,12 +205,20 @@ class ClothingItemType extends AbstractType
             return [];
         }
 
-        return array_filter(
-            array_map(
-                fn(ItemColor $ic) => $ic->getColor(),
-                $item->getItemColors()->toArray()
-            ),
-            fn(?Color $color) => $color !== null
-        );
+        $primary   = [];
+        $secondary = [];
+
+        foreach ($item->getItemColors() as $ic) {
+            if ($ic->getColor() == null) {
+                continue;
+            }
+            if ($ic->isPrimary()) {
+                $primary[] = $ic->getColor();
+            } else {
+                $secondary[] = $ic->getColor();
+            }
+        }
+
+        return array_merge($primary, $secondary);
     }
 }

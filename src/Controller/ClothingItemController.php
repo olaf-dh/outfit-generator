@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
+use App\Domain\Outfit\Enum\ClothingItemStatus;
+use App\Domain\Outfit\Message\AnalyzeClothingItemMessage;
+use App\Domain\Outfit\MessageHandler\AnalyzeClothingItemHandler;
 use App\Entity\ClothingItem;
+use App\Entity\Color;
 use App\Entity\User;
 use App\Form\ClothingItemType;
 use App\Repository\ClothingItemRepository;
+use App\Service\ClothingItemDeleter;
 use App\Service\ClothingItemPhotoUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
@@ -25,6 +30,8 @@ final class ClothingItemController extends AbstractController
         private readonly ClothingItemRepository $repository,
         private readonly EntityManagerInterface $entityManager,
         private readonly ClothingItemPhotoUploader $photoUploader,
+        private readonly AnalyzeClothingItemHandler $handler,
+        private readonly ClothingItemDeleter $deleter,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -40,7 +47,7 @@ final class ClothingItemController extends AbstractController
 
         $items = $this->repository->findByOwner($owner);
 
-        return $this->render('clothing_item/index.html.twig', [
+        return $this->render('clothing_item/listing.html.twig', [
             'items' => $items,
         ]);
     }
@@ -77,7 +84,20 @@ final class ClothingItemController extends AbstractController
 
             $this->addFlash('success', $this->translator->trans('flash.clothing_item.created'));
 
-            return $this->redirectToRoute('app_clothing_item_index');
+            /** @var int $id */
+            $id = $item->getId();
+
+            if ($item->getPhotoPath() !== null) {
+                $this->handler->__invoke(new AnalyzeClothingItemMessage($id));
+            } else {
+                $item->setStatus(ClothingItemStatus::COMPLETE);
+                $this->entityManager->flush();
+            }
+
+            return $this->redirectToRoute('app_clothing_item_edit', [
+                'id' => $id,
+                'form' => $form
+            ]);
         }
 
         return $this->render('clothing_item/form.html.twig', [
@@ -107,6 +127,18 @@ final class ClothingItemController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Color $color */
+            $color = $form->get('itemColors')->getData();
+            // Update primary color
+            $selectedColor = $color->getId();
+            if ($selectedColor !== null) {
+                foreach ($item->getItemColors() as $itemColor) {
+                    $itemColor->setIsPrimary(
+                        $itemColor->getColor()->getId() === $selectedColor
+                    );
+                }
+            }
+
             /** @var UploadedFile|null $photoFile */
             $photoFile = $form->get('photo')->getData();
 
@@ -139,19 +171,13 @@ final class ClothingItemController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_clothing_item_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_clothing_item_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, ClothingItem $item): Response
     {
         $this->denyAccessUnlessGranted('delete', $item);
 
         if ($this->isCsrfTokenValid('delete' . $item->getId(), $request->getPayload()->getString('_token'))) {
-            if ($item->getPhotoPath() !== null) {
-                $this->photoUploader->delete($item->getPhotoPath());
-            }
-
-            $this->entityManager->remove($item);
-            $this->entityManager->flush();
-
+            $this->deleter->delete($item);
             $this->addFlash('success', $this->translator->trans('flash.clothing_item.deleted'));
         }
 
