@@ -141,10 +141,19 @@ final class ClothingItemController extends AbstractController
 
             /** @var UploadedFile|null $photoFile */
             $photoFile = $form->get('photo')->getData();
+            $newFile = false;
+
+            /** @var int $id */
+            $id = $item->getId();
 
             if ($photoFile !== null) {
+                $newFile = true;
                 if ($item->getPhotoPath() !== null) {
                     $this->photoUploader->delete($item->getPhotoPath());
+                    $itemColors = $item->getItemColors();
+                    foreach ($itemColors as $itemColor) {
+                        $item->removeItemColor($itemColor);
+                    }
                 }
 
                 try {
@@ -154,11 +163,21 @@ final class ClothingItemController extends AbstractController
                     $this->addFlash('error', $this->translator->trans('clothing_item.form.error.invalid_image'));
                     return $this->redirectToRoute('app_clothing_item_edit', ['item' => $item, 'form' => $form]);
                 }
+                $this->handler->__invoke(new AnalyzeClothingItemMessage($id));
+            } else {
+                $item->setStatus(ClothingItemStatus::COMPLETE);
             }
 
             $this->entityManager->flush();
 
             $this->addFlash('success', $this->translator->trans('flash.clothing_item.updated'));
+
+            if ($newFile) {
+                return $this->redirectToRoute('app_clothing_item_edit', [
+                    'id' => $id,
+                    'form' => $form
+                ]);
+            }
 
             return $this->redirectToRoute('app_clothing_item_index');
         }

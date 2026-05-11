@@ -64,7 +64,7 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                            {# Gesamt-Prozent Anzeige #}
+
                             <div class="d-flex align-items-center gap-3 mt-2">
                                 <button type="button" id="add_material_button" class="btn btn-outline-secondary btn-sm">
                                     + {{ 'clothing_item.form.button.add_material'|trans }}
@@ -85,10 +85,21 @@
                                 <label class="form-label fw-bold">
                                     {{ 'clothing_item.form.label.primary_color'|trans }}
                                 </label>
-                                {% for choice in form.itemColors %}
-                                    <label class="form-check-label d-flex align-items-center" style="gap: 0.5rem;">
-                                        {{ form_widget(choice, { attr: { class: 'form-check-input' } }) }}
-                                        {{ choice.vars.label|raw }}
+                                {% for child in form.itemColors %}
+                                    {% set hex = child.vars.attr['data-hex'] %}
+
+                                    <label class="d-flex align-items-center gap-2 mb-2">
+                                        {{ form_widget(child) }}
+                                        <span
+                                            style="
+                                                display:inline-block;
+                                                width:2.5rem;
+                                                height:1rem;
+                                                background-color: {{ hex }};
+                                                border:1px solid #aaa;
+                                                border-radius:3px;
+                                                "></span>
+                                        {{ child.vars.label }}
                                     </label>
                                 {% endfor %}
                             </div>

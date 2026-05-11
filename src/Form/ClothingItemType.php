@@ -6,7 +6,6 @@ namespace App\Form;
 
 use App\Entity\ClothingItem;
 use App\Entity\Color;
-use App\Entity\ItemColor;
 use App\Entity\Pattern;
 use App\Entity\Season;
 use App\Entity\Style;
@@ -112,31 +111,18 @@ class ClothingItemType extends AbstractType
 
             $builder
                 ->add('itemColors', ChoiceType::class, [
-                    'label'      => false,
-                    'mapped'     => false,
-                    'expanded'   => true,
-                    'multiple'   => false,
-                    'data'       => $currentPrimary, // ← pre-select the current primary color
-                    'choices'    => $this->getItemColors($builder->getData()),
-                    'choice_label' => function (Color $color) {
-                        return sprintf(
-                            '<div class="d-flex align-items-center gap-2">
-                                        <span style="
-                                            display: inline-block;
-                                            width: 2.5rem;
-                                            height: 1rem;
-                                            background-color: %s;
-                                            border: 1px solid #aaa;
-                                            border-radius: 3px;
-                                            flex-shrink: 0;
-                                        ">&nbsp;&nbsp;</span>%s</div>',
-                            $color->getHexCode(),
-                            $this->translator->trans('color.name.' . $color->getName())
-                        );
-                    },
-                    'choice_value' => fn(?Color $color) => $color?->getId(),
-                    'attr'         => ['class' => 'd-flex flex-column gap-2'],
-                    'label_html'   => true,
+                    'label'         => false,
+                    'mapped'        => false,
+                    'expanded'      => true,
+                    'multiple'      => false,
+                    'data'          => $currentPrimary,
+                    'choices'       => $this->getItemColors($builder->getData()),
+                    'choice_label'  => fn (Color $color) => $this->translator->trans('color.name.' . $color->getName()),
+                    'choice_value'  => fn (?Color $color) => $color?->getId(),
+                    'choice_attr'   => fn (Color $color) => [
+                        'data-hex'  => $color->getHexCode(),
+                        'data-name' => $color->getName(),
+                    ],
                 ])
                 ->add('itemMaterials', CollectionType::class, [
                     'label'         => false,
