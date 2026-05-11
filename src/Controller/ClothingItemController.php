@@ -47,7 +47,7 @@ final class ClothingItemController extends AbstractController
 
         $items = $this->repository->findByOwner($owner);
 
-        return $this->render('clothing_item/listing.html.twig', [
+        return $this->render('clothing_item/index.html.twig', [
             'items' => $items,
         ]);
     }
