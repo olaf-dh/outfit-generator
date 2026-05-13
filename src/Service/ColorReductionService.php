@@ -5,15 +5,22 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\ClothingItem;
+use App\Entity\ItemColor;
 
 readonly class ColorReductionService
 {
-    public function __construct()
-    {
-    }
-
     public function normalize(ClothingItem $item): void
     {
-        // TODO: Implement normalize() method.
+        $pattern = $item->getPattern();
+        $maxSecondary = $pattern->getMaxSecondaryColor();
+
+        $secondaryColors = array_filter(
+            $item->getItemColors()->toArray(),
+            fn(ItemColor $color) => !$color->isPrimary()
+        );
+
+        foreach (array_slice($secondaryColors, $maxSecondary) as $color) {
+            $item->removeItemColor($color);
+        }
     }
 }

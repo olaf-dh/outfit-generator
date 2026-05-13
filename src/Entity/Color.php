@@ -131,23 +131,4 @@ class Color
 
         return $this;
     }
-
-    /**
-     * Returns all clothing items that contain this color.
-     *
-     * @return Collection<int, ClothingItem>
-     */
-    public function getClothingItems(): Collection
-    {
-        return new ArrayCollection(
-            $this->itemColors
-                ->map(fn(ItemColor $ic) => $ic->getClothingItem())
-                ->toArray()
-        );
-    }
-
-//    public function __toString(): string
-//    {
-//        return $this->name . ($this->hexCode ? ' (' . $this->hexCode . ')' : '');
-//    }
 }

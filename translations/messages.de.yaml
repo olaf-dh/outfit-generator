@@ -334,7 +334,7 @@ outfit:
         suggestions_title: Vorschläge
         no_suggestions: Keine passenden Outfits gefunden. Bitte andere Einstellungen wählen.
         hints:
-            select_item: Wähle 1-2 Kleidungsstücke aus und starte die Suche.
+            select_items: Wähle 1-2 Kleidungsstücke aus und starte die Suche.
         suggestions:
             title: Vorschläge
             outfit: Outfit %number%

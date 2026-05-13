@@ -38,7 +38,7 @@ class OutfitSuggestionService
     }
 
     /**
-     * @param ClothingItem[] $seedItems
+     * @param array<ClothingItem> $seedItems
      * @return OutfitSuggestion[]
      */
     public function suggest(

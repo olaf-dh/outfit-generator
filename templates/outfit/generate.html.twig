@@ -22,7 +22,7 @@
         <div class="row g-4">
 
             {# Left column: Form #}
-            <div class="col-lg-4">
+            <div class="col-lg-5">
                 <div class="card shadow-sm border-0 rounded-4">
                     <div class="card-body p-4">
                         {{ form_start(form) }}
@@ -34,47 +34,71 @@
                                 <small class="text-muted fw-normal">(1–2)</small>
                             </label>
 
-                            {# Visual Grid with photos #}
-                            <div class="row row-cols-3 g-2 mb-2" id="seed-items-grid">
+                            {# Verstecktes Formularfeld – wird per JS befüllt #}
+                            <div style="display:none">
                                 {% for choice in form.seedItems %}
-                                    {% set item = itemsById[choice.vars.value] %}
-                                    {% if item is defined %}
-                                        <div class="col">
-                                            <label class="seed-item-label w-100 h-100 position-relative"
-                                                   style="cursor: pointer;">
-                                                {{ form_widget(choice, {
-                                                    attr: {
-                                                        class: 'seed-item-checkbox visually-hidden',
-                                                        'data-name': item.name
-                                                    }
-                                                }) }}
-                                                <div class="seed-item-card border rounded-3 overflow-hidden
-                                                    d-flex flex-column align-items-center
-                                                    p-1 text-center"
-                                                     style="transition: all 0.15s;">
-                                                    {% if item.photoPath %}
-                                                        <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
-                                                             class="w-100 rounded-2 object-fit-cover"
-                                                             style="height: 70px;"
-                                                             alt="{{ item.name }}">
-                                                    {% else %}
-                                                        <div class="w-100 bg-light rounded-2 d-flex align-items-center
-                                                            justify-content-center"
-                                                             style="height: 70px;">
-                                                            <span style="font-size: 1.5rem;">👕</span>
-                                                        </div>
-                                                    {% endif %}
-                                                    <small class="mt-1 text-truncate w-100"
-                                                           style="font-size: 0.65rem;"
-                                                           title="{{ item.name }}">
-                                                        {{ item.name }}
-                                                    </small>
-                                                </div>
-                                            </label>
-                                        </div>
-                                    {% endif %}
+                                    {{ form_widget(choice, {attr: {class: 'seed-item-checkbox'}}) }}
                                 {% endfor %}
                             </div>
+
+                            {# Tab Navigation #}
+                            <ul class="nav nav-tabs nav-sm" id="seedItemTabs" role="tablist">
+                                {% for categoryName, group in grouped %}
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link py-1 px-2 {% if loop.first %}active{% endif %}"
+                                                style="font-size: 0.8rem;"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#seed-tab-{{ loop.index }}"
+                                                type="button">
+                                            {{ ('category.name.' ~ categoryName)|trans }}
+                                        </button>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                            {# Tab Content #}
+                            <div class="tab-content border border-top-0 rounded-bottom p-2" id="seedItemTabsContent">
+                                {% for categoryName, group in grouped %}
+                                    <div class="tab-pane fade {% if loop.first %}show active{% endif %}"
+                                         id="seed-tab-{{ loop.index }}">
+
+                                        <div class="row row-cols-3 row-cols-sm-4 g-2 mt-1">
+                                            {% for item in group %}
+                                                <div class="col">
+                                                    <div class="seed-item-card border rounded-3 overflow-hidden
+                                        d-flex flex-column align-items-center p-1 text-center"
+                                                         data-id="{{ item.id }}"
+                                                         style="cursor: pointer; transition: all 0.15s;">
+
+                                                        {# Foto #}
+                                                        {% if item.photoPath %}
+                                                            <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
+                                                                 class="w-100 rounded-2 object-fit-cover"
+                                                                 style="height: 80px;"
+                                                                 alt="{{ item.name }}">
+                                                        {% else %}
+                                                            <div class="w-100 bg-light rounded-2 d-flex align-items-center
+                                                justify-content-center"
+                                                                 style="height: 80px;">
+                                                                <span style="font-size: 1.5rem;">👕</span>
+                                                            </div>
+                                                        {% endif %}
+
+                                                        {# Name #}
+                                                        <small class="mt-1 text-truncate w-100"
+                                                               style="font-size: 0.65rem;"
+                                                               title="{{ item.name }}">
+                                                            {{ item.name }}
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+
                             {{ form_errors(form.seedItems) }}
                         </div>
 
@@ -116,7 +140,7 @@
             </div>
 
             {# Right column: suggestions #}
-            <div class="col-lg-8">
+            <div class="col-lg-7">
 
                 {% if suggestions is not empty %}
                     <h2 class="h5 mb-3">{{ (t ~ '.suggestions.title')|trans }}</h2>
@@ -217,41 +241,48 @@
 {% block javascripts %}
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const checkboxes = document.querySelectorAll('.seed-item-checkbox');
-            const maxSelect  = 2;
+            const cards    = document.querySelectorAll('.seed-item-card');
+            const maxSelect = 2;
 
-            function updateCards() {
-                const checked = document.querySelectorAll('.seed-item-checkbox:checked');
-
-                checkboxes.forEach(cb => {
-                    const card = cb.closest('.seed-item-label').querySelector('.seed-item-card');
-
-                    if (cb.checked) {
-                        card.style.borderColor    = '#0d6efd';
-                        card.style.borderWidth    = '2px';
-                        card.style.backgroundColor = '#f0f7ff';
-                    } else {
-                        card.style.borderColor    = '';
-                        card.style.borderWidth    = '';
-                        card.style.backgroundColor = '';
-
-                        // Deactivate when reach max
-                        if (checked.length >= maxSelect) {
-                            card.style.opacity = '0.4';
-                            cb.disabled = true;
-                        } else {
-                            card.style.opacity = '';
-                            cb.disabled = false;
-                        }
-                    }
-                });
+            function getSelected() {
+                return document.querySelectorAll('.seed-item-card.selected');
             }
 
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', updateCards);
-            });
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const id       = card.dataset.id;
+                    const checkbox = document.querySelector(`.seed-item-checkbox[value="${id}"]`);
 
-            updateCards();
+                    if (!checkbox) return;
+
+                    if (card.classList.contains('selected')) {
+                        // Deselect
+                        card.classList.remove('selected');
+                        card.style.borderColor     = '';
+                        card.style.borderWidth     = '';
+                        card.style.backgroundColor = '';
+                        checkbox.checked = false;
+                    } else {
+                        // Select – max 2
+                        if (getSelected().length >= maxSelect) return;
+
+                        card.classList.add('selected');
+                        card.style.borderColor     = '#0d6efd';
+                        card.style.borderWidth     = '2px';
+                        card.style.backgroundColor = '#f0f7ff';
+                        checkbox.checked = true;
+                    }
+
+                    // Not selected items gray out when max is reached
+                    const selectedCount = getSelected().length;
+                    cards.forEach(c => {
+                        if (!c.classList.contains('selected')) {
+                            c.style.opacity = selectedCount >= maxSelect ? '0.4' : '';
+                            c.style.pointerEvents = selectedCount >= maxSelect ? 'none' : '';
+                        }
+                    });
+                });
+            });
         });
     </script>
 {% endblock %}

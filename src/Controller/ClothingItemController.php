@@ -14,6 +14,7 @@ use App\Form\ClothingItemType;
 use App\Repository\ClothingItemRepository;
 use App\Service\ClothingItemDeleter;
 use App\Service\ClothingItemPhotoUploader;
+use App\Service\ColorReductionService;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -29,11 +30,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class ClothingItemController extends AbstractController
 {
     public function __construct(
-        private readonly ClothingItemRepository $repository,
-        private readonly EntityManagerInterface $entityManager,
-        private readonly ClothingItemPhotoUploader $photoUploader,
         private readonly AnalyzeClothingItemHandler $handler,
         private readonly ClothingItemDeleter $deleter,
+        private readonly ClothingItemPhotoUploader $photoUploader,
+        private readonly ClothingItemRepository $repository,
+        private readonly ColorReductionService $colorReduction,
+        private readonly EntityManagerInterface $entityManager,
         private readonly TranslatorInterface $translator,
     ) {
     }
@@ -169,6 +171,8 @@ final class ClothingItemController extends AbstractController
             } else {
                 $item->setStatus(ClothingItemStatus::COMPLETE);
             }
+
+            $this->colorReduction->normalize($item);
 
             $this->entityManager->flush();
 

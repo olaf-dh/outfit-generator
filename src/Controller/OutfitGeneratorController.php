@@ -71,10 +71,16 @@ class OutfitGeneratorController extends AbstractController
 
         $allItems = $this->repository->findByOwner($owner);
         $itemsById = [];
+        $grouped = [];
+
         foreach ($allItems as $item) {
             /** @var int $id */
             $id = $item->getId();
             $itemsById[$id] = $item;
+
+            /** @var string $categoryName */
+            $categoryName = $item->getSubCategory()?->getCategory()?->getName();
+            $grouped[$categoryName][] = $item;
         }
 
         return $this->render('outfit/generate.html.twig', [
@@ -82,6 +88,7 @@ class OutfitGeneratorController extends AbstractController
             'error' => $error,
             'suggestions' => $suggestions,
             'itemsById'   => $itemsById,
+            'grouped'     => $grouped,
         ]);
     }
 }

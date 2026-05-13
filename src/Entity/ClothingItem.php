@@ -204,7 +204,7 @@ class ClothingItem
         if ($this->itemColors->removeElement($itemColor)) {
             // set the owning side to null (unless already changed)
             if ($itemColor->getClothingItem() === $this) {
-                $itemColor->setClothingItem($this);
+                $itemColor->setClothingItem(null);
             }
         }
 
