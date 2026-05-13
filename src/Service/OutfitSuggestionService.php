@@ -204,13 +204,11 @@ class OutfitSuggestionService
             }
         }
 
-        $patternA = $a->getPatterns()->first();
-        $patternB = $b->getPatterns()->first();
+        $patternA = $a->getPattern();
+        $patternB = $b->getPattern();
 
-        if ($patternA !== false && $patternB !== false) {
-            if (!$this->patternCompatibility->areCompatible($patternA, $patternB)) {
-                return false;
-            }
+        if (!$this->patternCompatibility->areCompatible($patternA, $patternB)) {
+            return false;
         }
 
         return true;

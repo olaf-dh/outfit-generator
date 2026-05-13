@@ -203,10 +203,10 @@ clothing_item:
         title: Meine Kleidungsstücke
         empty: Noch keine Kleidungsstücke vorhanden
     add:
-        title: Kleidungsstück anlegen
+        title: Neues Kleidungsstück anlegen
         button: Anlegen
     edit:
-        title: Kleidungsstück bearbeiten
+        title: Bearbeiten
         button: Speichern
     delete:
         button: Entfernen
@@ -214,7 +214,8 @@ clothing_item:
     photo:
         upload: Foto hochladen
         analyze: KI-Analyse starten
-        analyzing: Wird analysiert…
+        analyzing: "%count% Foto(s) werden gerade analysiert..."
+        needs_review: "%count% Kleidungsstück(e) warten auf deine Bestätigung."
     form:
         back_to_dashboard: Zurück zur Übersicht
         button:
@@ -330,16 +331,25 @@ subcategory:
 outfit:
     generator:
         title: Outfit-Generator
-        seed_items: Ausgewählte Kleidungsstücke
-        style_label: Stil
-        season_label: Jahreszeit
-        weather_label: Wetter (optional)
-        generate_button: Outfits vorschlagen
         suggestions_title: Vorschläge
         no_suggestions: Keine passenden Outfits gefunden. Bitte andere Einstellungen wählen.
-    suggestion:
-        items_label: Kleidungsstücke
-        save_button: Outfit speichern
+        hints:
+            select_item: Wähle 1-2 Kleidungsstücke aus und starte die Suche.
+        suggestions:
+            title: Vorschläge
+            outfit: Outfit %number%
+            score: Score %score%
+        form:
+            placeholder:
+                select: Bitte wählen…
+                weather: Alle Wetterbedingungen
+            label:
+                season: Jahreszeit
+                weather: Wetter
+                style: Stil
+                seed_items: Ausgewählte Kleidungsstücke
+            button:
+                generate: Outfits vorschlagen
 
 flash:
     clothing_item:
@@ -361,65 +371,40 @@ registration:
             not_blank: Bitte ein Passwort eingeben.
             min_length: Das Passwort muss mindestens 8 Zeichen lang sein.
 
-templates:
-    base:
-        title: Outfit KI
-        login: Anmelden
-        logout: Abmelden
-        site_name: Outfit-Manager
-    dashboard:
-        index:
-            title: Startseite
-            welcome: Willkommen zurück, {{ user }}!
-            last_items: Letzte Kleidungsstücke
-            no_items: Keine Kleidungsstücke vorhanden
-        card:
-            clothing:
-                title: Kleidung
-                text: Du hast {{ count }} Kleidungstücke gespeichert.
-                button: Anzeigen
-            outfit:
-                title: Outfit zusammenstellen
-                text: Stelle ein Outfit aus Deinen vorhandenen Kleidungsstücken zusammen.
-                button: Starten
-    clothing_item:
-        index:
-            title: Meine Kleidungsstücke
-            table_head:
-                subcategory: Unterkategorie
-                preview: Vorschau
-                name: Name
-                style: Stil
-                color: Farbe
-                pattern: Muster
-                material: Material
-                season: Jahreszeit
-                layer_depth: Schichttiefe
-                action: Aktion
-            table_body:
-                no_photo: Kein Bild vorhanden
-                no_material: Kein Material definiert
-                no_color: Keine Farbe definiert
-                primary_color: Hauptfarbe
-            action:
-                edit: Bearbeiten
-                new: Neues Kleidungsstück anlegen
-                delete: Entfernen
-                delete_confirm: Möchten Sie dieses Kleidungsstück wirklich löschen?
-            status:
-                analyzing: "%count% Foto(s) werden gerade analysiert..."
-                needs_review: "%count% Kleidungsstück(e) warten auf deine Bestätigung."
-    security:
-        login:
-            title: Anmelden
-            please: Bitte anmelden
-            email: E-Mail
-            password: Passwort
-            remember_me: Angemeldet bleiben
-            submit: Anmelden
-            error:
-                invalid_credentials: Falscher Benutzername oder Passwort.
-                locked: Ihr Konto ist gesperrt.
-                expired: Ihr Konto ist abgelaufen.
-            message:
-                logged_in: Sie sind eingeloggt als
+dashboard:
+    title: Startseite
+    welcome: Willkommen zurück, {{ user }}!
+    last_items: Letzte Kleidungsstücke
+    no_items: Keine Kleidungsstücke vorhanden
+    card:
+        clothing:
+            title: Kleidung
+            text: Du hast {{ count }} Kleidungstücke gespeichert.
+            button: Anzeigen
+        outfit:
+            title: Outfit zusammenstellen
+            text: Stelle ein Outfit aus Deinen vorhandenen Kleidungsstücken zusammen.
+            button: Starten
+
+base:
+    title: Outfit KI
+    login: Anmelden
+    logout: Abmelden
+    site_name: Outfit-Manager
+
+form:
+    optional: (optional)
+
+security:
+    title: Anmelden
+    please: Bitte anmelden
+    email: E-Mail
+    password: Passwort
+    remember_me: Angemeldet bleiben
+    submit: Anmelden
+    error:
+        invalid_credentials: Falscher Benutzername oder Passwort.
+        locked: Ihr Konto ist gesperrt.
+        expired: Ihr Konto ist abgelaufen.
+    message:
+        logged_in: Sie sind eingeloggt als

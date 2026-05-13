@@ -17,7 +17,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class LookupFixtures extends Fixture
 {
-    // Patterns
+    // Pattern
     public const string PATTERN_SOLID              = 'pattern-solid';
     public const string PATTERN_VERTICAL_STRIPES   = 'pattern-vertical-stripes';
     public const string PATTERN_HORIZONTAL_STRIPES = 'pattern-horizontal-stripes';
@@ -82,31 +82,32 @@ class LookupFixtures extends Fixture
     private function loadPatterns(ObjectManager $manager): void
     {
         $patterns = [
-            self::PATTERN_SOLID              => PatternType::SOLID,
-            self::PATTERN_VERTICAL_STRIPES   => PatternType::VERTICAL_STRIPES,
-            self::PATTERN_HORIZONTAL_STRIPES => PatternType::HORIZONTAL_STRIPES,
-            self::PATTERN_CHECKED            => PatternType::CHECKED,
-            self::PATTERN_DOTTED             => PatternType::DOTTED,
-            self::PATTERN_FLORAL             => PatternType::FLORAL,
-            self::PATTERN_LEAF               => PatternType::LEAF,
-            self::PATTERN_NOVELTY            => PatternType::NOVELTY,
-            self::PATTERN_PRINT              => PatternType::PRINT,
-            self::PATTERN_MULTICOLOR         => PatternType::MULTICOLOR,
-            self::PATTERN_CAMOUFLAGE         => PatternType::CAMOUFLAGE,
-            self::PATTERN_PAISLEY            => PatternType::PAISLEY,
-            self::PATTERN_HOUNDSTOOTH        => PatternType::HOUNDSTOOTH,
-            self::PATTERN_CHEVRON            => PatternType::CHEVRON,
-            self::PATTERN_ARGYLE             => PatternType::ARGYLE,
-            self::PATTERN_ZIGZAG             => PatternType::ZIGZAG,
-            self::PATTERN_GEOMETRIC          => PatternType::GEOMETRIC,
-            self::PATTERN_ABSTRACT           => PatternType::ABSTRACT,
-            self::PATTERN_TIE_DYE            => PatternType::TIE_DYE,
-            self::PATTERN_MARL               => PatternType::MARL,
+            self::PATTERN_SOLID              => ['type' => PatternType::SOLID],
+            self::PATTERN_VERTICAL_STRIPES   => ['type' => PatternType::VERTICAL_STRIPES, 'maxSecondaryColor' => 1],
+            self::PATTERN_HORIZONTAL_STRIPES => ['type' => PatternType::HORIZONTAL_STRIPES, 'maxSecondaryColor' => 1],
+            self::PATTERN_CHECKED            => ['type' => PatternType::CHECKED, 'maxSecondaryColor' => 1],
+            self::PATTERN_DOTTED             => ['type' => PatternType::DOTTED, 'maxSecondaryColor' => 1],
+            self::PATTERN_FLORAL             => ['type' => PatternType::FLORAL, 'maxSecondaryColor' => 2],
+            self::PATTERN_LEAF               => ['type' => PatternType::LEAF, 'maxSecondaryColor' => 2],
+            self::PATTERN_NOVELTY            => ['type' => PatternType::NOVELTY, 'maxSecondaryColor' => 2],
+            self::PATTERN_PRINT              => ['type' => PatternType::PRINT, 'maxSecondaryColor' => 2],
+            self::PATTERN_MULTICOLOR         => ['type' => PatternType::MULTICOLOR, 'maxSecondaryColor' => 3],
+            self::PATTERN_CAMOUFLAGE         => ['type' => PatternType::CAMOUFLAGE, 'maxSecondaryColor' => 2],
+            self::PATTERN_PAISLEY            => ['type' => PatternType::PAISLEY, 'maxSecondaryColor' => 2],
+            self::PATTERN_HOUNDSTOOTH        => ['type' => PatternType::HOUNDSTOOTH, 'maxSecondaryColor' => 1],
+            self::PATTERN_CHEVRON            => ['type' => PatternType::CHEVRON, 'maxSecondaryColor' => 1],
+            self::PATTERN_ARGYLE             => ['type' => PatternType::ARGYLE, 'maxSecondaryColor' => 1],
+            self::PATTERN_ZIGZAG             => ['type' => PatternType::ZIGZAG, 'maxSecondaryColor' => 1],
+            self::PATTERN_GEOMETRIC          => ['type' => PatternType::GEOMETRIC, 'maxSecondaryColor' => 1],
+            self::PATTERN_ABSTRACT           => ['type' => PatternType::ABSTRACT, 'maxSecondaryColor' => 3],
+            self::PATTERN_TIE_DYE            => ['type' => PatternType::TIE_DYE, 'maxSecondaryColor' => 3],
+            self::PATTERN_MARL               => ['type' => PatternType::MARL],
         ];
 
-        foreach ($patterns as $reference => $type) {
+        foreach ($patterns as $reference => $data) {
             $pattern = new Pattern();
-            $pattern->setType($type);
+            $pattern->setType($data['type']);
+            $pattern->setMaxSecondaryColor($data['maxSecondaryColor'] ?? 0);
             $manager->persist($pattern);
             $this->addReference($reference, $pattern);
         }

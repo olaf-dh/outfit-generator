@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
+use InvalidArgumentException;
 use League\ColorExtractor\Color;
 use League\ColorExtractor\ColorExtractor;
 use League\ColorExtractor\Palette;
@@ -27,7 +28,7 @@ class ColorExtractorService
     public function extract(string $imagePath): array
     {
         if (!file_exists($imagePath)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Image file not found: %s', $imagePath)
             );
         }
@@ -36,20 +37,53 @@ class ColorExtractorService
         $extractor = new ColorExtractor($palette);
 
         // Up to 10 colors are extracted to leave enough colors for Green-Screen filtering
+        /** @var array<int, int> $colors */
         $colors = $extractor->extract(10);
 
-        $filtered = [];
-        /** @var int $colorInt */
+        $hasBrightColor = false;
         foreach ($colors as $colorInt) {
             $hex = $this->intToHex($colorInt);
-            if (!$this->isGreenScreen($hex)) {
-                $filtered[] = $hex;
+            $hsl = $this->hexToHsl($hex);
+
+            if ($hsl['l'] > 0.35 && $hsl['s'] > 0.1) {
+                $hasBrightColor = true;
             }
+        }
+
+        $filtered = [];
+        foreach ($colors as $colorInt) {
+            $hex = $this->intToHex($colorInt);
+            if ($this->isGreenScreen($hex)) {
+                continue;
+            }
+
+            $hsl = $this->hexToHsl($hex);
+
+            // Remove dark shadow colors ONLY if brighter colors exist
+            if (
+                $hasBrightColor &&
+                $hsl['l'] < 0.12
+            ) {
+                continue;
+            }
+
+            $filtered[] = $hex;
         }
 
         if (empty($filtered)) {
             return ['primary' => '#808080', 'secondary' => []]; // Fallback: Gray
         }
+
+        usort($filtered, function (string $a, string $b) {
+
+            $hslA = $this->hexToHsl($a);
+            $hslB = $this->hexToHsl($b);
+
+            $scoreA = ($hslA['s'] * 0.7) + ($hslA['l'] * 0.3);
+            $scoreB = ($hslB['s'] * 0.7) + ($hslB['l'] * 0.3);
+
+            return $scoreB <=> $scoreA;
+        });
 
         $primary   = array_shift($filtered);
         $secondary = array_slice($filtered, 0, 2);

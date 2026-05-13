@@ -141,11 +141,11 @@ class ClothingItemType extends AbstractType
                     'expanded' => true,
                     'attr' => ['class' => 'd-flex flex-wrap gap-2'],
                 ])
-                ->add('patterns', EntityType::class, [
+                ->add('pattern', EntityType::class, [
                     'class' => Pattern::class,
                     'choice_label' => fn(Pattern $p) => 'enum.pattern_type.' . $p->getType()->value,
                     'choice_translation_domain' => 'messages',
-                    'multiple' => true,
+                    'multiple' => false,
                     'expanded' => true,
                     'attr' => ['class' => 'd-flex flex-wrap gap-2'],
                 ])

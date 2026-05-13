@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% set message = 'templates.clothing_item.index' %}
+{% set message = 'clothing_item' %}
 
-{% block title %}{{ (message ~ '.title')|trans }}{% endblock %}
+{% block title %}{{ (message ~ '.list.title')|trans }}{% endblock %}
 
 {% block body %}
     <div class="container py-4">
@@ -24,23 +24,25 @@
         {% if pendingItems|length > 0 %}
             <div class="alert alert-info d-flex align-items-center gap-2">
                 <div class="spinner-border spinner-border-sm" role="status"></div>
-                {{ (message ~ '.status.analyzing')|trans({'%count%': pendingItems|length}) }}
+                {{ (message ~ '.photo.analyzing')|trans({'%count%': pendingItems|length}) }}
             </div>
         {% endif %}
 
         {% if analyzedItems|length > 0 %}
             <div class="alert alert-warning">
-                {{ (message ~ '.status.needs_review')|trans({'%count%': analyzedItems|length}) }}
+                {{ (message ~ '.photo.needs_review')|trans({'%count%': analyzedItems|length}) }}
             </div>
         {% endif %}
 
         {# Header #}
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="h3 mb-0">{{ (message ~ '.title')|trans }}</h1>
+            <h1 class="h3 mb-0">{{ (message ~ '.list.title')|trans }}</h1>
             <a href="{{ path('app_clothing_item_new') }}" class="btn btn-primary">
-                + {{ (message ~ '.action.new')|trans }}
+                + {{ (message ~ '.add.title')|trans }}
             </a>
         </div>
+
+        {% if items %}
 
         {# Set groups of items in categories #}
         {% set grouped = {} %}
@@ -147,15 +149,15 @@
                                         <div class="d-flex gap-2">
                                             <a href="{{ path('app_clothing_item_edit', {id: item.id}) }}"
                                                class="btn btn-sm btn-outline-primary flex-grow-1">
-                                                {{ (message ~ '.action.edit')|trans }}
+                                                {{ (message ~ '.edit.title')|trans }}
                                             </a>
                                             <form method="post"
                                                   action="{{ path('app_clothing_item_delete', {id: item.id}) }}"
-                                                  onsubmit="return confirm('{{ (message ~ '.action.delete_confirm')|trans }}')">
+                                                  onsubmit="return confirm('{{ (message ~ '.delete.confirm')|trans }}')">
                                                 <input type="hidden" name="_token"
                                                        value="{{ csrf_token('delete' ~ item.id) }}">
                                                 <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                        title="{{ (message ~ '.action.delete')|trans }}">
+                                                        title="{{ (message ~ '.delete.button')|trans }}">
                                                     🗑
                                                 </button>
                                             </form>
@@ -164,21 +166,19 @@
 
                                 </div>
                             </div>
-                        {% else %}
-                            <div class="col-12">
-                                <div class="text-center py-5 text-muted">
-                                    <div style="font-size: 4rem;">👕</div>
-                                    <p class="mt-3">{{ (message ~ '.empty')|trans }}</p>
-                                    <a href="{{ path('app_clothing_item_new') }}" class="btn btn-primary mt-2">
-                                        {{ (message ~ '.action.new')|trans }}
-                                    </a>
-                                </div>
-                            </div>
                         {% endfor %}
                     </div>
 
                 </div>
             {% endfor %}
         </div>
+        {% else %}
+            <div class="col-12">
+                <div class="text-center py-5 text-muted">
+                    <div style="font-size: 4rem;">👕</div>
+                    <p class="mt-3">{{ (message ~ '.list.empty')|trans }}</p>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

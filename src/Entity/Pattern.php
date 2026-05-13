@@ -21,6 +21,9 @@ class Pattern
     #[ORM\Column(enumType: PatternType::class)]
     private PatternType $type;
 
+    #[ORM\Column]
+    private int $maxSecondaryColor = 0;
+
     /**
      * @var Collection<int, ClothingItem>
      */
@@ -45,6 +48,16 @@ class Pattern
     public function setType(PatternType $type): void
     {
         $this->type = $type;
+    }
+
+    public function getMaxSecondaryColor(): int
+    {
+        return $this->maxSecondaryColor;
+    }
+
+    public function setMaxSecondaryColor(int $maxSecondaryColor): void
+    {
+        $this->maxSecondaryColor = $maxSecondaryColor;
     }
 
     /**

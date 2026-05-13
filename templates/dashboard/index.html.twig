@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'templates.dashboard.index.title'|trans }}{% endblock %}
+{% set message = 'dashboard' %}
+
+{% block title %}{{ (message ~ '.title')|trans }}{% endblock %}
 
 {% block body %}
     {% for label, messages in app.flashes %}
@@ -11,55 +13,39 @@
         </div>
     {% endfor %}
     <div class="container py-5">
-        <h1 class="mb-4">👋 {{ 'templates.dashboard.index.welcome'|trans({'{{ user }}': app.user.firstName}) }}</h1>
+        <h1 class="mb-4">👋 {{ (message ~ '.welcome')|trans({'{{ user }}': app.user.firstName}) }}</h1>
 
         <div class="row g-4">
-            {% set cardClothingTitle = 'templates.dashboard.card.clothing.title'|trans %}
-            {% set cardClothingText = 'templates.dashboard.card.clothing.text'|trans({'{{ count }}': clothingItems|length}) %}
-            {% set cardClothingButton = 'templates.dashboard.card.clothing.button'|trans %}
             {% include 'dashboard/_card.html.twig' with {
                 icon: '🧺',
-                title: cardClothingTitle,
-                text: cardClothingText,
+                title: (message ~ '.card.clothing.title')|trans,
+                text: (message ~ '.card.clothing.text')|trans({'{{ count }}': clothingItems|length}),
                 route: 'app_clothing_item_index',
-                button: cardClothingButton,
+                button: (message ~ '.card.clothing.button')|trans,
                 buttonClass: 'btn-outline-primary'
             } %}
 
-{#            {% include 'dashboard/_card.html.twig' with {#}
-{#                icon: '🎯',#}
-{#                title: 'Outfit zusammenstellen',#}
-{#                text: 'Stelle ein Outfit aus deinen vorhandenen Kleidungsstücken zusammen.',#}
-{#                route: 'app_outfit_form',#}
-{#                button: 'Starten',#}
-{#                buttonClass: 'btn-success'#}
-{#            } %}#}
-
-{#            {% include 'dashboard/_card.html.twig' with {#}
-{#                icon: '🧑‍🎨',#}
-{#                title: 'Eigenschaften verwalten',#}
-{#                text: 'Bearbeite alle Eigenschaften wie Farbe, Stil, usw.',#}
-{#                route: 'app_property_index',#}
-{#                button: 'Bearbeiten',#}
-{#                buttonClass: 'btn-outline-secondary'#}
-{#            } %}#}
-
-
+            {% include 'dashboard/_card.html.twig' with {
+                icon: '🎯',
+                title: (message ~ '.card.outfit.title')|trans,
+                text: (message ~ '.card.outfit.text')|trans,
+                route: 'app_outfit_generator',
+                button: (message ~ '.card.outfit.button')|trans,
+                buttonClass: 'btn-success'
+            } %}
         </div>
 
         <hr class="my-5">
 
-        <h4>🕘 {{ 'templates.dashboard.index.last_items'|trans }}</h4>
+        <h4>🕘 {{ (message ~ '.last_items')|trans }}</h4>
         <ul class="list-group list-group-flush">
             {% for item in recentItems %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     {{ item.name }} ({{ ('category.name.' ~ item.subCategory.category)|trans }})
                 </li>
             {% else %}
-                <li class="list-group-item">{{ 'templates.dashboard.index.no_items'|trans }}.</li>
+                <li class="list-group-item">{{ (message ~ '.no_items')|trans }}.</li>
             {% endfor %}
         </ul>
-
-        <p><a href="{{ path('app_logout') }}">{{ 'templates.base.logout'|trans }}</a></p>
     </div>
 {% endblock %}

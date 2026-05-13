@@ -60,13 +60,6 @@ class ClothingItem
     private Collection $itemMaterials;
 
     /**
-     * @var Collection<int, Pattern>
-     */
-    #[ORM\ManyToMany(targetEntity: Pattern::class, inversedBy: 'clothingItems')]
-    #[ORM\JoinTable(name: 'clothing_item_pattern')]
-    private Collection $patterns;
-
-    /**
      * @var Collection<int, Season>
      */
     #[ORM\ManyToMany(targetEntity: Season::class, inversedBy: 'clothingItems')]
@@ -87,6 +80,10 @@ class ClothingItem
     #[ORM\JoinTable(name: 'clothing_item_weather_condition')]
     private Collection $weatherConditions;
 
+    #[ORM\ManyToOne(targetEntity: Pattern::class, inversedBy: 'clothingItems')]
+    #[ORM\JoinColumn(nullable: false)]
+    private Pattern $pattern;
+
     #[ORM\ManyToOne(targetEntity: SubCategory::class, inversedBy: 'clothingItems')]
     private ?SubCategory $subCategory = null;
 
@@ -102,7 +99,6 @@ class ClothingItem
         $this->createdAt = new \DateTimeImmutable();
         $this->itemColors = new ArrayCollection();
         $this->itemMaterials = new ArrayCollection();
-        $this->patterns = new ArrayCollection();
         $this->seasons = new ArrayCollection();
         $this->styles = new ArrayCollection();
         $this->weatherConditions = new ArrayCollection();
@@ -246,30 +242,6 @@ class ClothingItem
     }
 
     /**
-     * @return Collection<int, Pattern>
-     */
-    public function getPatterns(): Collection
-    {
-        return $this->patterns;
-    }
-
-    public function addPattern(Pattern $pattern): static
-    {
-        if (!$this->patterns->contains($pattern)) {
-            $this->patterns[] = $pattern;
-        }
-
-        return $this;
-    }
-
-    public function removePattern(Pattern $pattern): static
-    {
-        $this->patterns->removeElement($pattern);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Season>
      */
     public function getSeasons(): Collection
@@ -347,6 +319,18 @@ class ClothingItem
     public function setSubCategory(?SubCategory $subCategory): static
     {
         $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    public function getPattern(): Pattern
+    {
+        return $this->pattern;
+    }
+
+    public function setPattern(Pattern $pattern): static
+    {
+        $this->pattern = $pattern;
 
         return $this;
     }

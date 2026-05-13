@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -26,7 +28,7 @@ class RegistrationController extends AbstractController
     ): Response {
         // Logged in user is redirected to clothing item index
         if ($this->getUser()) {
-            return $this->redirectToRoute('app_clothing_item_index');
+            return $this->redirectToRoute('app_dashboard_index');
         }
 
         $user = new User();

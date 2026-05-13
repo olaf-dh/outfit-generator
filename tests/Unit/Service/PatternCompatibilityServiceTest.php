@@ -62,7 +62,7 @@ class PatternCompatibilityServiceTest extends TestCase
     }
 
     // -------------------------------------------------------
-    // Geometric rules: two geometric patterns clash
+    // Geometric rules: two geometric pattern clash
     // -------------------------------------------------------
 
     public function testTwoCheckedPatternsAreNotCompatible(): void

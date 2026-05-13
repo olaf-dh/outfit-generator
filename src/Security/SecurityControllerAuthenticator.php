@@ -50,7 +50,7 @@ class SecurityControllerAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_clothing_item_index'));
+        return new RedirectResponse($this->urlGenerator->generate('app_dashboard_index'));
     }
 
     protected function getLoginUrl(Request $request): string

@@ -65,6 +65,7 @@ class Category
     public function setBodyZone(BodyZone $bodyZone): static
     {
         $this->bodyZone = $bodyZone;
+
         return $this;
     }
 

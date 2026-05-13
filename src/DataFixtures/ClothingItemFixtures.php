@@ -62,6 +62,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
             $item->setSubCategory($this->getReference($data['subcategory'], SubCategory::class));
             $item->setMinLayerDepth($data['min_layer']);
             $item->setMaxLayerDepth($data['max_layer']);
+            $item->setPattern($this->getReference($data['pattern'], Pattern::class));
             $item->setStatus($status);
             $item->setOwner($owner);
 
@@ -89,11 +90,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 $item->addItemMaterial($itemMaterial);
             }
 
-            // Pattern, Style, Season, WeatherCondition
-            foreach ($data['patterns'] as $ref) {
-                $item->addPattern($this->getReference($ref, Pattern::class));
-            }
-
+            // Style, Season, WeatherCondition
             foreach ($data['styles'] as $ref) {
                 $item->addStyle($this->getReference($ref, Style::class));
             }
@@ -122,7 +119,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
      *     primary_color: string,
      *     secondary_colors?: string[],
      *     materials: array<string, float>,
-     *     patterns: string[],
+     *     pattern: string,
      *     styles: string[],
      *     seasons: string[],
      *     weather_conditions?: string[],
@@ -140,7 +137,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 2,
                 'primary_color' => ColorFixtures::COLOR_WHITE,
                 'materials'     => [MaterialFixtures::MATERIAL_COTTON => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'       => [
                     LookupFixtures::SEASON_SPRING,
@@ -155,7 +152,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 3,
                 'primary_color' => ColorFixtures::COLOR_RED,
                 'materials'     => [MaterialFixtures::MATERIAL_CASHMERE => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
                 'seasons'       => [LookupFixtures::SEASON_AUTUMN, LookupFixtures::SEASON_WINTER],
             ],
@@ -167,7 +164,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'primary_color'    => ColorFixtures::COLOR_DARK_BLUE,
                 'secondary_colors' => [ColorFixtures::COLOR_WHITE],
                 'materials'        => [MaterialFixtures::MATERIAL_COTTON => 100.0],
-                'patterns'         => [LookupFixtures::PATTERN_VERTICAL_STRIPES],
+                'pattern'          => LookupFixtures::PATTERN_VERTICAL_STRIPES,
                 'styles'           => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
                 'seasons'          => [LookupFixtures::SEASON_SPRING, LookupFixtures::SEASON_SUMMER],
             ],
@@ -180,7 +177,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 1,
                 'primary_color' => ColorFixtures::COLOR_CHARCOAL,
                 'materials'     => [MaterialFixtures::MATERIAL_WOOL => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'       => [
                     LookupFixtures::SEASON_SPRING,
@@ -195,7 +192,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 1,
                 'primary_color' => ColorFixtures::COLOR_MUSTARD,
                 'materials'     => [MaterialFixtures::MATERIAL_COTTON => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
                 'seasons'       => [LookupFixtures::SEASON_SPRING, LookupFixtures::SEASON_AUTUMN],
             ],
@@ -206,7 +203,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 1,
                 'primary_color' => ColorFixtures::COLOR_DARK_BLUE,
                 'materials'     => [MaterialFixtures::MATERIAL_DENIM => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'       => [], // no Season = universal
             ],
@@ -219,7 +216,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 5,
                 'primary_color' => ColorFixtures::COLOR_WARM_GRAY,
                 'materials'     => [MaterialFixtures::MATERIAL_WOOL => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'       => [LookupFixtures::SEASON_AUTUMN, LookupFixtures::SEASON_WINTER],
             ],
@@ -233,7 +230,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                     MaterialFixtures::MATERIAL_COTTON    => 65.0,
                     MaterialFixtures::MATERIAL_POLYESTER => 35.0,
                 ],
-                'patterns'           => [LookupFixtures::PATTERN_SOLID],
+                'pattern'            => LookupFixtures::PATTERN_SOLID,
                 'styles'             => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_BUSINESS],
                 'seasons'            => [LookupFixtures::SEASON_SPRING, LookupFixtures::SEASON_AUTUMN],
                 'weather_conditions' => [LookupFixtures::WEATHER_RAINY, LookupFixtures::WEATHER_WINDY],
@@ -247,7 +244,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 1,
                 'primary_color' => ColorFixtures::COLOR_CAMEL,
                 'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_BUSINESS],
                 'seasons'       => [],
             ],
@@ -258,7 +255,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 1,
                 'primary_color' => ColorFixtures::COLOR_WHITE,
                 'materials'     => [MaterialFixtures::MATERIAL_COTTON => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_CASUAL],
                 'seasons'       => [],
             ],
@@ -271,7 +268,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'          => 1,
                 'primary_color'      => ColorFixtures::COLOR_LIGHT_GRAY,
                 'materials'          => [MaterialFixtures::MATERIAL_WOOL => 100.0],
-                'patterns'           => [LookupFixtures::PATTERN_SOLID],
+                'pattern'            => LookupFixtures::PATTERN_SOLID,
                 'styles'             => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
                 'seasons'            => [LookupFixtures::SEASON_AUTUMN, LookupFixtures::SEASON_WINTER],
                 'weather_conditions' => [LookupFixtures::WEATHER_COLD, LookupFixtures::WEATHER_WINDY],
@@ -283,7 +280,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
                 'max_layer'     => 1,
                 'primary_color' => ColorFixtures::COLOR_TAUPE,
                 'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
-                'patterns'      => [LookupFixtures::PATTERN_SOLID],
+                'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [
                     LookupFixtures::STYLE_CASUAL,
                     LookupFixtures::STYLE_SMART_CASUAL,

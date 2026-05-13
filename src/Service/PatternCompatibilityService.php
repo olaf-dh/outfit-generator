@@ -29,7 +29,7 @@ class PatternCompatibilityService
 
     public function areCompatible(Pattern $a, Pattern $b): bool
     {
-        // Rule 1: solid is compatible with all patterns
+        // Rule 1: solid is compatible with all pattern
         if ($this->isSolid($a) || $this->isSolid($b)) {
             return true;
         }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -24,7 +26,8 @@ final class DashboardController extends AbstractController
         /** @var string $email */
         $email = $owner->getUserIdentifier();
 
-        $recentItems = array_slice($items, 0, 5);
+        $recentItems = array_reverse($items);
+        $recentItems = array_slice($recentItems, 0, 5);
 
         return $this->render('dashboard/index.html.twig', [
             'email' => $email,
