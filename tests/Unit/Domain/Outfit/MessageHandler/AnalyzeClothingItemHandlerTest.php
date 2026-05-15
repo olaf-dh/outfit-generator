@@ -2,9 +2,6 @@
 
 namespace App\Tests\Unit\Domain\Outfit\MessageHandler;
 
-use App\Entity\ClothingItem;
-use App\Entity\Color;
-use App\Entity\ItemColor;
 use App\Domain\Outfit\Enum\ClothingItemStatus;
 use App\Domain\Outfit\Enum\ColorFamily;
 use App\Domain\Outfit\Enum\ColorSaturation;
@@ -12,6 +9,9 @@ use App\Domain\Outfit\Enum\ColorTemperature;
 use App\Domain\Outfit\Enum\ColorTone;
 use App\Domain\Outfit\Message\AnalyzeClothingItemMessage;
 use App\Domain\Outfit\MessageHandler\AnalyzeClothingItemHandler;
+use App\Entity\ClothingItem;
+use App\Entity\Color;
+use App\Entity\ItemColor;
 use App\Repository\ClothingItemRepository;
 use App\Repository\ColorRepository;
 use App\Service\ColorExtractorService;

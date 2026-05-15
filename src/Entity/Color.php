@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity;
+namespace App\Domain\Outfit\Entity;
 
 use App\Domain\Outfit\Enum\ColorFamily;
 use App\Domain\Outfit\Enum\ColorSaturation;

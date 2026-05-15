@@ -249,6 +249,11 @@ clothing_item:
             required: Dieses Feld ist erforderlich.
             invalid_image: Bitte ein gültiges Bild hochladen (JPG, PNG).
             image_too_large: Das Bild darf maximal 10 MB groß sein.
+    index:
+        uncategorized: Nicht kategorisiert
+        no_subcategory: Kategorie fehlt
+        action:
+            complete: Vervollständigen
 
 category:
     name:
@@ -385,6 +390,10 @@ dashboard:
             title: Outfit zusammenstellen
             text: Stelle ein Outfit aus Deinen vorhandenen Kleidungsstücken zusammen.
             button: Starten
+        batch_upload:
+            title: Fotos hochladen
+            text: Lade mehrere Fotos auf einmal hoch und lass sie automatisch analysieren.
+            button: Fotos hochladen
 
 base:
     title: Outfit KI
@@ -408,3 +417,31 @@ security:
         expired: Ihr Konto ist abgelaufen.
     message:
         logged_in: Sie sind eingeloggt als
+
+batch_upload:
+    title: Mehrere Fotos hochladen
+    subtitle: Lade bis zu 50 Fotos auf einmal hoch. Jedes Foto wird automatisch analysiert.
+    no_files_selected: Keine Dateien ausgewählt
+    files_selected: Dateien ausgewählt
+    max_files: Maximum %max% Dateien
+    back: Zurück zur Liste
+    drop_zone:
+        title: Fotos hierher ziehen
+        subtitle: oder klicken um Dateien auszuwählen (JPG, PNG, WEBP)
+        button: Dateien auswählen
+    form:
+        button:
+            upload: Hochladen und analysieren
+    flash:
+        success: "%count% Kleidungsstück(e) erfolgreich angelegt und werden analysiert."
+        errors: "%count% Datei(en) konnten nicht hochgeladen werden."
+    hint:
+        title: Hinweis
+        text: >
+            Nach dem Upload werden die Fotos automatisch analysiert.
+            Die erkannten Farben erscheinen dann in der Liste.
+            Bitte bearbeite danach jedes Kleidungsstück um Kategorie,
+            Stil und weitere Eigenschaften zu ergänzen.
+    review:
+        progress: "Kleidungsstück %current% von %total%"
+        empty: Alle Kleidungsstücke wurden bewertet.

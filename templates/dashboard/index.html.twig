@@ -33,6 +33,15 @@
                 button: (message ~ '.card.outfit.button')|trans,
                 buttonClass: 'btn-success'
             } %}
+
+            {% include 'dashboard/_card.html.twig' with {
+                icon: '📸',
+                title: (message ~ '.card.batch_upload.title')|trans,
+                text: (message ~ '.card.batch_upload.text')|trans,
+                route: 'app_clothing_item_batch_upload',
+                button: (message ~ '.card.batch_upload.button')|trans,
+                buttonClass: 'btn-outline-primary'
+            } %}
         </div>
 
         <hr class="my-5">
@@ -41,7 +50,10 @@
         <ul class="list-group list-group-flush">
             {% for item in recentItems %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ item.name }} ({{ ('category.name.' ~ item.subCategory.category)|trans }})
+                    {{ item.name }}
+                    {% if item.subCategory is not null %}
+                        ({{ ('category.name.' ~ item.subCategory.category)|trans }})
+                    {% endif %}
                 </li>
             {% else %}
                 <li class="list-group-item">{{ (message ~ '.no_items')|trans }}.</li>

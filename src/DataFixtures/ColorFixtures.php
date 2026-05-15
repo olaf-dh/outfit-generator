@@ -10,9 +10,10 @@ use App\Domain\Outfit\Enum\ColorTemperature;
 use App\Domain\Outfit\Enum\ColorTone;
 use App\Entity\Color;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class ColorFixtures extends Fixture
+class ColorFixtures extends Fixture implements FixtureGroupInterface
 {
     // Colors
     public const string COLOR_NAVY           = 'color-navy';
@@ -748,5 +749,10 @@ class ColorFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['default', 'test'];
     }
 }

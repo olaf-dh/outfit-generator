@@ -12,7 +12,6 @@ use App\Entity\User;
 use App\Form\OutfitGeneratorType;
 use App\Repository\ClothingItemRepository;
 use App\Service\OutfitSuggestionService;
-use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

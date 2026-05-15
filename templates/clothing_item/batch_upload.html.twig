@@ -1,0 +1,195 @@
+{% extends 'base.html.twig' %}
+
+{% set t = 'batch_upload' %}
+
+{% block title %}{{ (t ~ '.title')|trans }}{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+
+        {# Flash Messages #}
+        {% for label, messages in app.flashes %}
+            {% for msg in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    {{ msg }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+
+                <div class="card shadow-sm border-0 rounded-4">
+                    <div class="card-header bg-transparent border-0 pt-4 px-4 pb-0">
+                        <h1 class="h4 mb-0">{{ (t ~ '.title')|trans }}</h1>
+                        <p class="text-muted mt-1 mb-0" style="font-size: 0.9rem;">
+                            {{ (t ~ '.subtitle')|trans }}
+                        </p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        {{ form_start(form, {attr: {
+                            enctype: 'multipart/form-data',
+                            id: 'batch-upload-form'
+                        }}) }}
+
+                        {# Upload area #}
+                        <div class="mb-4">
+                            <div id="drop-zone"
+                                 class="border-2 border-dashed rounded-4 p-5 text-center"
+                                 style="border-color: #dee2e6; cursor: pointer; transition: all 0.2s;">
+                                <div id="drop-zone-content">
+                                    <div style="font-size: 3rem;">📸</div>
+                                    <p class="mt-2 mb-1 fw-semibold">
+                                        {{ (t ~ '.drop_zone.title')|trans }}
+                                    </p>
+                                    <p class="text-muted small mb-3">
+                                        {{ (t ~ '.drop_zone.subtitle')|trans }}
+                                    </p>
+                                    <label for="{{ form.photos.vars.id }}"
+                                           class="btn btn-outline-primary">
+                                        {{ (t ~ '.drop_zone.button')|trans }}
+                                    </label>
+                                </div>
+
+                                {# Preview #}
+                                <div id="preview-container"
+                                     class="row row-cols-3 row-cols-sm-4 row-cols-md-5 g-2 mt-2 d-none">
+                                </div>
+                            </div>
+
+                            {# Hidden file input #}
+                            <div style="display:none">
+                                {{ form_widget(form.photos) }}
+                            </div>
+                            {{ form_errors(form.photos) }}
+                        </div>
+
+                        {# Counter #}
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-muted small" id="file-count">
+                            {{ (t ~ '.no_files_selected')|trans }}
+                        </span>
+                            <span class="text-muted small">
+                            {{ (t ~ '.max_files')|trans({'%max%': 50}) }}
+                        </span>
+                        </div>
+
+                        {# Submit #}
+                        <button type="submit"
+                                id="submit-btn"
+                                class="btn btn-primary w-100"
+                                disabled>
+                            {{ (t ~ '.form.button.upload')|trans }}
+                        </button>
+
+                        {{ form_end(form) }}
+
+                        <a href="{{ path('app_clothing_item_index') }}"
+                           class="btn btn-link w-100 mt-2">
+                            {{ (t ~ '.back')|trans }}
+                        </a>
+                    </div>
+                </div>
+
+                {# Hint #}
+                <div class="alert alert-info mt-3 rounded-4 border-0">
+                    <strong>💡 {{ (t ~ '.hint.title')|trans }}</strong><br>
+                    <small>{{ (t ~ '.hint.text')|trans }}</small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropZone       = document.getElementById('drop-zone');
+            const fileInput      = document.getElementById('{{ form.photos.vars.id }}');
+            const previewContainer = document.getElementById('preview-container');
+            const fileCount      = document.getElementById('file-count');
+            const submitBtn      = document.getElementById('submit-btn');
+            const maxFiles       = 50;
+
+            // --- Drag & Drop ---
+
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor     = '#0d6efd';
+                dropZone.style.backgroundColor = '#f0f7ff';
+            });
+
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.style.borderColor     = '#dee2e6';
+                dropZone.style.backgroundColor = '';
+            });
+
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.style.borderColor     = '#dee2e6';
+                dropZone.style.backgroundColor = '';
+
+                const dt = e.dataTransfer;
+                if (dt.files.length > 0) {
+                    fileInput.files = dt.files;
+                    updatePreview(dt.files);
+                }
+            });
+
+            // --- File Input Change ---
+
+            fileInput.addEventListener('change', () => {
+                updatePreview(fileInput.files);
+            });
+
+            // --- Update preview ---
+
+            function updatePreview(files) {
+                previewContainer.innerHTML = '';
+
+                if (files.length === 0) {
+                    previewContainer.classList.add('d-none');
+                    fileCount.textContent = '{{ (t ~ ".no_files_selected")|trans }}';
+                    submitBtn.disabled    = true;
+                    return;
+                }
+
+                const count = Math.min(files.length, maxFiles);
+                fileCount.textContent = `${count} {{ (t ~ ".files_selected")|trans }}`;
+                submitBtn.disabled    = false;
+
+                previewContainer.classList.remove('d-none');
+
+                Array.from(files).slice(0, maxFiles).forEach(file => {
+                    const reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        const col = document.createElement('div');
+                        col.className = 'col';
+
+                        col.innerHTML = `
+                    <div class="position-relative">
+                        <img src="${e.target.result}"
+                             class="w-100 rounded-3 object-fit-cover"
+                             style="height: 80px;"
+                             alt="${file.name}">
+                        <small class="d-block text-truncate text-muted mt-1"
+                               style="font-size: 0.6rem;"
+                               title="${file.name}">
+                            ${file.name}
+                        </small>
+                    </div>
+                `;
+
+                        previewContainer.appendChild(col);
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+    </script>
+{% endblock %}

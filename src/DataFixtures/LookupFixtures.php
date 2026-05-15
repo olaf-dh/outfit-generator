@@ -13,9 +13,10 @@ use App\Entity\Season;
 use App\Entity\Style;
 use App\Entity\WeatherCondition;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class LookupFixtures extends Fixture
+class LookupFixtures extends Fixture implements FixtureGroupInterface
 {
     // Pattern
     public const string PATTERN_SOLID              = 'pattern-solid';
@@ -173,5 +174,10 @@ class LookupFixtures extends Fixture
             $manager->persist($condition);
             $this->addReference($reference, $condition);
         }
+    }
+
+    public static function getGroups(): array
+    {
+        return ['default', 'test'];
     }
 }

@@ -21,7 +21,7 @@ final class DashboardController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        $items = $clothingItemRepository->findBy(['owner' => $owner]);
+        $items = $clothingItemRepository->findBy(['owner' => $owner, 'status' => 'complete']);
 
         /** @var string $email */
         $email = $owner->getUserIdentifier();

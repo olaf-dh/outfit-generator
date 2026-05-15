@@ -19,6 +19,12 @@ framework:
             # Route your messages to the transports
             'App\Domain\Outfit\Message\AnalyzeClothingItemMessage': async
 
+when@dev:
+    framework:
+        messenger:
+            routing:
+                'App\Domain\Outfit\Message\AnalyzeClothingItemMessage': sync
+
 when@test:
     framework:
         messenger:

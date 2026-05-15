@@ -46,29 +46,52 @@
 
         {# Set groups of items in categories #}
         {% set grouped = {} %}
+        {% set ungrouped = [] %}
         {% for item in items %}
-            {% set c = item.subCategory.category.name %}
-            {% set grouped = grouped|merge({ (c): (grouped[c]|default([]))|merge([item]) }) %}
+            {% if item.subCategory is not null %}
+                {% set c = item.subCategory.category.name %}
+                {% set grouped = grouped|merge({ (c): (grouped[c]|default([]))|merge([item]) }) %}
+            {% else %}
+                {% set ungrouped = ungrouped|merge([item]) %}
+            {% endif %}
         {% endfor %}
 
         {# 🔹 Tab Navigation #}
         {% set activeCategory = app.request.query.get('category')|default('') %}
+        {% set uncategorizedActive = ungrouped|length > 0 and grouped|length == 0 %}
         <ul class="nav nav-tabs" id="categoryTabs" role="tablist">
             {% for categoryName, group in grouped %}
                 <li class="nav-item" role="presentation">
                     <button class="nav-link {% if activeCategory == categoryName|lower %}
-                    active{% elseif loop.first and not activeCategory %}active{% endif %}"
+                    active{% elseif loop.first and not activeCategory and not uncategorizedActive %}active{% endif %}"
                             id="tab-{{ loop.index }}-tab"
                             data-bs-toggle="tab"
                             data-bs-target="#tab-{{ loop.index }}"
                             type="button"
                             role="tab"
                             aria-controls="tab-{{ loop.index }}"
-                            aria-selected="{{ loop.first ? 'true' : 'false' }}">
+                            aria-selected="{{ (loop.first and not uncategorizedActive) ? 'true' : 'false' }}">
                         {{ ('category.name.' ~ categoryName)|trans }}
                     </button>
                 </li>
             {% endfor %}
+
+            {# Tab für Items ohne Kategorie #}
+            {% if ungrouped|length > 0 %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link {{ uncategorizedActive ? 'active' : '' }}"
+                            id="tab-uncategorized-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#tab-uncategorized"
+                            type="button"
+                            role="tab"
+                            aria-controls="tab-uncategorized"
+                            aria-selected="{{ uncategorizedActive ? 'true' : 'false' }}">
+                        {{ 'clothing_item.index.uncategorized'|trans }}
+                        <span class="badge bg-warning text-dark ms-1">{{ ungrouped|length }}</span>
+                    </button>
+                </li>
+            {% endif %}
         </ul>
 
         {# 🔹 Tab Content #}
@@ -171,6 +194,75 @@
 
                 </div>
             {% endfor %}
+
+            {% if ungrouped|length > 0 %}
+                <div class="tab-pane fade {{ uncategorizedActive ? 'show active' : '' }}"
+                     id="tab-uncategorized" role="tabpanel">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+                        {% for item in ungrouped %}
+                            <div class="col">
+                                <div class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden border border-warning">
+                                    {# Foto #}
+                                    <a href="{{ path('app_clothing_item_batch_review') }}"
+                                       class="text-decoration-none">
+                                        {% if item.photoPath %}
+                                            <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
+                                                 class="card-img-top object-fit-cover"
+                                                 style="height: 220px;"
+                                                 alt="{{ item.name }}">
+                                        {% else %}
+                                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center"
+                                                 style="height: 220px;">
+                                                <span style="font-size: 3rem;">👕</span>
+                                            </div>
+                                        {% endif %}
+                                    </a>
+
+                                    <div class="card-body pb-1">
+                                        <h6 class="card-title mb-1 text-truncate">{{ item.name }}</h6>
+                                        <small class="text-warning">
+                                            {{ 'clothing_item.index.no_subcategory'|trans }}
+                                        </small>
+
+                                        {# Farben #}
+                                        {% if item.itemColors|length > 0 %}
+                                            <div class="d-flex gap-1 mt-2 flex-wrap">
+                                                {% for ic in item.itemColors %}
+                                                    <span style="
+                                                        display: inline-block;
+                                                        width: 2.5rem;
+                                                        height: 1rem;
+                                                        background-color: {{ ic.color.hexCode }};
+                                                        border: 1px solid #888;
+                                                        border-radius: 3px;">
+                                            </span>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="card-footer bg-transparent border-0 pt-0 pb-3 px-3">
+                                        <div class="d-flex gap-2">
+                                            <a href="{{ path('app_clothing_item_batch_review') }}"
+                                               class="btn btn-sm btn-warning flex-grow-1">
+                                                {{ 'clothing_item.index.action.complete'|trans }}
+                                            </a>
+                                            <form method="post"
+                                                  action="{{ path('app_clothing_item_delete', {id: item.id}) }}"
+                                                  onsubmit="return confirm('{{ (message ~ '.delete.confirm')|trans }}')">
+                                                <input type="hidden" name="_token"
+                                                       value="{{ csrf_token('delete' ~ item.id) }}">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">🗑</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
         </div>
         {% else %}
             <div class="col-12">

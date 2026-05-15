@@ -7,9 +7,10 @@ namespace App\DataFixtures;
 use App\Domain\Outfit\Enum\BodyZone;
 use App\Entity\Category;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class CategoryFixtures extends Fixture
+class CategoryFixtures extends Fixture implements FixtureGroupInterface
 {
     public const string UPPER_BODY  = 'category-upper-body';
     public const string LOWER_BODY  = 'category-lower-body';
@@ -43,5 +44,10 @@ class CategoryFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['default', 'test'];
     }
 }

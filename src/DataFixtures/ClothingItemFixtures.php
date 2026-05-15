@@ -17,11 +17,12 @@ use App\Entity\SubCategory;
 use App\Entity\User;
 use App\Entity\WeatherCondition;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
+class ClothingItemFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     public const string WHITE_SHIRT       = 'item-white-shirt';
     public const string RED_PULLOVER      = 'item-red-pullover';
@@ -299,5 +300,10 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface
             SubCategoryFixtures::class,
             LookupFixtures::class,
         ];
+    }
+
+    public static function getGroups(): array
+    {
+        return ['test'];
     }
 }

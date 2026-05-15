@@ -7,10 +7,11 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\SubCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class SubCategoryFixtures extends Fixture implements DependentFixtureInterface
+class SubCategoryFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     // Upper Body
     public const string T_SHIRT         = 'subcategory-t-shirt';
@@ -170,5 +171,10 @@ class SubCategoryFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies(): array
     {
         return [CategoryFixtures::class];
+    }
+
+    public static function getGroups(): array
+    {
+        return ['default', 'test'];
     }
 }

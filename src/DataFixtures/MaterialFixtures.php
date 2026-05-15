@@ -9,9 +9,10 @@ use App\Domain\Outfit\Enum\MaterialCategory;
 use App\Domain\Outfit\Enum\WarmthLevel;
 use App\Entity\Material;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class MaterialFixtures extends Fixture
+class MaterialFixtures extends Fixture implements FixtureGroupInterface
 {
     public const string MATERIAL_COTTON    = 'material-cotton';
     public const string MATERIAL_WOOL      = 'material-wool';
@@ -234,5 +235,10 @@ class MaterialFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['default', 'test'];
     }
 }

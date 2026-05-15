@@ -53,4 +53,4 @@ $run("doctrine:migrations:migrate {$envArg} {$ni}");
 /**
  * Load Fixtures
  */
-$run("doctrine:fixtures:load {$envArg} {$ni}");
+$run("doctrine:fixtures:load {$envArg} {$ni} --group=test --env=test");

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container py-5 text-center">
+        <div class="spinner-border text-primary mb-3" role="status"></div>
+        <h2>{{ 'batch_upload.waiting.title'|trans }}</h2>
+        <p class="text-muted">
+            {{ 'batch_upload.waiting.text'|trans({'%count%': pendingCount}) }}
+        </p>
+        <a href="{{ path('app_clothing_item_batch_review') }}"
+           class="btn btn-primary mt-3">
+            {{ 'batch_upload.waiting.refresh'|trans }}
+        </a>
+    </div>
+
+    <script>
+        // Load the page every 3 seconds
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+    </script>
+{% endblock %}
