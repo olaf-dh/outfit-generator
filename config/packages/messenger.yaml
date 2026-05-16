@@ -17,13 +17,13 @@ framework:
 
         routing:
             # Route your messages to the transports
-            'App\Domain\Outfit\Message\AnalyzeClothingItemMessage': async
+            'App\ClothingItem\Message\AnalyzeClothingItemMessage': async
 
 when@dev:
     framework:
         messenger:
             routing:
-                'App\Domain\Outfit\Message\AnalyzeClothingItemMessage': sync
+                'App\ClothingItem\Message\AnalyzeClothingItemMessage': sync
 
 when@test:
     framework:

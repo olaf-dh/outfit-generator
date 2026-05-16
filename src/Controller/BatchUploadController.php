@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Domain\Outfit\Enum\ClothingItemStatus;
-use App\Domain\Outfit\Message\AnalyzeClothingItemMessage;
+use App\ClothingItem\Enum\ClothingItemStatus;
+use App\ClothingItem\Message\AnalyzeClothingItemMessage;
+use App\ClothingItem\Service\ClothingItemPhotoUploader;
 use App\Entity\ClothingItem;
 use App\Entity\User;
 use App\Form\BatchUploadType;
-use App\Service\ClothingItemPhotoUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,7 +57,7 @@ class BatchUploadController extends AbstractController
                     $cleanName    = $this->cleanFilename($originalName);
 
                     // Save photo
-                    $filename = $this->photoUploader->upload($photo);
+                    $filename = $this->photoUploader->uploadAnalysis($photo);
 
                     // ClothingItem create
                     $item = new ClothingItem();

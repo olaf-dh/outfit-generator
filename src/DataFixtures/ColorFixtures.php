@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Outfit\Enum\ColorFamily;
-use App\Domain\Outfit\Enum\ColorSaturation;
-use App\Domain\Outfit\Enum\ColorTemperature;
-use App\Domain\Outfit\Enum\ColorTone;
+use App\Color\Enum\ColorFamily;
+use App\Color\Enum\ColorSaturation;
+use App\Color\Enum\ColorTemperature;
+use App\Color\Enum\ColorTone;
 use App\Entity\Color;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;

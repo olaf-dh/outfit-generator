@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Outfit\Enum\PatternType;
+use App\ClothingItem\Enum\PatternType;
 use App\Repository\PatternRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

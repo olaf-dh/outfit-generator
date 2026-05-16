@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Domain\Outfit\Enum\SeasonType;
-use App\Domain\Outfit\Enum\StyleType;
-use App\Domain\Outfit\Enum\WeatherConditionType;
+use App\ClothingItem\Enum\SeasonType;
+use App\ClothingItem\Enum\StyleType;
+use App\ClothingItem\Enum\WeatherConditionType;
 use App\Entity\ClothingItem;
 use App\Repository\ClothingItemRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;

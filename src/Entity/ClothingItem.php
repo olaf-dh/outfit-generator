@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Domain\Outfit\Enum\ClothingItemStatus;
+use App\ClothingItem\Enum\ClothingItemStatus;
 use App\Repository\ClothingItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -36,6 +36,9 @@ class ClothingItem
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoPath = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $displayPhotoPath = null;
 
     /**
      * @var Collection<int, ItemColor>
@@ -81,8 +84,8 @@ class ClothingItem
     private Collection $weatherConditions;
 
     #[ORM\ManyToOne(targetEntity: Pattern::class, inversedBy: 'clothingItems')]
-    #[ORM\JoinColumn(nullable: false)]
-    private Pattern $pattern;
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Pattern $pattern = null;
 
     #[ORM\ManyToOne(targetEntity: SubCategory::class, inversedBy: 'clothingItems')]
     private ?SubCategory $subCategory = null;
@@ -181,6 +184,18 @@ class ClothingItem
         return $this;
     }
 
+    public function getDisplayPhotoPath(): ?string
+    {
+        return $this->displayPhotoPath;
+    }
+
+    public function setDisplayPhotoPath(?string $displayPhotoPath): static
+    {
+        $this->displayPhotoPath = $displayPhotoPath;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, ItemColor>
      */
@@ -209,6 +224,21 @@ class ClothingItem
         }
 
         return $this;
+    }
+
+    public function updatePrimaryColor(?Color $newPrimary): void
+    {
+        if ($newPrimary === null) {
+            return;
+        }
+
+        if ($this->itemColors->isEmpty()) {
+            return;
+        }
+
+        foreach ($this->itemColors as $itemColor) {
+            $itemColor->setIsPrimary($itemColor->getColor()->getId() === $newPrimary->getId());
+        }
     }
 
     /**
@@ -323,12 +353,12 @@ class ClothingItem
         return $this;
     }
 
-    public function getPattern(): Pattern
+    public function getPattern(): ?Pattern
     {
         return $this->pattern;
     }
 
-    public function setPattern(Pattern $pattern): static
+    public function setPattern(?Pattern $pattern): static
     {
         $this->pattern = $pattern;
 

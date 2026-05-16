@@ -71,8 +71,8 @@
                                                          style="cursor: pointer; transition: all 0.15s;">
 
                                                         {# Foto #}
-                                                        {% if item.photoPath %}
-                                                            <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
+                                                        {% if item.displayPhotoPath %}
+                                                            <img src="{{ asset('uploads/clothing/' ~ item.displayPhotoPath) }}"
                                                                  class="w-100 rounded-2 object-fit-cover"
                                                                  style="height: 80px;"
                                                                  alt="{{ item.name }}">
@@ -166,8 +166,8 @@
                                             <div class="text-center">
 
                                                 {# Photo #}
-                                                {% if item.photoPath %}
-                                                    <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
+                                                {% if item.displayPhotoPath %}
+                                                    <img src="{{ asset('uploads/clothing/' ~ item.displayPhotoPath) }}"
                                                          class="w-100 rounded-3 object-fit-cover shadow-sm"
                                                          style="height: 100px;"
                                                          alt="{{ item.name }}">

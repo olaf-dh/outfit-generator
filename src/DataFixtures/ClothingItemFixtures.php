@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Outfit\Enum\ClothingItemStatus;
+use App\ClothingItem\Enum\ClothingItemStatus;
 use App\Entity\ClothingItem;
 use App\Entity\Color;
 use App\Entity\ItemColor;

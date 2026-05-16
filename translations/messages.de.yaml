@@ -240,7 +240,12 @@ clothing_item:
             seasons: Jahreszeiten
             weather_conditions: Wetterbedingungen
             notes: Notizen
-            photo: Foto
+            analysis_photo_preview: Analyse-Foto (aktuell)
+            current_display_photo: Aktuelles Display-Foto
+            photo_upload: Neues Foto hochladen.
+        hint:
+            display_photo: Hintergrund wird automatisch entfernt.
+            analysis_photo: Wird für die Farbanalyse verwendet.
         placeholder:
             name: Bezeichnung
             select: Bitte wählen…
@@ -249,6 +254,7 @@ clothing_item:
             required: Dieses Feld ist erforderlich.
             invalid_image: Bitte ein gültiges Bild hochladen (JPG, PNG).
             image_too_large: Das Bild darf maximal 10 MB groß sein.
+            background_removal: Hintergrundentfernung fehlgeschlagen. Bitte versuche es erneut.
     index:
         uncategorized: Nicht kategorisiert
         no_subcategory: Kategorie fehlt

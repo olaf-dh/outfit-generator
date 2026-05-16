@@ -2,7 +2,8 @@
 
 namespace App\Repository;
 
-use App\Domain\Outfit\Enum\BodyZone;
+use App\ClothingItem\Enum\BodyZone;
+use App\ClothingItem\Enum\ClothingItemStatus;
 use App\Entity\ClothingItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,8 +25,8 @@ class ClothingItemRepository extends ServiceEntityRepository
      */
     public function findByBodyZone(BodyZone $zone): array
     {
-        /** @var array<int, ClothingItem> $return */
-        $return = $this->createQueryBuilder('c')
+        /** @var array<int, ClothingItem> $result */
+        $result = $this->createQueryBuilder('c')
             ->join('c.subCategory', 's')
             ->join('s.category', 'cat')
             ->where('cat.bodyZone = :zone')
@@ -33,7 +34,7 @@ class ClothingItemRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        return $return;
+        return $result;
     }
 
     /**
@@ -42,15 +43,35 @@ class ClothingItemRepository extends ServiceEntityRepository
      */
     public function findByOwner(UserInterface $user): array
     {
-        /** @var array<int, ClothingItem> $return */
-        $return = $this->createQueryBuilder('c')
+        /** @var array<int, ClothingItem> $result */
+        $result = $this->createQueryBuilder('c')
             ->where('c.owner = :user')
             ->setParameter('user', $user)
             ->orderBy('c.createdAt', 'DESC')
             ->getQuery()
             ->getResult();
 
-        return $return;
+        return $result;
+    }
+
+    /**
+     * @param UserInterface $user
+     * @return array<int, ClothingItem>
+     */
+    public function findUnreviewedByOwner(UserInterface $user): array
+    {
+        /** @var array<int, ClothingItem> $result */
+        $result = $this->createQueryBuilder('c')
+            ->where('c.owner = :user')
+            ->andWhere('c.subCategory IS NULL')
+            ->andWhere('c.status != :complete')
+            ->setParameter('user', $user)
+            ->setParameter('complete', ClothingItemStatus::COMPLETE)
+            ->orderBy('c.createdAt', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $result;
     }
 
     //    /**

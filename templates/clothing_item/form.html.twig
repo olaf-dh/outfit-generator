@@ -55,8 +55,161 @@
                     </div>
                 </div>
 
+                <div class="row g-3 mt-1">
+
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.min_layer_depth'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.minLayerDepth) }}
+                        </div>
+                        {{ form_errors(form.minLayerDepth) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.max_layer_depth'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.maxLayerDepth) }}
+                        </div>
+                        {{ form_errors(form.maxLayerDepth) }}
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.notes'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-1 bg-light">
+                            {{ form_widget(form.notes) }}
+                        </div>
+                        {{ form_errors(form.notes) }}
+                    </div>
+                </div>
+
                 {% if isEdit == true %}
+                    <div class="mt-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.styles'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.styles) }}
+                        </div>
+                        {{ form_errors(form.styles) }}
+                    </div>
+
+                    <div class="mt-4">
+                        <label class="form-label fw-bold">
+                            {{ 'clothing_item.form.label.patterns'|trans }}
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ form_widget(form.pattern) }}
+                        </div>
+                        {{ form_errors(form.pattern) }}
+                    </div>
+
                     <div class="row g-3 mt-1">
+                        <div class="col-md-5">
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.seasons'|trans }}
+                            </label>
+                            <div class="border rounded-3 p-3 bg-light">
+                                {{ form_widget(form.seasons) }}
+                            </div>
+                            {{ form_errors(form.seasons) }}
+                        </div>
+
+                        <div class="col-md-7">
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.weather_conditions'|trans }}
+                            </label>
+                            <div class="border rounded-3 p-3 bg-light">
+                                {{ form_widget(form.weatherConditions) }}
+                            </div>
+                            {{ form_errors(form.weatherConditions) }}
+                        </div>
+                    </div>
+                {% endif %}
+
+                <div class="row g-3 mt-1">
+                    <div class="col-md-3">
+                        {# Preview of current display photo #}
+                        {% if isEdit and form.vars.data.displayPhotoPath is not null %}
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.current_display_photo'|trans }}
+                            </label>
+                            <div class="mb-2">
+                                <img src="{{ asset('uploads/clothing/' ~ form.vars.data.displayPhotoPath) }}"
+                                     class="img-thumbnail"
+                                     style="max-height: 150px; object-fit: contain;"
+                                     alt="{{ form.vars.data.name }}">
+                            </div>
+                        {% elseif form.vars.data.displayPhotoPath is null %}
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.photo_upload'|trans }}
+                            </label>
+                        {% endif %}
+                        <div class="border rounded-3 p-2 bg-light">
+                            {{ form_widget(form.displayPhoto) }}
+                        </div>
+                        {{ form_errors(form.displayPhoto) }}
+                        <small class="text-muted d-block mt-1">
+                            {{ 'clothing_item.form.hint.display_photo'|trans }}
+                        </small>
+                    </div>
+
+                    <div class="col-md-3">
+                        {% if isEdit and form.vars.data.photoPath is not null %}
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.analysis_photo_preview'|trans }}
+                            </label>
+                            <div class="mb-2">
+                                <img src="{{ path('app_clothing_item_analysis_photo', {id: form.vars.data.id}) }}"
+                                     class="img-thumbnail"
+                                     style="max-height: 150px; object-fit: contain;"
+                                     alt="{{ form.vars.data.name }}">
+                            </div>
+                        {% elseif form.vars.data.photoPath is null %}
+                            <label class="form-label fw-bold">
+                                {{ 'clothing_item.form.label.photo_upload'|trans }}
+                            </label>
+                        {% endif %}
+                        <div class="border rounded-3 p-2 bg-light">
+                            {{ form_widget(form.photo) }}
+                        </div>
+                        {{ form_errors(form.photo) }}
+                        <small class="text-muted d-block mt-1">
+                            {{ 'clothing_item.form.hint.analysis_photo'|trans }}
+                        </small>
+                    </div>
+
+                    {% if isEdit %}
+                        <div class="col-md-2">
+                            <div class="flex-grow-1">
+                                <label class="form-label fw-bold">
+                                    {{ 'clothing_item.form.label.primary_color'|trans }}
+                                </label>
+                                {% for child in form.itemColors %}
+                                    {% set hex = child.vars.attr['data-hex'] %}
+
+                                    <label class="d-flex align-items-center gap-2 mb-2">
+                                        {{ form_widget(child) }}
+                                        <span
+                                            style="
+                                                display:inline-block;
+                                                width:2.5rem;
+                                                height:1rem;
+                                                background-color: {{ hex }};
+                                                border:1px solid #aaa;
+                                                border-radius:3px;
+                                                "></span>
+                                        {{ child.vars.label }}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
                         <div class="col-md-4">
                             <label class="form-label fw-bold">
                                 {{ 'clothing_item.form.label.materials'|trans }}
@@ -102,134 +255,9 @@
                                 </span>
                             </div>
                         </div>
-
-                        <div class="col-md-4">
-                            <div class="flex-grow-1">
-                                <label class="form-label fw-bold">
-                                    {{ 'clothing_item.form.label.primary_color'|trans }}
-                                </label>
-                                {% for child in form.itemColors %}
-                                    {% set hex = child.vars.attr['data-hex'] %}
-
-                                    <label class="d-flex align-items-center gap-2 mb-2">
-                                        {{ form_widget(child) }}
-                                        <span
-                                            style="
-                                                display:inline-block;
-                                                width:2.5rem;
-                                                height:1rem;
-                                                background-color: {{ hex }};
-                                                border:1px solid #aaa;
-                                                border-radius:3px;
-                                                "></span>
-                                        {{ child.vars.label }}
-                                    </label>
-                                {% endfor %}
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            {% if form.vars.value and form.vars.value.photoPath %}
-                                <div style="max-width: 160px;">
-                                    <img src="{{ asset('uploads/clothing/' ~ form.vars.value.photoPath) }}"
-                                         class="img-thumbnail"
-                                         alt="{{ form.vars.value.name ?? 'Bild' }}">
-                                    <small class="text-muted d-block text-center mt-1">
-                                        {{ form.vars.value.name }}
-                                    </small>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-
-                    <div class="mt-4">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.styles'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-3 bg-light">
-                            {{ form_widget(form.styles) }}
-                        </div>
-                        {{ form_errors(form.styles) }}
-                    </div>
-
-                    <div class="mt-4">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.patterns'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-3 bg-light">
-                            {{ form_widget(form.pattern) }}
-                        </div>
-                        {{ form_errors(form.pattern) }}
-                    </div>
-
-                    <div class="row g-3 mt-1">
-                        <div class="col-md-4">
-                            <label class="form-label fw-bold">
-                                {{ 'clothing_item.form.label.seasons'|trans }}
-                            </label>
-                            <div class="border rounded-3 p-3 bg-light">
-                                {{ form_widget(form.seasons) }}
-                            </div>
-                            {{ form_errors(form.seasons) }}
-                        </div>
-
-                        <div class="col-md-5">
-                            <label class="form-label fw-bold">
-                                {{ 'clothing_item.form.label.weather_conditions'|trans }}
-                            </label>
-                            <div class="border rounded-3 p-3 bg-light">
-                                {{ form_widget(form.weatherConditions) }}
-                            </div>
-                            {{ form_errors(form.weatherConditions) }}
-                        </div>
-                    </div>
-                {% endif %}
-
-                <div class="row g-3 mt-1">
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.photo'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-2 bg-light">
-                            {{ form_widget(form.photo) }}
-                        </div>
-                        {{ form_errors(form.photo) }}
-                    </div>
-
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.min_layer_depth'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-3 bg-light">
-                            {{ form_widget(form.minLayerDepth) }}
-                        </div>
-                        {{ form_errors(form.minLayerDepth) }}
-                    </div>
-
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.max_layer_depth'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-3 bg-light">
-                            {{ form_widget(form.maxLayerDepth) }}
-                        </div>
-                        {{ form_errors(form.maxLayerDepth) }}
-                    </div>
-
-                    <div class="col-md-3">
-                        <label class="form-label fw-bold">
-                            {{ 'clothing_item.form.label.notes'|trans }}
-                        </label>
-                        <div class="border rounded-3 p-1 bg-light">
-                            {{ form_widget(form.notes) }}
-                        </div>
-                        {{ form_errors(form.notes) }}
-                    </div>
+                    {% endif %}
                 </div>
 
-                <div class="row g-3 mt-1">
-
-                </div>
                 <div class="mt-4 d-flex gap-2">
                     <button type="submit" class="btn btn-primary">
                         {{ (isEdit ? 'clothing_item.edit.button' : 'clothing_item.add.button')|trans }}

@@ -1,0 +1,84 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\ClothingItem\MessageHandler;
+
+use App\ClothingItem\Enum\ClothingItemStatus;
+use App\ClothingItem\Message\AnalyzeClothingItemMessage;
+use App\Color\Analyzer\ColorExtractorService;
+use App\Color\Matcher\ColorMatchingService;
+use App\Entity\ItemColor;
+use App\Repository\ClothingItemRepository;
+use App\Repository\ColorRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use InvalidArgumentException;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+
+#[AsMessageHandler]
+readonly class AnalyzeClothingItemHandler
+{
+    public function __construct(
+        private ClothingItemRepository $clothingItemRepository,
+        private ColorRepository $colorRepository,
+        private ColorExtractorService $colorExtractor,
+        private ColorMatchingService $colorMatcher,
+        private EntityManagerInterface $entityManager,
+        #[Autowire('%clothing_analysis_dir%')]
+        private string $analysisDir,
+    ) {
+    }
+
+    public function __invoke(AnalyzeClothingItemMessage $message): void
+    {
+        $item = $this->clothingItemRepository->find($message->getClothingItemId());
+
+        // Item isn't found or no photo → skip
+        if ($item === null || $item->getPhotoPath() === null) {
+            return;
+        }
+
+        // No photo → set status to COMPLETE, no analysis needed
+        if ($item->getPhotoPath() == null) {
+            $item->setStatus(ClothingItemStatus::COMPLETE);
+            $this->entityManager->flush();
+            return;
+        }
+
+        $imagePath = $this->analysisDir . '/' . $item->getPhotoPath();
+
+        // Extract colors from the photo
+        try {
+            $extracted = $this->colorExtractor->extract($imagePath);
+        } catch (InvalidArgumentException) {
+            // Photo isn't found → still set status to ANALYZED
+            $item->setStatus(ClothingItemStatus::ANALYZED);
+            $this->entityManager->flush();
+            return;
+        }
+
+        // Load all DB colors for the matching service
+        $dbColors = $this->colorRepository->findAll();
+
+        // Assign primary color
+        $primaryHex   = $extracted['primary'];
+        $primaryColor = $this->colorMatcher->findClosest($primaryHex, $dbColors);
+
+        if ($primaryColor !== null) {
+            $item->addItemColor(new ItemColor($item, $primaryColor, true));
+        }
+
+        // Assign secondary colors
+        foreach ($extracted['secondary'] as $secondaryHex) {
+            $secondaryColor = $this->colorMatcher->findClosest($secondaryHex, $dbColors);
+
+            if ($secondaryColor !== null) {
+                $item->addItemColor(new ItemColor($item, $secondaryColor, false));
+            }
+        }
+
+        $item->setStatus(ClothingItemStatus::ANALYZED);
+        $this->entityManager->flush();
+    }
+}

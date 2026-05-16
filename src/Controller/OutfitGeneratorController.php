@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Domain\Outfit\Enum\SeasonType;
-use App\Domain\Outfit\Enum\StyleType;
-use App\Domain\Outfit\Enum\WeatherConditionType;
+use App\ClothingItem\Enum\SeasonType;
+use App\ClothingItem\Enum\StyleType;
+use App\ClothingItem\Enum\WeatherConditionType;
 use App\Entity\ClothingItem;
 use App\Entity\User;
 use App\Form\OutfitGeneratorType;
+use App\Outfit\DTO\OutfitSuggestion;
+use App\Outfit\Service\OutfitSuggestionService;
 use App\Repository\ClothingItemRepository;
-use App\Service\OutfitSuggestionService;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,9 +45,11 @@ class OutfitGeneratorController extends AbstractController
         $error = null;
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Collection<int, ClothingItem> $seedItemsData */
+            $seedItemsData = $form->get('seedItems')->getData();
 
-            /** @var array<ClothingItem> $seedItems */
-            $seedItems = $form->get('seedItems')->getData();
+            /** @var array<int, ClothingItem> $seedItems */
+            $seedItems = $seedItemsData->toArray();
 
             /** @var StyleType $style */
             $style     = $form->get('style')->getData();
@@ -56,6 +60,10 @@ class OutfitGeneratorController extends AbstractController
             /** @var WeatherConditionType|null $weather */
             $weather   = $form->get('weather')->getData();
 
+            /**
+             * @var array<int, ClothingItem> $suggestions
+             * @return OutfitSuggestion[]
+             */
             $suggestions = $this->suggestionService->suggest(
                 seedItems: $seedItems,
                 style: $style,

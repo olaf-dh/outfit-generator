@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Outfit\Entity;
+namespace App\Entity;
 
-use App\Domain\Outfit\Enum\ColorFamily;
-use App\Domain\Outfit\Enum\ColorSaturation;
-use App\Domain\Outfit\Enum\ColorTemperature;
-use App\Domain\Outfit\Enum\ColorTone;
+use App\Color\Enum\ColorFamily;
+use App\Color\Enum\ColorSaturation;
+use App\Color\Enum\ColorTemperature;
+use App\Color\Enum\ColorTone;
 use App\Repository\ColorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

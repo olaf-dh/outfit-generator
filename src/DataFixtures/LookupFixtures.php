@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Outfit\Enum\PatternType;
-use App\Domain\Outfit\Enum\SeasonType;
-use App\Domain\Outfit\Enum\StyleType;
-use App\Domain\Outfit\Enum\WeatherConditionType;
+use App\ClothingItem\Enum\PatternType;
+use App\ClothingItem\Enum\SeasonType;
+use App\ClothingItem\Enum\StyleType;
+use App\ClothingItem\Enum\WeatherConditionType;
 use App\Entity\Pattern;
 use App\Entity\Season;
 use App\Entity\Style;

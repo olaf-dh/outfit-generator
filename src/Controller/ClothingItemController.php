@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Domain\Outfit\Enum\ClothingItemStatus;
-use App\Domain\Outfit\Message\AnalyzeClothingItemMessage;
-use App\Domain\Outfit\MessageHandler\AnalyzeClothingItemHandler;
+use App\ClothingItem\Enum\ClothingItemStatus;
+use App\ClothingItem\Message\AnalyzeClothingItemMessage;
+use App\ClothingItem\MessageHandler\AnalyzeClothingItemHandler;
+use App\ClothingItem\Service\BatchReviewProgressService;
+use App\ClothingItem\Service\ClothingItemDeleter;
+use App\ClothingItem\Service\ClothingItemPhotoService;
+use App\ClothingItem\Service\ClothingItemPhotoUploader;
+use App\Color\Normalizer\ColorReductionService;
 use App\Entity\ClothingItem;
 use App\Entity\Color;
 use App\Entity\User;
 use App\Form\ClothingItemType;
 use App\Repository\ClothingItemRepository;
-use App\Service\BatchReviewProgressService;
-use App\Service\ClothingItemDeleter;
-use App\Service\ClothingItemPhotoService;
-use App\Service\ClothingItemPhotoUploader;
-use App\Service\ColorReductionService;
-use App\Service\ItemColorService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +42,6 @@ final class ClothingItemController extends AbstractController
         private readonly ColorReductionService $colorReduction,
         private readonly EntityManagerInterface $entityManager,
         private readonly TranslatorInterface $translator,
-        private readonly ItemColorService $itemColorService,
         private readonly ClothingItemPhotoService $photoService,
         private readonly BatchReviewProgressService $batchReviewProgress,
     ) {
@@ -81,7 +82,7 @@ final class ClothingItemController extends AbstractController
 
             if ($photoFile !== null) {
                 try {
-                    $fileName = $this->photoUploader->upload($photoFile);
+                    $fileName = $this->photoUploader->uploadAnalysis($photoFile);
                     $item->setPhotoPath($fileName);
                 } catch (InvalidArgumentException $e) {
                     $this->addFlash('error', $this->translator->trans('clothing_item.form.error.invalid_image'));
@@ -112,6 +113,7 @@ final class ClothingItemController extends AbstractController
 
         return $this->render('clothing_item/form.html.twig', [
             'form' => $form->createView(),
+            'from' => null,
             'title' => 'clothing_item.add.title',
             'isEdit' => false,
             'list_path' => 'app_clothing_item_index'
@@ -137,7 +139,7 @@ final class ClothingItemController extends AbstractController
             /** @var Color $color */
             $color = $form->get('itemColors')->getData();
             // Update primary color
-            $this->itemColorService->updatePrimaryColor($item, $color);
+            $item->updatePrimaryColor($color);
 
             /** @var UploadedFile|null $photoFile */
             $photoFile = $form->get('photo')->getData();
@@ -159,6 +161,19 @@ final class ClothingItemController extends AbstractController
             }
 
             $this->colorReduction->normalize($item);
+
+            /** @var UploadedFile|null $displayPhotoFile */
+            $displayPhotoFile = $form->get('displayPhoto')->getData();
+
+            if ($displayPhotoFile !== null) {
+                // Replace display photo
+                try {
+                    $this->photoService->replaceDisplayPhoto($item, $displayPhotoFile);
+                } catch (Exception $e) {
+                    $this->addFlash('warning', $this->translator->trans('clothing_item.form.error.background_removal'));
+                }
+            }
+
             $this->entityManager->flush();
             $this->addFlash('success', $this->translator->trans('flash.clothing_item.updated'));
 
@@ -236,5 +251,23 @@ final class ClothingItemController extends AbstractController
             'id'   => array_values($analyzedItems)[0]->getId(),
             'from' => 'batch_review',
         ]);
+    }
+
+    #[Route('/{id}/analysis-photo', name: 'app_clothing_item_analysis_photo', methods: ['GET'])]
+    public function analysisPhoto(ClothingItem $item, #[Autowire('%clothing_analysis_dir%')] string $analysisDir): Response
+    {
+        $this->denyAccessUnlessGranted('view', $item);
+
+        if ($item->getPhotoPath() === null) {
+            throw $this->createNotFoundException('No analysis photo available');
+        }
+
+        $path = $analysisDir . '/' . $item->getPhotoPath();
+
+        if (!file_exists($path)) {
+            throw $this->createNotFoundException('Analysis photo not found');
+        }
+
+        return new BinaryFileResponse($path);
     }
 }

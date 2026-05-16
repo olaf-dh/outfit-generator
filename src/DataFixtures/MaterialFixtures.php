@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Domain\Outfit\Enum\BreathabilityLevel;
-use App\Domain\Outfit\Enum\MaterialCategory;
-use App\Domain\Outfit\Enum\WarmthLevel;
+use App\ClothingItem\Enum\BreathabilityLevel;
+use App\ClothingItem\Enum\MaterialCategory;
+use App\ClothingItem\Enum\WarmthLevel;
 use App\Entity\Material;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;

@@ -81,6 +81,6 @@ class ItemColor
 
     public function __toString(): string
     {
-        return sprintf('%s (%s)', $this->color->getName(), $this->isPrimary ? 'primär' : 'sekundär');
+        return sprintf('%s (%s)', $this->color->getName(), $this->isPrimary ? 'primary' : 'secondary');
     }
 }

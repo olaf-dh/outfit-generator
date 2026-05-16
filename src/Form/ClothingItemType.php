@@ -86,7 +86,7 @@ class ClothingItemType extends AbstractType
                 ],
             ])
             ->add('photo', FileType::class, [
-                'label' => 'clothing_item.form.label.photo',
+                'label' => 'clothing_item.form.label.analysis_photo',
                 'required' => !$isEdit,
                 'mapped' => false,
                 'constraints' => [new File(
@@ -96,6 +96,18 @@ class ClothingItemType extends AbstractType
                     mimeTypesMessage: 'clothing_item.form.error.invalid_image',
                 )],
                 'attr' => ['class' => 'form-control'],
+            ])
+            ->add('displayPhoto', FileType::class, [
+                'label'    => 'clothing_item.form.label.display_photo',
+                'required' => false,
+                'mapped'   => false,
+                'constraints' => [new File(
+                    maxSize: '10M',
+                    mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
+                    maxSizeMessage: 'clothing_item.form.error.image_too_large',
+                    mimeTypesMessage: 'clothing_item.form.error.invalid_image',
+                )],
+                'attr' => ['class' => 'form-control', 'required' => false],
             ])
         ;
 

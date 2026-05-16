@@ -114,8 +114,8 @@
                                     {# Foto #}
                                     <a href="{{ path('app_clothing_item_edit', {id: item.id}) }}"
                                        class="text-decoration-none">
-                                        {% if item.photoPath %}
-                                            <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
+                                        {% if item.displayPhotoPath %}
+                                            <img src="{{ asset('uploads/clothing/' ~ item.displayPhotoPath) }}"
                                                  class="card-img-top object-fit-cover"
                                                  style="height: 220px;"
                                                  alt="{{ item.name }}">
@@ -205,8 +205,8 @@
                                     {# Foto #}
                                     <a href="{{ path('app_clothing_item_batch_review') }}"
                                        class="text-decoration-none">
-                                        {% if item.photoPath %}
-                                            <img src="{{ asset('uploads/clothing/' ~ item.photoPath) }}"
+                                        {% if item.displayPhotoPath %}
+                                            <img src="{{ asset('uploads/clothing/' ~ item.displayPhotoPath) }}"
                                                  class="card-img-top object-fit-cover"
                                                  style="height: 220px;"
                                                  alt="{{ item.name }}">
