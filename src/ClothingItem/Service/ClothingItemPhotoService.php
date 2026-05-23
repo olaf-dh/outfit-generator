@@ -38,16 +38,16 @@ readonly class ClothingItemPhotoService
         // Delete old photo and color associations
         if ($item->getPhotoPath() !== null) {
             $this->photoUploader->deleteAnalysis($item->getPhotoPath());
-
-            foreach ($item->getItemColors() as $itemColor) {
-                $item->removeItemColor($itemColor);
-            }
+        }
+        foreach ($item->getItemColors() as $itemColor) {
+            $item->removeItemColor($itemColor);
         }
 
         // Upload new photo and set status to pending
         $filename = $this->photoUploader->uploadAnalysis($file);
         $item->setPhotoPath($filename);
         $item->setStatus(ClothingItemStatus::PENDING);
+        $item->setPattern(null);
 
         /** @var int $id */
         $id = $item->getId();

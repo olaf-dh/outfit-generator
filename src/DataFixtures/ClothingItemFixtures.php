@@ -29,10 +29,10 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
     public const string BLUE_STRIPE_SHIRT = 'item-blue-stripe-shirt';
     public const string ANTHRACITE_PANTS  = 'item-anthracite-pants';
     public const string MUSTARD_CHINO     = 'item-mustard-chino';
-    public const string DARK_BLUE_JEANS   = 'item-dark-blue-jeans';
+    public const string BLUE_JEANS        = 'item-blue-jeans';
     public const string GRAY_COAT         = 'item-gray-coat';
     public const string BEIGE_TRENCH      = 'item-beige-trench';
-    public const string CAMEL_SHOES       = 'item-camel-shoes';
+    public const string CARAMEL_SHOES     = 'item-caramel-shoes';
     public const string WHITE_SNEAKERS    = 'item-white-sneakers';
     public const string GRAY_SCARF        = 'item-gray-scarf';
     public const string BROWN_BELT        = 'item-brown-belt';
@@ -151,7 +151,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::PULLOVER,
                 'min_layer'     => 2,
                 'max_layer'     => 3,
-                'primary_color' => ColorFixtures::COLOR_RED,
+                'primary_color' => ColorFixtures::COLOR_RUBY,
                 'materials'     => [MaterialFixtures::MATERIAL_CASHMERE => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
@@ -162,7 +162,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'      => SubCategoryFixtures::BUTTON_DOWN,
                 'min_layer'        => 2,
                 'max_layer'        => 2,
-                'primary_color'    => ColorFixtures::COLOR_DARK_BLUE,
+                'primary_color'    => ColorFixtures::COLOR_ROYAL_BLUE,
                 'secondary_colors' => [ColorFixtures::COLOR_WHITE],
                 'materials'        => [MaterialFixtures::MATERIAL_COTTON => 100.0],
                 'pattern'          => LookupFixtures::PATTERN_VERTICAL_STRIPES,
@@ -197,12 +197,12 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
                 'seasons'       => [LookupFixtures::SEASON_SPRING, LookupFixtures::SEASON_AUTUMN],
             ],
-            self::DARK_BLUE_JEANS => [
+            self::BLUE_JEANS => [
                 'name'          => 'Dark Blue Jeans',
                 'subcategory'   => SubCategoryFixtures::JEANS,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => ColorFixtures::COLOR_DARK_BLUE,
+                'primary_color' => ColorFixtures::COLOR_DENIM,
                 'materials'     => [MaterialFixtures::MATERIAL_DENIM => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
@@ -215,7 +215,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::COAT,
                 'min_layer'     => 4,
                 'max_layer'     => 5,
-                'primary_color' => ColorFixtures::COLOR_WARM_GRAY,
+                'primary_color' => ColorFixtures::COLOR_ASH_GRAY,
                 'materials'     => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
@@ -226,7 +226,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'        => SubCategoryFixtures::TRENCH_COAT,
                 'min_layer'          => 4,
                 'max_layer'          => 5,
-                'primary_color'      => ColorFixtures::COLOR_BEIGE,
+                'primary_color'      => ColorFixtures::COLOR_ECRU,
                 'materials'          => [
                     MaterialFixtures::MATERIAL_COTTON    => 65.0,
                     MaterialFixtures::MATERIAL_POLYESTER => 35.0,
@@ -238,12 +238,12 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
             ],
 
             // --- Shoes ---
-            self::CAMEL_SHOES => [
+            self::CARAMEL_SHOES => [
                 'name'          => 'Camel Leather Shoes',
                 'subcategory'   => SubCategoryFixtures::BUSINESS_SHOES,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => ColorFixtures::COLOR_CAMEL,
+                'primary_color' => ColorFixtures::COLOR_CARAMEL,
                 'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_BUSINESS],
@@ -267,7 +267,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'        => SubCategoryFixtures::SCARF,
                 'min_layer'          => 1,
                 'max_layer'          => 1,
-                'primary_color'      => ColorFixtures::COLOR_LIGHT_GRAY,
+                'primary_color'      => ColorFixtures::COLOR_SMOKE,
                 'materials'          => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'pattern'            => LookupFixtures::PATTERN_SOLID,
                 'styles'             => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
@@ -279,7 +279,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::BELT,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => ColorFixtures::COLOR_TAUPE,
+                'primary_color' => ColorFixtures::COLOR_WALNUT,
                 'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [

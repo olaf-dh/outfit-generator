@@ -44,6 +44,24 @@ class Color
     #[ORM\Column(enumType: ColorSaturation::class)]
     private ColorSaturation $saturation;
 
+    #[ORM\Column(type: 'smallint')]
+    private int $r;
+
+    #[ORM\Column(type: 'smallint')]
+    private int $g;
+
+    #[ORM\Column(type: 'smallint')]
+    private int $b;
+
+    #[ORM\Column]
+    private float $h;
+
+    #[ORM\Column]
+    private float $s;
+
+    #[ORM\Column]
+    private float $v;
+
     /**
      * @var Collection<int, ItemColor>
      */
@@ -128,6 +146,78 @@ class Color
     public function setSaturation(ColorSaturation $saturation): static
     {
         $this->saturation = $saturation;
+
+        return $this;
+    }
+
+    public function getR(): int
+    {
+        return $this->r;
+    }
+
+    public function setR(int $r): static
+    {
+        $this->r = $r;
+
+        return $this;
+    }
+
+    public function getG(): int
+    {
+        return $this->g;
+    }
+
+    public function setG(int $g): static
+    {
+        $this->g = $g;
+
+        return $this;
+    }
+
+    public function getB(): int
+    {
+        return $this->b;
+    }
+
+    public function setB(int $b): static
+    {
+        $this->b = $b;
+
+        return $this;
+    }
+
+    public function getH(): float
+    {
+        return $this->h;
+    }
+
+    public function setH(float $h): static
+    {
+        $this->h = $h;
+
+        return $this;
+    }
+
+    public function getS(): float
+    {
+        return $this->s;
+    }
+
+    public function setS(float $s): static
+    {
+        $this->s = $s;
+
+        return $this;
+    }
+
+    public function getV(): float
+    {
+        return $this->v;
+    }
+
+    public function setV(float $v): static
+    {
+        $this->v = $v;
 
         return $this;
     }

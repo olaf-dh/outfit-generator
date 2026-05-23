@@ -17,4 +17,5 @@ enum ColorFamily: string
     case WHITE = 'white';
     case GRAY = 'gray';
     case BEIGE = 'beige';
+    case PINK = 'pink';
 }

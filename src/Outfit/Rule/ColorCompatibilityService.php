@@ -47,7 +47,7 @@ class ColorCompatibilityService
 
     private function areBothVivid(Color $a, Color $b): bool
     {
-        return $a->getSaturation() === ColorSaturation::VIVID
-            && $b->getSaturation() === ColorSaturation::VIVID;
+        return $a->getSaturation() === ColorSaturation::VIBRANT
+            && $b->getSaturation() === ColorSaturation::VIBRANT;
     }
 }

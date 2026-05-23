@@ -10,26 +10,27 @@ use App\ClothingItem\Enum\StyleType;
 use App\ClothingItem\Enum\WeatherConditionType;
 use App\DataFixtures\CategoryFixtures;
 use App\DataFixtures\ClothingItemFixtures;
+use App\DataFixtures\ColorFixtures;
 use App\DataFixtures\LookupFixtures;
+use App\DataFixtures\MaterialFixtures;
 use App\DataFixtures\SubCategoryFixtures;
+use App\DTO\Outfit\OutfitSuggestion;
 use App\Entity\ClothingItem;
-use App\Outfit\DTO\OutfitSuggestion;
 use App\Outfit\Service\OutfitSuggestionService;
+use Doctrine\Bundle\FixturesBundle\Loader\SymfonyFixturesLoader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Loader;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\DataFixtures\ReferenceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class OutfitSuggestionServiceTest extends KernelTestCase
 {
     private OutfitSuggestionService $service;
     private EntityManagerInterface $entityManager;
-    private UserPasswordHasherInterface $hasher;
 
     /**
      * Fixture references after loading
@@ -50,25 +51,19 @@ class OutfitSuggestionServiceTest extends KernelTestCase
         $service             = static::getContainer()->get(OutfitSuggestionService::class);
         $this->service       = $service;
 
-        /** @var UserPasswordHasherInterface $hasher */
-        $hasher              = static::getContainer()->get(UserPasswordHasherInterface::class);
-        $this->hasher        = $hasher;
-
         $this->loadFixtures();
     }
 
     private function loadFixtures(): void
     {
-        $loader = new Loader();
-        $categoryFixtures    = new CategoryFixtures();
-        $subcategoryFixtures = new SubCategoryFixtures();
-        $lookupFixtures      = new LookupFixtures();
-        $itemFixtures        = new ClothingItemFixtures(hasher: $this->hasher);
+        $loader = new SymfonyFixturesLoader();
 
-        $loader->addFixture($categoryFixtures);
-        $loader->addFixture($subcategoryFixtures);
-        $loader->addFixture($lookupFixtures);
-        $loader->addFixture($itemFixtures);
+        $loader->addFixture($this->getFixture(CategoryFixtures::class));
+        $loader->addFixture($this->getFixture(SubCategoryFixtures::class));
+        $loader->addFixture($this->getFixture(MaterialFixtures::class));
+        $loader->addFixture($this->getFixture(ColorFixtures::class));
+        $loader->addFixture($this->getFixture(LookupFixtures::class));
+        $loader->addFixture($this->getFixture(ClothingItemFixtures::class));
 
         $purger   = new ORMPurger($this->entityManager);
         $executor = new ORMExecutor($this->entityManager, $purger);
@@ -76,6 +71,14 @@ class OutfitSuggestionServiceTest extends KernelTestCase
 
         // Save references after loading
         $this->references['items'] = $executor->getReferenceRepository();
+    }
+
+    private function getFixture(string $fixtureClass): FixtureInterface
+    {
+        $fixture = static::getContainer()->get($fixtureClass);
+        assert($fixture instanceof FixtureInterface);
+
+        return $fixture;
     }
 
     /**
@@ -143,7 +146,7 @@ class OutfitSuggestionServiceTest extends KernelTestCase
     public function testSeedItemsAreAlwaysIncludedInSuggestion(): void
     {
         $pullover = $this->getItem(ClothingItemFixtures::RED_PULLOVER);
-        $shoes    = $this->getItem(ClothingItemFixtures::CAMEL_SHOES);
+        $shoes    = $this->getItem(ClothingItemFixtures::CARAMEL_SHOES);
 
         $suggestions = $this->service->suggest(
             [$pullover, $shoes],

@@ -26,9 +26,9 @@ services:
             - '../src/DependencyInjection/'
             - '../src/Entity/'
             - '../src/Kernel.php'
-            - '../src/Domain/Outfit/Generator/OutfitContext.php'
-            - '../src/Domain/Outfit/DTO/'
-            - '../src/Domain/Outfit/Message/'
+            - '../src/Outfit/Generator/OutfitContext.php'
+            - '../src/DTO/'
+            - '../src/ClothingItem/Message/'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -42,3 +42,10 @@ when@test:
         App\:
             resource: '../src/'
             public: true
+            exclude:
+                - '../src/DependencyInjection/'
+                - '../src/Entity/'
+                - '../src/Kernel.php'
+                - '../src/Outfit/Generator/OutfitContext.php'
+                - '../src/DTO/'
+                - '../src/ClothingItem/Message/'

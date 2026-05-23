@@ -7,6 +7,7 @@ namespace App\Color\Enum;
 enum ColorSaturation: string
 {
     case MUTED = 'muted';
-    case NORMAL = 'normal';
-    case VIVID = 'vivid';
+    case SOFT = 'soft';
+    case MEDIUM = 'medium';
+    case VIBRANT = 'vibrant';
 }

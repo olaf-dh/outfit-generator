@@ -49,6 +49,7 @@ enum:
         white: Weiß
         gray: Grau
         beige: Beige
+        pink: Pink
 
     color_tone:
         light: Hell
@@ -62,8 +63,9 @@ enum:
 
     color_saturation:
         muted: Gedeckt
-        normal: Normal
-        vivid: Kräftig
+        medium: Mittel
+        soft: Soft
+        vibrant: Kräftig
 
     pattern_type:
         solid: Einfarbig
@@ -89,93 +91,113 @@ enum:
 
 color:
     name:
-        navy: Navy
-        dark_blue: Dunkelblau
-        blue: Blau
+        navy: Marineblau
+        midnight_blue: Mitternachtsblau
+        denim: Jeansblau
         royal_blue: Königsblau
         steel_blue: Stahlblau
-        light_blue: Hellblau
-        dusty_blue: Staubblau
+        baby_blue: Babyblau
+        sky_blue: Himmelblau
+        azure: Azurblau
 
-        burgundy: Burgunderrot
-        dark_red: Dunkelrot
-        red: Rot
-        cherry: Kirschrot
-        brick: Ziegelrot
-        light_red: Hellrot
-        dusty_red: Staubrot
+        crimson: Pupurrot
+        depp_red: Dunkelrot
+        soft_red: Zartrot
+        ruby: Rubinrot
+        brick_red: Ziegelrot
+        wine: Weinrot
+        coral_red: Korallenrot
+        tomato: Tomatenrot
 
-        dark_green: Dunkelgrün
-        forest_green: Waldgrün
-        green: Grün
+        mint: Minzgrün
+        forest: Waldgrün
+        lime: limettengrün
         emerald: Smaragdgrün
         olive: Olivgrün
-        light_green: Hellgrün
+        jade: Jadegrün
         sage: Salbeigrün
+        moss: Moosgrün
 
         mustard: Senfgelb
-        dark_yellow: Dunkelgelb
-        yellow: Gelb
-        gold: Gold
+        lemon: Zitronengelb
+        butter: Buttergelb
+        gold: Goldgelb
         sand_yellow: Sandgelb
-        light_yellow: Hellgelb
-        dusty_yellow: Staubgelb
+        honey: Honiggelb
+        canary: Kanariengelb
+        ochre: Ocker
 
-        burnt_orange: Gebranntes Orange
-        dark_orange: Dunkelorange
-        orange: Orange
-        coral: Koralle
-        light_orange: Hellorange
-        terracotta: Terrakotta
-        dusty_orange: Stauborange
+        burnt_orange: Dunkelorange
+        copper: Kupfer
+        rust: rostiges Orange
+        tangerine: Mandarine
+        amber: Bernstein
+        orange_peel: Orangenschale
+        peach: Pfirsich
+        apricot: Aprikose
 
-        dark_purple: Dunkellila
+        lilac: Flieder
         eggplant: Aubergine
         purple: Lila
         violet: Violett
         plum: Pflaume
         lavender: Lavendel
-        dusty_purple: Staublila
+        indigo: Indigo
+        mauve: Malve
 
-        dark_brown: Dunkelbraun
-        chocolate: Schokolade
-        brown: Braun
-        chestnut: Kastanienbraun
-        taupe: Taupe
-        light_brown: Hellbraun
-        camel: Kamel
+        rose: Rosé
+        blush: Zartrosa
+        hot_pink: Knallrosa
+        dusty_pink: Altrosa
+        salmon_pink: Lachsrosa
+        fuchsia: Fuchsia
+        baby_pink: Babyrosa
+        raspberry: Himbeerrosa
 
-        charcoal: Anthrazit
-        dark_gray: Dunkelgrau
-        gray: Grau
-        cool_gray: Kühles Grau
-        warm_gray: Warmes Grau
-        light_gray: Hellgrau
+        coffee: Kaffeebraun
+        chocolate: Schokoladenbraun
+        beige_brown: Beige-Braun
+        walnut: Walnussbraun
+        cinnamon: Zimtbraun
+        mocha: Mokka
+        caramel: Karamell
+        sepia: Sepia
+
+        slate: Schiefergrau
+        ash_gray: Aschgrau
+        smoke: Rauchgrau
+        dove_gray: Taubengrau
+        graphite_gray: Graphitegrau
+        mist: Nebelgrau
+        steel: Stahlgrau
         silver: Silber
 
         white: Weiß
-        off_white: Off-White
-        ivory: Elfenbein
-        cream: Creme
-        soft_white: Weichweiß
-        cool_white: Kaltweiß
-        pearl: Perlweiß
+        snow: Schneeweiß
+        ivory_white: Elfenbeinweiß
+        milk: Milchweiß
+        cloud: Wolkenweiß
+        bone: Knochenweiß
+        pearl: Perlmutt
+        frost: Frostweiß
 
         black: Schwarz
         soft_black: Weichschwarz
-        charcoal_black: Kohleschwarz
-        warm_black: Warmes Schwarz
-        faded_black: Ausgewaschenes Schwarz
-        cool_black: Kühles Schwarz
-        matte_black: Mattes Schwarz
+        charcoal: Anthrazit
+        jet_black: Tiefschwarz
+        graphite: Graphit
+        off_black: Off-Black (sehr dunkles Grau-Schwarz)
+        ash_black: Ascheschwarz
+        smoky_black: Rauchschwarz
 
-        beige: Beige
+        cream: Creme
         sand: Sand
-        nude: Hautfarben
-        taupe_light: Helles Taupe
-        stone: Stein
-        warm_beige: Warmes Beige
-        cool_beige: Kühles Beige
+        ivory: Elfenbein
+        ecru: Ecru
+        linen: Leinen
+        almond: Mandel
+        champagne: Champgner
+        oat: Hafer
 
 material:
     name:

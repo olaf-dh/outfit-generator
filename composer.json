@@ -35,7 +35,8 @@
         "symfony/validator": "8.0.*",
         "symfony/yaml": "8.0.*",
         "symfonycasts/reset-password-bundle": "^1.25",
-        "twig/extra-bundle": "^3.24"
+        "twig/extra-bundle": "^3.24",
+        "ext-imagick": "*"
     },
     "require-dev": {
         "ext-gd": "*",

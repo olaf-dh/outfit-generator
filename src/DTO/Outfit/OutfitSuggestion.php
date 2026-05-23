@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Outfit\DTO;
+namespace App\DTO\Outfit;
 
 use App\Entity\ClothingItem;
 

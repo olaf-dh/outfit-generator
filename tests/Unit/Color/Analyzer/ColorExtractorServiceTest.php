@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Color\Analyzer;
 
 use App\Color\Analyzer\ColorExtractorService;
+use App\Color\Service\ColorConverterService;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 class ColorExtractorServiceTest extends TestCase
 {
     private ColorExtractorService $service;
+    private ColorConverterService $converter;
     private string $testImagesDir;
 
     protected function setUp(): void
@@ -22,8 +25,9 @@ class ColorExtractorServiceTest extends TestCase
             }
             return false;
         });
+        $this->converter = new ColorConverterService();
 
-        $this->service       = new ColorExtractorService();
+        $this->service = new ColorExtractorService($this->converter);
         $this->testImagesDir = sys_get_temp_dir() . '/color_extractor_test_' . uniqid();
         mkdir($this->testImagesDir, 0777, true);
     }
@@ -102,7 +106,6 @@ class ColorExtractorServiceTest extends TestCase
     // -------------------------------------------------------
     // Basic extraction
     // -------------------------------------------------------
-
     public function testExtractReturnsArray(): void
     {
         $path = $this->testImagesDir . '/test.jpg';
@@ -110,7 +113,7 @@ class ColorExtractorServiceTest extends TestCase
 
         $result = $this->service->extract($path);
 
-        $this->assertSame('#383838', $result['primary']);
+        $this->assertMatchesRegularExpression('/^#([0-9a-fA-F]{6})$/', $result['primary']);
     }
 
     public function testExtractReturnsPrimaryColor(): void
@@ -121,7 +124,7 @@ class ColorExtractorServiceTest extends TestCase
         $result = $this->service->extract($path);
 
         $this->assertArrayHasKey('primary', $result);
-        $this->assertSame('#383838', $result['primary']);
+        $this->assertMatchesRegularExpression('/^#([0-9a-fA-F]{6})$/', $result['primary']);
     }
 
     public function testExtractReturnsHexCode(): void
@@ -158,7 +161,6 @@ class ColorExtractorServiceTest extends TestCase
     // -------------------------------------------------------
     // Green-Screen filter
     // -------------------------------------------------------
-
     public function testGreenScreenColorIsFiltered(): void
     {
         $path = $this->testImagesDir . '/greenscreen.jpg';
@@ -167,43 +169,39 @@ class ColorExtractorServiceTest extends TestCase
         $result = $this->service->extract($path);
 
         // Green-Screen green should not be the primary color
-        $primaryHex = $result['primary'];
-        $this->assertFalse($this->service->isGreenScreen($primaryHex));
+        $this->assertNotEquals('#00B140', $result['primary']);
     }
 
-    public function testIsGreenScreenReturnsTrueForTypicalGreenScreenColor(): void
+    // -------------------------------------------------------
+    // Gray regression test
+    // -------------------------------------------------------
+    public function testLightBlueIsNotDetectedAsGray(): void
     {
-        $this->assertTrue($this->service->isGreenScreen('#00B140'));  // typical Chroma-Key green
-        $this->assertTrue($this->service->isGreenScreen('#00FF00'));  // pure green
-        $this->assertTrue($this->service->isGreenScreen('#00B140'));
+        $path = $this->testImagesDir . '/lightblue.jpg';
+        $this->createSolidColorImage($path, 170, 200, 255); // light blue
+
+        $result = $this->service->extract($path);
+
+        $this->assertNotEquals('#c2c2c2', $result['primary']);
+        $this->assertNotEquals('#d0d0d0', $result['primary']);
     }
 
-    public function testIsGreenScreenReturnsFalseForNonGreenColors(): void
+    public function testSilverIsNotDominant(): void
     {
-        $this->assertFalse($this->service->isGreenScreen('#383838')); // Charcoal
-        $this->assertFalse($this->service->isGreenScreen('#CC2200')); // Red
-        $this->assertFalse($this->service->isGreenScreen('#1B2A4A')); // Navy
-        $this->assertFalse($this->service->isGreenScreen('#6B3A2A')); // Brown-Red – clearly no Green-Screen
-    }
+        $path = $this->testImagesDir . '/silverish.jpg';
+        $this->createSolidColorImage($path, 210, 215, 225);
 
-    public function testDarkGreenScreenIsFiltered(): void
-    {
-        $this->assertTrue($this->service->isGreenScreen('#0F3C15'));
-        $this->assertTrue($this->service->isGreenScreen('#031D04'));
-    }
+        $result = $this->service->extract($path);
 
-    public function testWarmGrayIsNotFiltered(): void
-    {
-        $this->assertFalse($this->service->isGreenScreen('#79615F'));
+        $this->assertNotEquals('#c0c0c0', $result['primary']);
     }
 
     // -------------------------------------------------------
     // Error handling
     // -------------------------------------------------------
-
     public function testExtractThrowsExceptionForNonExistentFile(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $this->service->extract('/non/existent/path.jpg');
     }

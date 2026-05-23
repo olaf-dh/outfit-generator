@@ -49,8 +49,3 @@ $run("doctrine:database:drop {$envArg} --force --if-exists");
 $run("doctrine:database:create {$envArg} {$ni}");
 
 $run("doctrine:migrations:migrate {$envArg} {$ni}");
-
-/**
- * Load Fixtures
- */
-$run("doctrine:fixtures:load {$envArg} {$ni} --group=test --env=test");

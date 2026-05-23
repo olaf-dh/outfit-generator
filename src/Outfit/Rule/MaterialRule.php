@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Outfit\Rule;
 
 use App\ClothingItem\Enum\WarmthLevel;
+use App\DTO\Outfit\OutfitSuggestion;
 use App\Entity\ItemMaterial;
-use App\Outfit\DTO\OutfitSuggestion;
 use App\Outfit\Generator\OutfitContext;
 
 /**

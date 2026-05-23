@@ -26,7 +26,7 @@ class ColorCompatibilityServiceTest extends TestCase
         ColorFamily $family,
         ColorTone $tone,
         ColorTemperature $temperature,
-        ColorSaturation $saturation = ColorSaturation::NORMAL
+        ColorSaturation $saturation = ColorSaturation::MEDIUM
     ): Color {
         $color = new Color();
         $color->setFamily($family);
@@ -186,7 +186,7 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorFamily::RED,
             ColorTone::MEDIUM,
             ColorTemperature::WARM,
-            ColorSaturation::VIVID
+            ColorSaturation::VIBRANT
         );
         $mutedGray = $this->makeColor(
             ColorFamily::GRAY,
@@ -204,7 +204,7 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorFamily::RED,
             ColorTone::MEDIUM,
             ColorTemperature::WARM,
-            ColorSaturation::VIVID
+            ColorSaturation::VIBRANT
         );
         $normalBrown = $this->makeColor(
             ColorFamily::BROWN,
@@ -221,13 +221,13 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorFamily::RED,
             ColorTone::MEDIUM,
             ColorTemperature::WARM,
-            ColorSaturation::VIVID
+            ColorSaturation::VIBRANT
         );
         $vividBlue = $this->makeColor(
             ColorFamily::BLUE,
             ColorTone::MEDIUM,
             ColorTemperature::COOL,
-            ColorSaturation::VIVID
+            ColorSaturation::VIBRANT
         );
 
         $this->assertFalse($this->service->areCompatible($vividRed, $vividBlue));
@@ -239,13 +239,13 @@ class ColorCompatibilityServiceTest extends TestCase
             ColorFamily::WHITE,
             ColorTone::LIGHT,
             ColorTemperature::NEUTRAL,
-            ColorSaturation::VIVID
+            ColorSaturation::VIBRANT
         );
         $vividBlue  = $this->makeColor(
             ColorFamily::BLUE,
             ColorTone::MEDIUM,
             ColorTemperature::COOL,
-            ColorSaturation::VIVID
+            ColorSaturation::VIBRANT
         );
 
         $this->assertFalse($this->service->areCompatible($vividWhite, $vividBlue));

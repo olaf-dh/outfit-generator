@@ -254,8 +254,11 @@ final class ClothingItemController extends AbstractController
     }
 
     #[Route('/{id}/analysis-photo', name: 'app_clothing_item_analysis_photo', methods: ['GET'])]
-    public function analysisPhoto(ClothingItem $item, #[Autowire('%clothing_analysis_dir%')] string $analysisDir): Response
-    {
+    public function analysisPhoto(
+        ClothingItem $item,
+        #[Autowire('%clothing_analysis_dir%')]
+        string $analysisDir
+    ): Response {
         $this->denyAccessUnlessGranted('view', $item);
 
         if ($item->getPhotoPath() === null) {
