@@ -136,10 +136,12 @@ final class ClothingItemController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var Color $color */
-            $color = $form->get('itemColors')->getData();
-            // Update primary color
-            $item->updatePrimaryColor($color);
+
+            /** @var Color $primaryColor */
+            $primaryColor = $form->get('primaryColor')->getData();
+
+            /** @var list<Color> $secondaryColors */
+            $secondaryColors = $form->get('secondaryColors')->getData();
 
             /** @var UploadedFile|null $photoFile */
             $photoFile = $form->get('photo')->getData();
@@ -160,6 +162,7 @@ final class ClothingItemController extends AbstractController
                 $item->setStatus(ClothingItemStatus::COMPLETE);
             }
 
+            $this->colorReduction->reduction($item, $primaryColor, $secondaryColors);
             $this->colorReduction->normalize($item);
 
             /** @var UploadedFile|null $displayPhotoFile */
@@ -230,7 +233,7 @@ final class ClothingItemController extends AbstractController
         $items = $this->repository->findUnreviewedByOwner($owner);
 
         if (empty($items)) {
-            $this->addFlash('info', 'batch_upload.review.empty');
+            $this->addFlash('info', $this->translator->trans('batch_upload.review.empty'));
             return $this->redirectToRoute('app_clothing_item_index');
         }
 
@@ -273,4 +276,20 @@ final class ClothingItemController extends AbstractController
 
         return new BinaryFileResponse($path);
     }
+
+//    #[Route('/upload', name: 'app_clothing_item_upload', methods: ['POST'])]
+//    public function uploadClothing(
+//        Request $request,
+//        ColorExtractionApiService $apiService,
+//        ColorMatchingService $colorMatcher
+//    ): Response {
+//        $files = $request->files->all('images');
+//
+//        if (empty($files)) {
+//            $this->addFlash('warning', 'clothing_item.upload.no_files');
+//            return $this->redirectToRoute('app_clothing_item_index');
+//        }
+//
+//        foreach ($files as $file) {}
+//    }
 }

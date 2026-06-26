@@ -12,6 +12,9 @@ use App\Entity\WeatherCondition;
 use App\Outfit\Rule\SeasonCompatibilityService;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group unit
+ */
 class SeasonCompatibilityServiceTest extends TestCase
 {
     private SeasonCompatibilityService $service;

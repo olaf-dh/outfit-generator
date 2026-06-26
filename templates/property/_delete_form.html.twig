@@ -1,0 +1,5 @@
+<form method="post" action="{{ path(deleteRoute, {'entityType': entityType, 'id': item.id}) }}"
+      onsubmit="return confirm({{ ('property.entity_delete.confirm')|trans({'%name%': item.name}) }});">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ item.id) }}">
+    <button class="btn btn-danger mt-3">{{ 'property.entity_delete.button'|trans }}</button>
+</form>

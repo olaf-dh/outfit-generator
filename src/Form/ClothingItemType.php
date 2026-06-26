@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
@@ -92,8 +93,8 @@ class ClothingItemType extends AbstractType
                 'constraints' => [new File(
                     maxSize: '10M',
                     mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-                    maxSizeMessage: 'clothing_item.form.error.image_too_large',
-                    mimeTypesMessage: 'clothing_item.form.error.invalid_image',
+                    maxSizeMessage: $this->translator->trans('clothing_item.form.error.image_too_large'),
+                    mimeTypesMessage: $this->translator->trans('clothing_item.form.error.invalid_image'),
                 )],
                 'attr' => ['class' => 'form-control'],
             ])
@@ -104,8 +105,8 @@ class ClothingItemType extends AbstractType
                 'constraints' => [new File(
                     maxSize: '10M',
                     mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-                    maxSizeMessage: 'clothing_item.form.error.image_too_large',
-                    mimeTypesMessage: 'clothing_item.form.error.invalid_image',
+                    maxSizeMessage: $this->translator->trans('clothing_item.form.error.image_too_large'),
+                    mimeTypesMessage: $this->translator->trans('clothing_item.form.error.invalid_image'),
                 )],
                 'attr' => ['class' => 'form-control', 'required' => false],
             ])
@@ -122,19 +123,39 @@ class ClothingItemType extends AbstractType
             }
 
             $builder
-                ->add('itemColors', ChoiceType::class, [
+                ->add('primaryColor', ChoiceType::class, [
                     'label'         => false,
                     'mapped'        => false,
                     'expanded'      => true,
                     'multiple'      => false,
                     'data'          => $currentPrimary,
                     'choices'       => $this->getItemColors($builder->getData()),
-                    'choice_label'  => fn (Color $color) => $this->translator->trans('color.name.' . $color->getName()),
+                    'choice_label'  => fn (Color $color) => $this->translator
+                        ->trans('color.name.' . $color->getName(), [], 'colors'),
                     'choice_value'  => fn (?Color $color) => $color?->getId(),
                     'choice_attr'   => fn (Color $color) => [
                         'data-hex'  => $color->getHexCode(),
                         'data-name' => $color->getName(),
                     ],
+                ])
+                ->add('secondaryColors', ChoiceType::class, [
+                    'label'         => false,
+                    'mapped'        => false,
+                    'expanded'      => true,
+                    'multiple'      => true,
+                    'choices'       => $this->getItemColors($builder->getData()),
+                    'choice_label'  => fn (Color $color) => $this->translator
+                        ->trans('color.name.' . $color->getName(), [], 'colors'),
+                    'choice_value'  => fn (?Color $color) => $color?->getId(),
+                    'choice_attr'   => fn (Color $color) => [
+                        'data-hex'  => $color->getHexCode(),
+                        'data-name' => $color->getName(),
+                    ],
+                    'constraints'   => [new Count(
+                        min: 0,
+                        max: 2,
+                        maxMessage: $this->translator->trans('clothing_item.form.error.max_secondary_colors'),
+                    )],
                 ])
                 ->add('itemMaterials', CollectionType::class, [
                     'label'         => false,

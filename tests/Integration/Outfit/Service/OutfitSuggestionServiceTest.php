@@ -27,6 +27,9 @@ use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @group integration
+ */
 class OutfitSuggestionServiceTest extends KernelTestCase
 {
     private OutfitSuggestionService $service;

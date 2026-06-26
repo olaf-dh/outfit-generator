@@ -11,9 +11,9 @@ final class ExtractedColor
         public int $r,
         public int $g,
         public int $b,
-        public float $h,
-        public float $s,
-        public float $v,
+        public int $h,
+        public int $s,
+        public int $v,
         public float $weight,
     ) {
     }

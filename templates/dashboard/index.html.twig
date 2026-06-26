@@ -42,6 +42,17 @@
                 button: (message ~ '.card.batch_upload.button')|trans,
                 buttonClass: 'btn-outline-primary'
             } %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                {% include 'dashboard/_card.html.twig' with {
+                    icon: '🧑‍🎨',
+                    title: 'Eigenschaften verwalten',
+                    text: 'Bearbeite alle Eigenschaften wie Farbe, Stil, usw.',
+                    route: 'app_property_index',
+                    button: 'Bearbeiten',
+                    buttonClass: 'btn-outline-secondary'
+                } %}
+            {% endif %}
         </div>
 
         <hr class="my-5">

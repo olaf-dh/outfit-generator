@@ -15,16 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ColorRepository::class)]
-class Color
+class Color extends AbstractAttribute
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 100, unique: true)]
-    private string $name;
-
     #[ORM\Column(length: 7, nullable: false)]
     #[Assert\Regex(
         pattern: '/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/',
@@ -54,13 +46,13 @@ class Color
     private int $b;
 
     #[ORM\Column]
-    private float $h;
+    private int $h;
 
     #[ORM\Column]
-    private float $s;
+    private int $s;
 
     #[ORM\Column]
-    private float $v;
+    private int $v;
 
     /**
      * @var Collection<int, ItemColor>
@@ -71,23 +63,6 @@ class Color
     public function __construct()
     {
         $this->itemColors = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getHexCode(): string
@@ -186,36 +161,36 @@ class Color
         return $this;
     }
 
-    public function getH(): float
+    public function getH(): int
     {
         return $this->h;
     }
 
-    public function setH(float $h): static
+    public function setH(int $h): static
     {
         $this->h = $h;
 
         return $this;
     }
 
-    public function getS(): float
+    public function getS(): int
     {
         return $this->s;
     }
 
-    public function setS(float $s): static
+    public function setS(int $s): static
     {
         $this->s = $s;
 
         return $this;
     }
 
-    public function getV(): float
+    public function getV(): int
     {
         return $this->v;
     }
 
-    public function setV(float $v): static
+    public function setV(int $v): static
     {
         $this->v = $v;
 

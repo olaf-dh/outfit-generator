@@ -7,6 +7,9 @@ use App\Entity\Pattern;
 use App\Outfit\Rule\PatternCompatibilityService;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group unit
+ */
 class PatternCompatibilityServiceTest extends TestCase
 {
     private PatternCompatibilityService $service;

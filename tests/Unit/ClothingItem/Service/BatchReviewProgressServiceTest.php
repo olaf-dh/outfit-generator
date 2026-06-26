@@ -14,6 +14,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+/**
+ * @group unit
+ */
 #[AllowMockObjectsWithoutExpectations]
 class BatchReviewProgressServiceTest extends TestCase
 {

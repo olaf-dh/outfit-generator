@@ -1,0 +1,116 @@
+color:
+    name:
+        ## Family blue
+        navy: Marineblau
+        pure_blue: Blau
+        light_blue: Hellblau
+        royal_blue: Königsblau
+        deep_sky_blue: tiefes Himmelblau
+        cornflower: Kornblumenblau
+        sky_blue: Himmelblau
+        dodger_blue: Dodgerblau
+
+        ## Family red
+        crimson: Karmesinrot
+        dark_red: Dunkelrot
+        indian_red: Indischrot
+        brick_red: Ziegelrot
+        pure_red: Rot
+        light_coral: helle Koralle
+        tomato: Tomatenrot
+
+
+        ## Family green
+        pure_green: Grün
+        forest: Waldgrün
+        lime: Limettengrün
+        light_green: Hellgrün
+        dark_olive: dunkles Olivgrün
+        sea_green: Seegrün
+        office_green: Officegrün
+        olive_drab: Olivgrün
+
+        ## Family yellow
+        peach_puff: Pfirsich
+        moccasin: Mokassingelb
+        bright_gold: leuchtendes Goldgelb
+        light_golden: helles Goldgelb
+        gold: Gold
+        goldenrod: Goldgelb
+        pure_yellow: Gelb
+        dark_goldenrod: dunkles Goldgelb
+
+        ## Family orange
+        peach: Pfirsich
+        light_orange: helles Orange
+        orange_gold: Orangegold
+        dark_orange: dunkles Orange
+        coral: Koralle
+        mango_orange: Mango-Orange
+        bright_orange: leuchtendes Orange
+        orange_peel: Orange
+
+        ## Family purple
+        pure_purple: Lila
+        medium_purple: Mittellila
+        rebecca_purple: Rebecca-Lila
+        dark_orchid: dunkle Orchidee
+        medium_orchid: Mittelorchidee
+        dark_violet: Dunkelviolett
+        thistle: Distel
+        plum: Pflaume
+
+        ## Family pink
+        pink: Rosa
+        hot_pink: Knallrosa
+        deep_pink: Tiefrosa
+        salmon_pink: Lachsrosa
+        pale_violet_red: blassroter Violett
+        pastel_pink: Pastellrosa
+
+        ## Family brown
+        saddle_brown: Sattelbraun
+        chocolate: Schokoladenbraun
+        sienna: Ockerbraun
+        peru: Perubraun
+        dark_brown: Dunkelbraun
+        maroon: Kastanienbraun
+        brown_red: Braunrot
+
+        ## Family gray
+        pure_gray: Grau
+        dark_gray: Dunkelgrau
+        silver: Silber
+        medium_gray: Mittelgrau
+        light_gray: Hellgrau
+        mist: Nebelgrau
+        bright_gray: strahlendes Grau
+        light_silver: Hellsilber
+
+        ## Family white
+        white: Weiß
+        almost_white: fast Weiß
+        ghost_white: Geisterweiß
+        off_white: gebrochenes Weiß
+        snow_white: Schneeweiß
+        gray_white: Hellgrau
+        lightest_gray: hellstes Grau
+        gainsboro: Gainsboro
+
+        ## Family black
+        pure_black: Schwarz
+        almost_black: fast Schwarz
+        deep_black: tiefes Schwarz
+        jet_black: Pechschwarz
+        charcoal: Kohleschwarz
+        gray_black: Off-Black (sehr dunkles Grau-Schwarz)
+        night_black: Nachtschwarz
+        soft_black: weiches Schwarz
+
+        ## Family beige
+        beige: Beige
+        sand_beige: Sand
+        light_beige: Hellbeige
+        pale_beige: blasses Beige
+        soft_sand: weicher Sandton
+        dark_beige: Dunkelbeige

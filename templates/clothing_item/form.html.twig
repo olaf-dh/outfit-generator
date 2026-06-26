@@ -133,7 +133,7 @@
                 {% endif %}
 
                 <div class="row g-3 mt-1">
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         {# Preview of current display photo #}
                         {% if isEdit and form.vars.data.displayPhotoPath is not null %}
                             <label class="form-label fw-bold">
@@ -159,7 +159,7 @@
                         </small>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         {% if isEdit and form.vars.data.photoPath is not null %}
                             <label class="form-label fw-bold">
                                 {{ 'clothing_item.form.label.analysis_photo_preview'|trans }}
@@ -190,7 +190,32 @@
                                 <label class="form-label fw-bold">
                                     {{ 'clothing_item.form.label.primary_color'|trans }}
                                 </label>
-                                {% for child in form.itemColors %}
+                                {% for child in form.primaryColor %}
+                                    {% set hex = child.vars.attr['data-hex'] %}
+
+                                    <label class="d-flex align-items-center gap-2 mb-2">
+                                        {{ form_widget(child) }}
+                                        <span
+                                            style="
+                                                display:inline-block;
+                                                width:2.5rem;
+                                                height:1rem;
+                                                background-color: {{ hex }};
+                                                border:1px solid #aaa;
+                                                border-radius:3px;
+                                                "></span>
+                                        {{ child.vars.label }}
+                                    </label>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="flex-grow-1">
+                                <label class="form-label fw-bold">
+                                    {{ 'clothing_item.form.label.secondary_colors'|trans }}
+                                </label>
+                                {% for child in form.secondaryColors %}
                                     {% set hex = child.vars.attr['data-hex'] %}
 
                                     <label class="d-flex align-items-center gap-2 mb-2">
@@ -246,8 +271,9 @@
                                     + {{ 'clothing_item.form.button.add_material'|trans }}
                                 </button>
                                 <span class="text-muted small">
-                                    {{ 'clothing_item.form.materials.total'|trans }}:
+                                    &nbsp;&nbsp;{{ 'clothing_item.form.materials.total'|trans }}:
                                     <strong id="total_percentage">0</strong>%
+                                    <br>
                                     <span id="percentage_warning" class="text-danger ms-2 d-none">
                                         {{ 'clothing_item.form.materials.not_100'|trans }}
                                     </span>

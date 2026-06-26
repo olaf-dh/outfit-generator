@@ -11,6 +11,9 @@ use App\Entity\SubCategory;
 use App\Outfit\Service\ZoneResolverService;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group unit
+ */
 class ZoneResolverServiceTest extends TestCase
 {
     private ZoneResolverService $service;

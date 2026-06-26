@@ -4,73 +4,75 @@ declare(strict_types=1);
 
 namespace App\Color\Service;
 
+use App\DTO\Color\HsvColor;
+use App\DTO\Color\RgbColor;
+use InvalidArgumentException;
+
 class ColorConverterService
 {
     /**
      * @param string $hex
-     * @return array<string, float|int>
+     * @return HsvColor
      */
-    public function hexToHsv(string $hex): array
+    public function hexToHsv(string $hex): HsvColor
     {
         $rgb = $this->hexToRgb($hex);
 
-        $r = $rgb['r'] / 255;
-        $g = $rgb['g'] / 255;
-        $b = $rgb['b'] / 255;
+        $r = $rgb->r / 255;
+        $g = $rgb->g / 255;
+        $b = $rgb->b / 255;
 
         $max = max($r, $g, $b);
         $min = min($r, $g, $b);
-
         $delta = $max - $min;
 
-        $h = 0.0;
+        $v = $max;
+        $s = $max > 0 ? $delta / $max : 0;
 
-        if (abs($delta) > 0.00001) {
-            if ($max === $r) {
-                $h = 60 * fmod(
-                    (($g - $b) / $delta),
-                    6
-                );
-            } elseif ($max === $g) {
-                $h = 60 * (
-                        (($b - $r) / $delta) + 2
-                    );
+        $h = 0;
+        if ($delta > 0) {
+            if (abs($max - $r) < PHP_FLOAT_EPSILON) {
+                $h = 60 * fmod((($g - $b) / $delta), 6);
+            } elseif (abs($max - $g) < PHP_FLOAT_EPSILON) {
+                $h = 60 * ((($b - $r) / $delta) + 2);
             } else {
-                $h = 60 * (
-                        (($r - $g) / $delta) + 4
-                    );
+                $h = 60 * ((($r - $g) / $delta) + 4);
+            }
+            if ($h < 0) {
+                $h += 360;
             }
         }
 
-        if ($h < 0) {
-            $h += 360;
-        }
-
-        $s = $max <= 0.00001
-            ? 0.0
-            : $delta / $max;
-
-        $v = $max;
-
-        return [
-            'h' => $h,
-            's' => $s,
-            'v' => $v,
-        ];
+        return new HsvColor(
+            h: (int) round($h),                 // 0 - 360°
+            s: (int) round($s * 100),     // 0 - 100%
+            v: (int) round($v * 100),     // 0 - 100%
+        );
     }
 
     /**
      * HexCode → RGB (0-255)
-     * @return array<string, int>
+     * @param string $hex
+     * @return RgbColor
      */
-    public function hexToRgb(string $hex): array
+    public function hexToRgb(string $hex): RgbColor
     {
-        $hex = ltrim($hex, '#');
+        if (strlen($hex) !== 7) {
+            throw new InvalidArgumentException('Invalid hex code');
+        }
 
-        return [
-            'r' => (int) hexdec(substr($hex, 0, 2)),
-            'g' => (int) hexdec(substr($hex, 2, 2)),
-            'b' => (int) hexdec(substr($hex, 4, 2)),
-        ];
+        if (!str_starts_with($hex, '#')) {
+            throw new InvalidArgumentException('Invalid hex code');
+        }
+        $hex = ltrim($hex, '#');
+        if (!ctype_xdigit($hex)) {
+            throw new InvalidArgumentException('Invalid hex code');
+        }
+
+        return new RgbColor(
+            r: (int) hexdec(substr($hex, 0, 2)),
+            g: (int) hexdec(substr($hex, 2, 2)),
+            b: (int) hexdec(substr($hex, 4, 2))
+        );
     }
 }

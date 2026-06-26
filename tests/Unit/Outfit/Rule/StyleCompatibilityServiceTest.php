@@ -9,6 +9,9 @@ use App\Entity\Style;
 use App\Outfit\Rule\StyleCompatibilityService;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group unit
+ */
 class StyleCompatibilityServiceTest extends TestCase
 {
     private StyleCompatibilityService $service;

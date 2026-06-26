@@ -18,7 +18,7 @@ class ItemMaterial
 
     #[ORM\ManyToOne(targetEntity: ClothingItem::class, inversedBy: 'itemMaterials')]
     #[ORM\JoinColumn(nullable: false)]
-    private ClothingItem $clothingItem;
+    private ?ClothingItem $clothingItem = null;
 
     #[ORM\ManyToOne(targetEntity: Material::class, inversedBy: 'itemMaterials')]
     #[ORM\JoinColumn(nullable: false)]
@@ -34,12 +34,12 @@ class ItemMaterial
         return $this->id;
     }
 
-    public function getClothingItem(): ClothingItem
+    public function getClothingItem(): ?ClothingItem
     {
         return $this->clothingItem;
     }
 
-    public function setClothingItem(ClothingItem $clothingItem): static
+    public function setClothingItem(?ClothingItem $clothingItem): static
     {
         $this->clothingItem = $clothingItem;
 

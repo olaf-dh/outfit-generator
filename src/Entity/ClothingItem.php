@@ -6,6 +6,7 @@ namespace App\Entity;
 
 use App\ClothingItem\Enum\ClothingItemStatus;
 use App\Repository\ClothingItemRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -32,13 +33,16 @@ class ClothingItem
     private ?string $notes = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoPath = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $displayPhotoPath = null;
+
+    #[ORM\OneToOne(mappedBy: 'clothingItem', cascade: ['persist'])]
+    private ?ColorAnalysis $colorAnalysis = null;
 
     /**
      * @var Collection<int, ItemColor>
@@ -99,7 +103,7 @@ class ClothingItem
 
     public function __construct()
     {
-        $this->createdAt = new \DateTimeImmutable();
+        $this->createdAt = new DateTimeImmutable();
         $this->itemColors = new ArrayCollection();
         $this->itemMaterials = new ArrayCollection();
         $this->seasons = new ArrayCollection();
@@ -160,12 +164,12 @@ class ClothingItem
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreatedAt(DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
 
@@ -192,6 +196,29 @@ class ClothingItem
     public function setDisplayPhotoPath(?string $displayPhotoPath): static
     {
         $this->displayPhotoPath = $displayPhotoPath;
+
+        return $this;
+    }
+
+    public function getColorAnalysis(): ?ColorAnalysis
+    {
+        return $this->colorAnalysis;
+    }
+
+    public function setColorAnalysis(?ColorAnalysis $colorAnalysis): static
+    {
+        if ($this->colorAnalysis === $colorAnalysis) {
+            return $this;
+        }
+        if ($this->colorAnalysis !== null && $this->colorAnalysis->getClothingItem() === $this) {
+            $this->colorAnalysis->setClothingItem(null);
+        }
+
+        $this->colorAnalysis = $colorAnalysis;
+
+        if ($colorAnalysis !== null && $colorAnalysis->getClothingItem() !== $this) {
+            $colorAnalysis->setClothingItem($this);
+        }
 
         return $this;
     }
@@ -264,7 +291,7 @@ class ClothingItem
         if ($this->itemMaterials->removeElement($itemMaterial)) {
             // set the owning side to null (unless already changed)
             if ($itemMaterial->getClothingItem() === $this) {
-                $itemMaterial->setClothingItem($this);
+                $itemMaterial->setClothingItem(null);
             }
         }
 

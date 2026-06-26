@@ -6,7 +6,7 @@ namespace App\Color\Matcher;
 
 use App\Color\Service\ColorConverterService;
 
-readonly class ColorDistanceService
+final readonly class ColorDistanceService
 {
     public function __construct(private ColorConverterService $converter)
     {
@@ -31,7 +31,7 @@ readonly class ColorDistanceService
     private function hexToLab(string $hex): array
     {
         $rgb = $this->converter->hexToRgb($hex);
-        $xyz = $this->rgbToXyz($rgb['r'], $rgb['g'], $rgb['b']);
+        $xyz = $this->rgbToXyz($rgb->r, $rgb->g, $rgb->b);
         return $this->xyzToLab($xyz['x'], $xyz['y'], $xyz['z']);
     }
 

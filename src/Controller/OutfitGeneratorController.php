@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/outfit-generator')]
 #[IsGranted('ROLE_USER')]
@@ -27,6 +28,7 @@ class OutfitGeneratorController extends AbstractController
     public function __construct(
         private readonly OutfitSuggestionService $suggestionService,
         private readonly ClothingItemRepository $repository,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
@@ -72,7 +74,7 @@ class OutfitGeneratorController extends AbstractController
             );
 
             if (empty($suggestions)) {
-                $this->addFlash('warning', 'outfit.generator.no_suggestions');
+                $this->addFlash('warning', $this->translator->trans('outfit.generator.no_suggestions'));
             }
         }
 

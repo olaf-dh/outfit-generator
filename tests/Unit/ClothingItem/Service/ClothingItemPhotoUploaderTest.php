@@ -9,6 +9,9 @@ use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * @group unit
+ */
 class ClothingItemPhotoUploaderTest extends TestCase
 {
     private string $uploadDir;

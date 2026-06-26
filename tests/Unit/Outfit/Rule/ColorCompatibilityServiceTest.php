@@ -12,6 +12,9 @@ use App\Entity\Color;
 use App\Outfit\Rule\ColorCompatibilityService;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group unit
+ */
 class ColorCompatibilityServiceTest extends TestCase
 {
     private ColorCompatibilityService $service;
@@ -44,10 +47,10 @@ class ColorCompatibilityServiceTest extends TestCase
 
     public function testGrayIsCompatibleWithBrown(): void
     {
-        $charcoal = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $darkGray = $this->makeColor(ColorFamily::GRAY, ColorTone::MEDIUM, ColorTemperature::NEUTRAL);
         $cognac    = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
 
-        $this->assertTrue($this->service->areCompatible($charcoal, $cognac));
+        $this->assertTrue($this->service->areCompatible($darkGray, $cognac));
     }
 
     public function testBlackIsCompatibleWithRed(): void
@@ -74,10 +77,10 @@ class ColorCompatibilityServiceTest extends TestCase
 
     public function testSameFamilyDifferentToneIsCompatible(): void
     {
-        $lightGray  = $this->makeColor(ColorFamily::GRAY, ColorTone::LIGHT, ColorTemperature::COOL);
-        $charcoal = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $lightGray = $this->makeColor(ColorFamily::GRAY, ColorTone::LIGHT, ColorTemperature::COOL);
+        $darkGray = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::NEUTRAL);
 
-        $this->assertTrue($this->service->areCompatible($lightGray, $charcoal));
+        $this->assertTrue($this->service->areCompatible($lightGray, $darkGray));
     }
 
     public function testSameFamilySameToneIsNotCompatible(): void
@@ -126,12 +129,12 @@ class ColorCompatibilityServiceTest extends TestCase
 
     public function testCompatibilityIsSymmetric(): void
     {
-        $cognac    = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
-        $charcoal = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::COOL);
+        $cognac = $this->makeColor(ColorFamily::BROWN, ColorTone::MEDIUM, ColorTemperature::WARM);
+        $darkGray = $this->makeColor(ColorFamily::GRAY, ColorTone::DARK, ColorTemperature::NEUTRAL);
 
         $this->assertEquals(
-            $this->service->areCompatible($cognac, $charcoal),
-            $this->service->areCompatible($charcoal, $cognac)
+            $this->service->areCompatible($cognac, $darkGray),
+            $this->service->areCompatible($darkGray, $cognac)
         );
     }
 

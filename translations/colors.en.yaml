@@ -1,0 +1,116 @@
+color:
+    name:
+        ## Family blue
+        navy: Navy
+        pure_blue: Blue
+        light_blue: Light Blue
+        royal_blue: Royal Blue
+        deep_sky_blue: Deep Sky Blue
+        cornflower: Cornflower Blue
+        sky_blue: Sky Blue
+        dodger_blue: Dodger Blue
+
+        ## Family red
+        crimson: Crimson
+        dark_red: Dark Red
+        indian_red: Indian Red
+        brick_red: Brick Red
+        pure_red: Red
+        light_coral: Light Coral
+        tomato: Tomato
+
+
+        ## Family green
+        pure_green: Green
+        forest: Forest Green
+        lime: Lime Green
+        light_green: Light Green
+        dark_olive: Dark Olive Green
+        sea_green: Sea Green
+        office_green: Office Green
+        olive_drab: Olive Drab
+
+        ## Family yellow
+        peach_puff: Peachpuff
+        moccasin: Moccasin
+        bright_gold: Bright Gold
+        light_golden: Light Golden
+        gold: Gold
+        goldenrod: Goldenrod
+        pure_yellow: Yellow
+        dark_goldenrod: Dark Goldenrod
+
+        ## Family orange
+        pure_orange: Orange
+        dark_orange: Dark Orange
+        coral: Coral
+        peach_orange: Peach Orange
+        bright_orange: Bright Orange
+        light_orange: Light Orange
+        orange_gold: Orange Gold
+        mango_orange: Mango-Orange
+
+        ## Family purple
+        pure_purple: Purple
+        medium_purple: Medium Purple
+        rebecca_purple: Rebecca-Purple
+        dark_orchid: Dark Orchid
+        medium_orchid: Medium Orchid
+        dark_violet: Dark Violet
+        thistle: Thistle
+        plum: Plum
+
+        ## Family pink
+        pink: Pink
+        hot_pink: Hot Pink
+        deep_pink: Deep Pink
+        salmon_pink: Salmon Pink
+        pale_violet_red: Pale Violet Red
+        pastel_pink: Pastel Pink
+
+        ## Family brown
+        saddle_brown: Saddle Brown
+        chocolate: Chocolate Brown
+        sienna: Sienna Brown
+        peru: Peru Brown
+        dark_brown: Dark Brown
+        maroon: Maroon Brown
+        brown_red: Brown Red
+
+        ## Family gray
+        pure_gray: Gray
+        dark_gray: Dark Gray
+        silver: Silver
+        medium_gray: Medium Gray
+        light_gray: Light Gray
+        mist: Mist
+        bright_gray: Bright Gray
+        light_silver: Light Silver
+
+        ## Family white
+        white: White
+        almost_white: Almost White
+        ghost_white: Ghost White
+        off_white: Off-White
+        snow_white: Snow White
+        gray_white: Gray White
+        lightest_gray: Lightest Gray
+        gainsboro: Gainsboro
+
+        ## Family black
+        pure_black: Black
+        almost_black: Almost Black
+        deep_black: Deep Black
+        jet_black: Jet Black
+        charcoal: Charcoal
+        gray_black: Off-Black
+        night_black: Night Black
+        soft_black: Soft Black
+
+        ## Family beige
+        beige: Beige
+        sand_beige: Sand
+        light_beige: Light Beige
+        pale_beige: Pale Beige
+        soft_sand: Soft Sand
+        dark_beige: Dark Beige

@@ -1,0 +1,144 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title|trans }}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .outer {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 8px;
+        }
+        .left {
+            grid-row: 1 / 3;
+        }
+        .right-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card shadow border-0 rounded-4">
+            <div class="card-header">
+                <h1>{{ title|trans }}</h1>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="row g-3 mt-1">
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">
+                            ID
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">{{ item.id }}</div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">
+                            Name
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ ('color.name.' ~ item.name)|trans([], 'colors') }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">
+                            Familie
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ ('enum.color_family.' ~ item.family.value)|trans }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">
+                            Ton
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ ('enum.color_tone.' ~ item.tone.value)|trans }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">
+                            Temperatur
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ ('enum.color_temperature.' ~ item.temperature.value)|trans }}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold">
+                            Sättigkeit
+                        </label>
+                        <div class="border rounded-3 p-3 bg-light">
+                            {{ ('enum.color_saturation.' ~ item.saturation.value)|trans }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-1">
+                    <div class="outer">
+                        <div class="left">
+                            <label class="form-label fw-bold">Farbfeld</label>
+                            <div class="border rounded-3 p-3 bg-light">
+                            <span
+                                style="
+                                    display:inline-block;
+                                    width:100%;
+                                    height:5.5rem;
+                                    background-color: {{ item.hexCode }};
+                                    border:1px solid #aaa;
+                                    border-radius:3px;
+                                    "></span>
+                            </div>
+                        </div>
+                        <div class="right-row">
+                            <div>
+                                <label class="form-label fw-bold">h</label>
+                                <div class="border rounded-3 p-3 bg-light">{{ item.h }}</div>
+                            </div>
+                            <div>
+                                <label class="form-label fw-bold">s</label>
+                                <div class="border rounded-3 p-3 bg-light">{{ item.s }}</div>
+                            </div>
+                            <div>
+                                <label class="form-label fw-bold">v</label>
+                                <div class="border rounded-3 p-3 bg-light">{{ item.v }}</div>
+                            </div>
+                        </div>
+                        <div class="right-row">
+                            <div>
+                                <label class="form-label fw-bold">r</label>
+                                <div class="border rounded-3 p-3 bg-light">{{ item.r }}</div>
+                            </div>
+                            <div>
+                                <label class="form-label fw-bold">g</label>
+                                <div class="border rounded-3 p-3 bg-light">{{ item.g }}</div>
+                            </div>
+                            <div>
+                                <label class="form-label fw-bold">b</label>
+                                <div class="border rounded-3 p-3 bg-light">{{ item.b }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="{{ path(indexRoute, {'entityType': entityType}) }}" class="btn btn-outline-primary mt-3">
+                    {{ 'property.entity_show.index_route'|trans }}
+                </a>
+
+                <a href="{{ path(editRoute, {'entityType': entityType, 'id': item.id}) }}"
+                   class="btn btn-outline-secondary mt-3">
+                    {{ 'property.entity_show.edit_route'|trans }}
+                </a>
+
+                {{ include('property/_delete_form.html.twig', {
+                    item: item,
+                    deleteRoute: deleteRoute,
+                    entityType: entityType
+                }) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

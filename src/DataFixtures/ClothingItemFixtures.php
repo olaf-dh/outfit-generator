@@ -28,7 +28,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
     public const string RED_PULLOVER      = 'item-red-pullover';
     public const string BLUE_STRIPE_SHIRT = 'item-blue-stripe-shirt';
     public const string ANTHRACITE_PANTS  = 'item-anthracite-pants';
-    public const string MUSTARD_CHINO     = 'item-mustard-chino';
+    public const string GOLDENROD_CHINO   = 'item-goldenrod-chino';
     public const string BLUE_JEANS        = 'item-blue-jeans';
     public const string GRAY_COAT         = 'item-gray-coat';
     public const string BEIGE_TRENCH      = 'item-beige-trench';
@@ -46,7 +46,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
         /* ---------- Owner ---------- */
         $owner = new User();
         $owner->setEmail('user@example.com');
-        $owner->setRoles(['ROLE_USER']);
+        $owner->setRoles(['ROLE_USER','ROLE_ADMIN']);
         $owner->setFirstName('User');
         $owner->setPassword($this->hasher->hashPassword($owner, 'test1234'));
         $owner->setIsVerified(true);
@@ -151,7 +151,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::PULLOVER,
                 'min_layer'     => 2,
                 'max_layer'     => 3,
-                'primary_color' => ColorFixtures::COLOR_RUBY,
+                'primary_color' => ColorFixtures::COLOR_CRIMSON,
                 'materials'     => [MaterialFixtures::MATERIAL_CASHMERE => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
@@ -186,12 +186,12 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                     LookupFixtures::SEASON_WINTER
                 ],
             ],
-            self::MUSTARD_CHINO => [
-                'name'          => 'Mustard Chino',
+            self::GOLDENROD_CHINO => [
+                'name'          => 'Goldenrod Chino',
                 'subcategory'   => SubCategoryFixtures::CHINO,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => ColorFixtures::COLOR_MUSTARD,
+                'primary_color' => ColorFixtures::COLOR_DARK_GOLDENROD,
                 'materials'     => [MaterialFixtures::MATERIAL_COTTON => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_CASUAL],
@@ -202,7 +202,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::JEANS,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => ColorFixtures::COLOR_DENIM,
+                'primary_color' => ColorFixtures::COLOR_NAVY,
                 'materials'     => [MaterialFixtures::MATERIAL_DENIM => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
@@ -215,7 +215,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::COAT,
                 'min_layer'     => 4,
                 'max_layer'     => 5,
-                'primary_color' => ColorFixtures::COLOR_ASH_GRAY,
+                'primary_color' => ColorFixtures::COLOR_LIGHT_GRAY,
                 'materials'     => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_BUSINESS, LookupFixtures::STYLE_SMART_CASUAL],
@@ -226,7 +226,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'        => SubCategoryFixtures::TRENCH_COAT,
                 'min_layer'          => 4,
                 'max_layer'          => 5,
-                'primary_color'      => ColorFixtures::COLOR_ECRU,
+                'primary_color'      => ColorFixtures::COLOR_BEIGE,
                 'materials'          => [
                     MaterialFixtures::MATERIAL_COTTON    => 65.0,
                     MaterialFixtures::MATERIAL_POLYESTER => 35.0,
@@ -243,7 +243,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::BUSINESS_SHOES,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => ColorFixtures::COLOR_CARAMEL,
+                'primary_color' => ColorFixtures::COLOR_SADDLE_BROWN,
                 'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [LookupFixtures::STYLE_SMART_CASUAL, LookupFixtures::STYLE_BUSINESS],
@@ -267,7 +267,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'        => SubCategoryFixtures::SCARF,
                 'min_layer'          => 1,
                 'max_layer'          => 1,
-                'primary_color'      => ColorFixtures::COLOR_SMOKE,
+                'primary_color'      => ColorFixtures::COLOR_MIST,
                 'materials'          => [MaterialFixtures::MATERIAL_WOOL => 100.0],
                 'pattern'            => LookupFixtures::PATTERN_SOLID,
                 'styles'             => [LookupFixtures::STYLE_CASUAL, LookupFixtures::STYLE_SMART_CASUAL],
@@ -279,7 +279,7 @@ class ClothingItemFixtures extends Fixture implements DependentFixtureInterface,
                 'subcategory'   => SubCategoryFixtures::BELT,
                 'min_layer'     => 1,
                 'max_layer'     => 1,
-                'primary_color' => ColorFixtures::COLOR_WALNUT,
+                'primary_color' => ColorFixtures::COLOR_SADDLE_BROWN,
                 'materials'     => [MaterialFixtures::MATERIAL_LEATHER => 100.0],
                 'pattern'       => LookupFixtures::PATTERN_SOLID,
                 'styles'        => [

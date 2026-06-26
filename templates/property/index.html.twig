@@ -1,0 +1,73 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Eigenschaften verwalten{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Eigenschaften verwalten</h1>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <a href="{{ path('app_property_entity_index', {entityType: 'color'}) }}" class="text-decoration-none">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Farbe</h5>
+                            <p class="card-text">Verwalte alle verfügbaren Farben.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+{#            <div class="col">#}
+{#                <a href="{{ path('app_material_index') }}" class="text-decoration-none">#}
+{#                    <div class="card shadow-sm h-100">#}
+{#                        <div class="card-body text-center">#}
+{#                            <h5 class="card-title">Material</h5>#}
+{#                            <p class="card-text">Bearbeite die Materialarten deiner Kleidung.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="col">#}
+{#                <a href="{{ path('app_pattern_index') }}" class="text-decoration-none">#}
+{#                    <div class="card shadow-sm h-100">#}
+{#                        <div class="card-body text-center">#}
+{#                            <h5 class="card-title">Muster</h5>#}
+{#                            <p class="card-text">Pflege die verschiedenen Muster.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="col">#}
+{#                <a href="{{ path('app_style_index') }}" class="text-decoration-none">#}
+{#                    <div class="card shadow-sm h-100">#}
+{#                        <div class="card-body text-center">#}
+{#                            <h5 class="card-title">Stilrichtung</h5>#}
+{#                            <p class="card-text">z.B. casual, elegant etc.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="col">#}
+{#                <a href="{{ path('app_category_index') }}" class="text-decoration-none">#}
+{#                    <div class="card shadow-sm h-100">#}
+{#                        <div class="card-body text-center">#}
+{#                            <h5 class="card-title">Kleidungs-Kategorie</h5>#}
+{#                            <p class="card-text">Oberteile, Hosen usw.</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="col">#}
+{#                <a href="{{ path('app_subcategory_index') }}" class="text-decoration-none">#}
+{#                    <div class="card shadow-sm h-100">#}
+{#                        <div class="card-body text-center">#}
+{#                            <h5 class="card-title">Kleidungs-Unterkategorie</h5>#}
+{#                            <p class="card-text">T-Shirts, Chinos, Sneaker …</p>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </a>#}
+{#            </div>#}
+        </div>
+    </div>
+{% endblock %}

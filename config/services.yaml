@@ -10,6 +10,7 @@ parameters:
     clothing_upload_dir: '%kernel.project_dir%/public/uploads/clothing'
     clothing_analysis_dir: '%kernel.project_dir%/var/storage/clothing/analysis'
     rembg_path: '/opt/rembg-env/bin/rembg'
+    color_api_url: '%env(COLOR_API_URL)%'
 
 services:
     # default configuration for services in *this* file
@@ -29,6 +30,9 @@ services:
             - '../src/Outfit/Generator/OutfitContext.php'
             - '../src/DTO/'
             - '../src/ClothingItem/Message/'
+    App\Color\Analyzer\ColorExtractionApiService:
+        arguments:
+            $colorApiUrl: '%color_api_url%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
@@ -49,3 +53,6 @@ when@test:
                 - '../src/Outfit/Generator/OutfitContext.php'
                 - '../src/DTO/'
                 - '../src/ClothingItem/Message/'
+        App\Color\Analyzer\ColorExtractionApiService:
+            arguments:
+                $colorApiUrl: '%color_api_url%'

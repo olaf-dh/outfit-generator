@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title|trans }}{% endblock %}
+
+{% block body %}
+    <h1>{{ title|trans }}</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>{{ ('property.entity_index.table.head.name')|trans }}</th>
+            {% if hexCode == true %}
+                <th>{{ ('property.entity_index.table.head.color_family')|trans }}</th>
+                <th>{{ ('property.entity_index.table.head.color_tone')|trans }}</th>
+                <th>{{ ('property.entity_index.table.head.color_temperature')|trans }}</th>
+                <th>{{ ('property.entity_index.table.head.color_saturation')|trans }}</th>
+                <th>{{ ('property.entity_index.table.head.color_show')|trans }}</th>
+            {% elseif description == true %}
+                <th>{{ ('property.entity_index.table.head.description')|trans }}</th>
+            {% elseif category == true %}
+                <th>{{ ('property.entity_index.table.head.category')|trans }}</th>
+            {% endif %}
+            {% if isWarm == true %}
+                <th>{{ ('property.entity_index.table.head.material_warm')|trans }}</th>
+            {% elseif sortOrder == true %}
+                <th>{{ ('property.entity_index.table.head.sort_order')|trans }}</th>
+            {% endif %}
+            <th style="text-align: center;">{{ ('property.entity_index.table.head.action')|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ ('color.name.' ~ item.name)|trans({}, 'colors') }}</td>
+                {% if hexCode == true %}
+                    <td>{{ ('enum.color_family.' ~ item.family.value)|trans }}</td>
+                    <td>{{ ('enum.color_tone.' ~ item.tone.value)|trans }}</td>
+                    <td>{{ ('enum.color_temperature.' ~ item.temperature.value)|trans }}</td>
+                    <td>{{ ('enum.color_saturation.' ~ item.saturation.value)|trans }}</td>
+                    <td>
+                        <span title="{{ item.hexCode }}"
+                              style="display: inline-block; width: 66px; height: 26px; background-color: {{ item.hexCode }}; border: 1px solid #000000;">
+
+                        </span>
+                    </td>
+                {% elseif description == true %}
+                    <td>{{ item.description }}</td>
+                {% elseif category == true %}
+                    <td>{{ item.category }}</td>
+                {% endif %}
+                {% if isWarm == true %}
+                    <td>
+                        {% if item.isWarm == true %}
+                            Ja
+                        {% else %}
+                            Nein
+                        {% endif %}
+                    </td>
+                {% elseif sortOrder == true %}
+                    <td>{{ item.sortOrder }}</td>
+                {% endif %}
+                <td>
+                    <a href="{{ path(showRoute, {'entityType': entityType, 'id': item.id}) }}"
+                       class="btn btn-outline-primary">
+                        {{ ('property.entity_index.table.button.show')|trans }}
+                    </a>
+                    <a href="{{ path(editRoute, {'entityType': entityType, 'id': item.id}) }}"
+                       class="btn btn-outline-secondary">
+                        {{ ('property.entity_index.table.button.edit')|trans }}
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records were found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path(newRoute, {'entityType': entityType}) }}" class="btn {{ buttonClass|default('btn-primary') }}">
+        {{ ('property.entity_index.table.button.new')|trans }}
+    </a>
+{% endblock %}

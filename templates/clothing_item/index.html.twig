@@ -141,7 +141,7 @@
                                         {% if item.itemColors|length > 0 %}
                                             <div class="d-flex gap-1 mt-2 flex-wrap">
                                                 {% for ic in item.itemColors %}
-                                                    <span title="{{ ('color.name.' ~ ic.color.name)|trans }}"
+                                                    <span title="{{ ('color.name.' ~ ic.color.name)|trans({}, 'colors') }}"
                                                           style="
                                                               display: inline-block;
                                                               width: 2.5rem;

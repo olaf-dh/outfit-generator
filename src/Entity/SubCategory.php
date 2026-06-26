@@ -10,16 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SubCategoryRepository::class)]
-class SubCategory
+class SubCategory extends AbstractAttribute
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $name = null;
-
     #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'subCategories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
@@ -33,23 +25,6 @@ class SubCategory
     public function __construct()
     {
         $this->clothingItems = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     public function getCategory(): ?Category

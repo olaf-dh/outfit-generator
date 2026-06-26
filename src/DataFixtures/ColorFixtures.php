@@ -17,113 +17,119 @@ use Doctrine\Persistence\ObjectManager;
 class ColorFixtures extends Fixture implements FixtureGroupInterface
 {
     // Colors
-    public const string COLOR_NAVY           = 'color-navy';
-    public const string COLOR_MIDNIGHT_BLUE  = 'color-midnight-blue';
-    public const string COLOR_DENIM          = 'color-denim';
-    public const string COLOR_ROYAL_BLUE     = 'color-royal-blue';
-    public const string COLOR_STEEL_BLUE     = 'color-steel-blue';
-    public const string COLOR_BABY_BLUE      = 'color-baby-blue';
-    public const string COLOR_SKY_BLUE       = 'color-sky-blue';
-    public const string COLOR_AZURE          = 'color-azure';
+    // black family
+    public const string COLOR_PURE_BLACK      = 'color-pure-black';
+    public const string COLOR_SOFT_BLACK     = 'color-soft-black';
+    public const string COLOR_JET_BLACK      = 'color-jet-black';
+    public const string COLOR_ALMOST_BLACK   = 'color-almost-black';
+    public const string COLOR_CHARCOAL       = 'color-charcoal';
+    public const string COLOR_GRAY_BLACK     = 'color-gray-black';
+    public const string COLOR_NIGHT_BLACK    = 'color-night-black';
+    public const string COLOR_DEEP_BLACK     = 'color-deep-black';
 
+    // white family
+    public const string COLOR_WHITE          = 'color-white';
+    public const string COLOR_SNOW_WHITE     = 'color-snow-white';
+    public const string COLOR_GAINSBORO      = 'color-gainsboro';
+    public const string COLOR_OFF_WHITE      = 'color-off-white';
+    public const string COLOR_GHOST_WHITE    = 'color-ghost-white';
+    public const string COLOR_ALMOST_WHITE   = 'color-almost-white';
+    public const string COLOR_GRAY_WHITE     = 'color-gray-white';
+    public const string COLOR_LIGHTEST_GRAY  = 'color-lightest-gray';
+
+    // gray family
+    public const string COLOR_PURE_GRAY      = 'color-pure-gray';
+    public const string COLOR_LIGHT_GRAY     = 'color-light-gray';
+    public const string COLOR_DARK_GRAY      = 'color-dark-gray';
+    public const string COLOR_MEDIUM_GRAY    = 'color-medium-gray';
+    public const string COLOR_BRIGHT_GRAY    = 'color-bright-gray';
+    public const string COLOR_SILVER         = 'color-silver';
+    public const string COLOR_LIGHT_SILVER   = 'color-light-silver';
+    public const string COLOR_MIST           = 'color-mist';
+
+    // beige family
+    public const string COLOR_BEIGE          = 'color-beige';
+    public const string COLOR_LIGHT_BEIGE    = 'color-light-beige';
+    public const string COLOR_PALE_BEIGE     = 'color-pale-beige';
+    public const string COLOR_SAND_BEIGE     = 'color-sand-beige';
+    public const string COLOR_SOFT_SAND      = 'color-soft-sand';
+    public const string COLOR_DARK_BEIGE     = 'color-dark-beige';
+
+    // brown family
+    public const string COLOR_PERU           = 'color-peru';
+    public const string COLOR_CHOCOLATE      = 'color-chocolate';
+    public const string COLOR_SIENNA         = 'color-sienna';
+    public const string COLOR_BROWN_RED      = 'color-brown-red';
+    public const string COLOR_SADDLE_BROWN   = 'color-saddle-brown';
+    public const string COLOR_MAROON         = 'color-maroon';
+    public const string COLOR_DARK_BROWN     = 'color-dark-brown';
+
+    // pink family
+    public const string COLOR_PINK           = 'color-pink';
+    public const string COLOR_HOT_PINK       = 'color-hot-pink';
+    public const string COLOR_SALMON_PINK    = 'color-salmon-pink';
+    public const string COLOR_PALE_VIOLET_RED = 'color-pale-violet-red';
+    public const string COLOR_DEEP_PINK      = 'color-deep-pink';
+    public const string COLOR_PASTEL_PINK    = 'color-pastel-pink';
+
+    // red family
+    public const string COLOR_PURE_RED       = 'color-pure-red';
+    public const string COLOR_DARK_RED       = 'color-dark-red';
+    public const string COLOR_INDIAN_RED     = 'color-indian-red';
     public const string COLOR_CRIMSON        = 'color-crimson';
-    public const string COLOR_DEEP_RED       = 'color-deep-red';
-    public const string COLOR_SOFT_RED       = 'color-soft-red';
-    public const string COLOR_RUBY           = 'color-ruby';
-    public const string COLOR_WINE           = 'color-wine';
-    public const string COLOR_CORAL_RED      = 'color-coral-red';
+    public const string COLOR_LIGHT_CORAL    = 'color-light-coral';
     public const string COLOR_BRICK_RED      = 'color-brick-red';
     public const string COLOR_TOMATO         = 'color-tomato';
 
-    public const string COLOR_MINT           = 'color-mint';
-    public const string COLOR_FOREST         = 'color-forest';
-    public const string COLOR_LIME           = 'color-lime';
-    public const string COLOR_EMERALD        = 'color-emerald';
-    public const string COLOR_OLIVE          = 'color-olive';
-    public const string COLOR_JADE           = 'color-jade';
-    public const string COLOR_SAGE           = 'color-sage';
-    public const string COLOR_MOSS           = 'color-moss';
-
-    public const string COLOR_LEMON          = 'color-lemon';
-    public const string COLOR_MUSTARD        = 'color-mustard';
-    public const string COLOR_BUTTER         = 'color-butter';
-    public const string COLOR_GOLDEN         = 'color-golden';
-    public const string COLOR_HONEY          = 'color-honey';
-    public const string COLOR_CANARY         = 'color-canary';
-    public const string COLOR_OCHRE          = 'color-ochre';
-    public const string COLOR_SAND_YELLOW    = 'color-sand-yellow';
-
-    public const string COLOR_BURNT_ORANGE   = 'color-burnt-orange';
-    public const string COLOR_COPPER         = 'color-copper';
-    public const string COLOR_RUST           = 'color-rust';
-    public const string COLOR_TANGERINE      = 'color-tangerine';
-    public const string COLOR_AMBER          = 'color-amber';
+    // orange family
+    public const string COLOR_CORAL          = 'color-coral';
+    public const string COLOR_LIGHT_ORANGE   = 'color-light-orange';
+    public const string COLOR_ORANGE_GOLD    = 'color-orange-gold';
     public const string COLOR_ORANGE_PEEL    = 'color-orange-peel';
     public const string COLOR_PEACH          = 'color-peach';
-    public const string COLOR_APRICOT        = 'color-apricot';
+    public const string COLOR_DARK_ORANGE    = 'color-dark-orange';
+    public const string COLOR_MANGO_ORANGE   = 'color-mango-orange';
+    public const string COLOR_BRIGHT_ORANGE  = 'color-bright-orange';
 
-    public const string COLOR_ROSE           = 'color-rose';
-    public const string COLOR_BLUSH          = 'color-blush';
-    public const string COLOR_HOT_PINK       = 'color-hot-pink';
-    public const string COLOR_DUSTY_PINK     = 'color-dusty-pink';
-    public const string COLOR_SALMON_PINK    = 'color-salmon-pink';
-    public const string COLOR_FUCHSIA        = 'color-fuchsia';
-    public const string COLOR_BABY_PINK      = 'color-baby-pink';
-    public const string COLOR_RASPBERRY      = 'color-raspberry';
+    // yellow family
+    public const string COLOR_PURE_YELLOW    = 'color-pure-yellow';
+//    public const string COLOR_PEACH_PUFF     = 'color-peach-puff';
+    public const string COLOR_GOLD           = 'color-gold';
+    public const string COLOR_LIGHT_GOLDEN   = 'color-light-golden';
+    public const string COLOR_MOCCASIN       = 'color-moccasin';
+    public const string COLOR_GOLDENROD      = 'color-goldenrod';
+    public const string COLOR_DARK_GOLDENROD = 'color-dark-goldenrod';
+    public const string COLOR_BRIGHT_GOLD    = 'color-bright-gold';
 
-    public const string COLOR_INDIGO         = 'color-indigo';
-    public const string COLOR_EGGPLANT       = 'color-eggplant';
-    public const string COLOR_MAUVE          = 'color-mauve';
-    public const string COLOR_VIOLET         = 'color-violet';
-    public const string COLOR_AMETHYST       = 'color-amethyst';
-    public const string COLOR_LAVENDER       = 'color-lavender';
+    // green family`
+    public const string COLOR_LIGHT_GREEN    = 'color-light-green';
+    public const string COLOR_PURE_GREEN     = 'color-pure-green';
+    public const string COLOR_LIME           = 'color-lime';
+    public const string COLOR_SEA_GREEN      = 'color-sea-green';
+    public const string COLOR_OLIVE_DRAB     = 'color-olive-drab';
+    public const string COLOR_DARK_OLIVE     = 'color-dark-olive';
+    public const string COLOR_OFFICE_GREEN   = 'color-office-green';
+    public const string COLOR_FOREST         = 'color-forest';
+
+    // blue family
+    public const string COLOR_NAVY           = 'color-navy';
+    public const string COLOR_DEEP_SKY_BLUE  = 'color-deep-sky-blue';
+    public const string COLOR_CORNFLOWER     = 'color-cornflower';
+    public const string COLOR_ROYAL_BLUE     = 'color-royal-blue';
+    public const string COLOR_PURE_BLUE     = 'color-pure-blue';
+    public const string COLOR_DODGER_BLUE    = 'color-dodger-blue';
+    public const string COLOR_LIGHT_BLUE     = 'color-light-blue';
+    public const string COLOR_SKY_BLUE       = 'color-sky-blue';
+
+    // purple family
+    public const string COLOR_DARK_ORCHID    = 'color-dark-orchid';
+    public const string COLOR_REBECCA_PURPLE = 'color-rebecca-purple';
+    public const string COLOR_MEDIUM_PURPLE  = 'color-medium-purple';
+    public const string COLOR_DARK_VIOLET    = 'color-dark-violet';
+    public const string COLOR_PURE_PURPLE    = 'color-pure-purple';
+    public const string COLOR_THISTLE        = 'color-thistle';
     public const string COLOR_PLUM           = 'color-plum';
-    public const string COLOR_LILAC          = 'color-lilac';
-
-    public const string COLOR_COFFEE         = 'color-coffee';
-    public const string COLOR_CHOCOLATE      = 'color-chocolate';
-    public const string COLOR_MOCHA          = 'color-mocha';
-    public const string COLOR_WALNUT         = 'color-walnut';
-    public const string COLOR_SEPIA          = 'color-sepia';
-    public const string COLOR_BEIGE_BROWN    = 'color-beige-brown';
-    public const string COLOR_CINNAMON       = 'color-cinnamon';
-    public const string COLOR_CARAMEL        = 'color-caramel';
-
-    public const string COLOR_SLATE          = 'color-slate';
-    public const string COLOR_GRAPHITE_GRAY  = 'color-graphite-gray';
-    public const string COLOR_STEEL          = 'color-steel';
-    public const string COLOR_ASH_GRAY       = 'color-ash-gray';
-    public const string COLOR_SMOKE          = 'color-smoke';
-    public const string COLOR_DOVE_GRAY      = 'color-dove-gray';
-    public const string COLOR_SILVER         = 'color-silver';
-    public const string COLOR_MIST           = 'color-mist';
-
-    public const string COLOR_WHITE          = 'color-white';
-    public const string COLOR_SNOW           = 'color-snow';
-    public const string COLOR_IVORY_WHITE    = 'color-ivory-white';
-    public const string COLOR_MILK           = 'color-milk';
-    public const string COLOR_CLOUD          = 'color-cloud';
-    public const string COLOR_BONE           = 'color-bone';
-    public const string COLOR_FROST          = 'color-frost';
-    public const string COLOR_PEARL          = 'color-pearl';
-
-    public const string COLOR_BLACK          = 'color-black';
-    public const string COLOR_SOFT_BLACK     = 'color-soft-black';
-    public const string COLOR_CHARCOAL       = 'color-charcoal';
-    public const string COLOR_JET_BLACK      = 'color-jet-black';
-    public const string COLOR_OFF_BLACK      = 'color-off-black';
-    public const string COLOR_ASH_BLACK      = 'color-ash-black';
-    public const string COLOR_SMOKY_BLACK    = 'color-smoky-black';
-    public const string COLOR_GRAPHITE       = 'color-graphite';
-
-    public const string COLOR_CREAM          = 'color-cream';
-    public const string COLOR_SAND           = 'color-sand';
-    public const string COLOR_IVORY          = 'color-ivory';
-    public const string COLOR_ECRU           = 'color-ecru';
-    public const string COLOR_LINEN          = 'color-linen';
-    public const string COLOR_ALMOND         = 'color-almond';
-    public const string COLOR_CHAMPAGNE      = 'color-champagne';
-    public const string COLOR_OAT            = 'color-oat';
+    public const string COLOR_MEDIUM_ORCHID  = 'color-medium-orchid';
 
     public function __construct(private readonly ColorConverterService $converter)
     {
@@ -132,598 +138,70 @@ class ColorFixtures extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager): void
     {
         $colors = [
-            // 🔵 BLUE
-            self::COLOR_NAVY => [
-                'name'   => 'navy',
-                'hex'    => '#000080',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_MIDNIGHT_BLUE => [
-                'name'   => 'midnight_blue',
-                'hex'    => '#191970',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_SKY_BLUE => [
-                'name'   => 'sky-blue',
-                'hex'    => '#87CEEB',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_ROYAL_BLUE => [
-                'name'   => 'royal_blue',
-                'hex'    => '#4169E1',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_STEEL_BLUE => [
-                'name'   => 'steel_blue',
-                'hex'    => '#4682B4',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_BABY_BLUE => [
-                'name'   => 'baby_blue',
-                'hex'    => '#AFC6F2',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_DENIM => [
-                'name'   => 'denim',
-                'hex'    => '#1560BD',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_AZURE => [
-                'name'   => 'azure',
-                'hex'    => '#007FFF',
-                'family' => ColorFamily::BLUE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-
-            // 🔴 RED
-            self::COLOR_CRIMSON => [
-                'name'   => 'crimson',
-                'hex'    => '#DC143C',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_DEEP_RED => [
-                'name'   => 'deep_red',
-                'hex'    => '#8B0000',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MEDIUM
-            ],
-            self::COLOR_SOFT_RED => [
-                'name'   => 'soft-red',
-                'hex'    => '#F08080',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_RUBY => [
-                'name'   => 'ruby',
-                'hex'    => '#E0115F',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_BRICK_RED => [
-                'name'   => 'brick_red',
-                'hex'    => '#B22222',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_WINE => [
-                'name'   => 'wine',
-                'hex'    => '#722F37',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_CORAL_RED => [
-                'name'   => 'coral-red',
-                'hex'    => '#FF4040',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_TOMATO => [
-                'name'   => 'tomato',
-                'hex'    => '#ff6347',
-                'family' => ColorFamily::RED,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-
-            // 🟢 GREEN
-            self::COLOR_MINT => [
-                'name'   => 'mint',
-                'hex'    => '#98FF98',
-                'family' => ColorFamily::GREEN,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_FOREST => [
-                'name'   => 'forest',
-                'hex'    => '#228B22',
-                'family' => ColorFamily::GREEN,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_MOSS => [
-                'name'   => 'moss',
-                'hex'    => '#8A9A5B',
-                'family' => ColorFamily::GREEN,
+            // ⚫ BLACK
+            self::COLOR_PURE_BLACK => [
+                'name'   => 'pure_black',
+                'hex'    => '#000000',
+                'family' => ColorFamily::BLACK,
                 'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_EMERALD => [
-                'name'   => 'emerald',
-                'hex'    => '#50C878',
-                'family' => ColorFamily::GREEN,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_OLIVE => [
-                'name'   => 'olive',
-                'hex'    => '#808000',
-                'family' => ColorFamily::GREEN,
+            self::COLOR_ALMOST_BLACK => [
+                'name'   => 'almost_black',
+                'hex'    => '#050505',
+                'family' => ColorFamily::BLACK,
                 'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_LIME => [
-                'name'   => 'lime',
-                'hex'    => '#BFFF00',
-                'family' => ColorFamily::GREEN,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_SAGE => [
-                'name'   => 'sage',
-                'hex'    => '#9CAF88',
-                'family' => ColorFamily::GREEN,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_JADE => [
-                'name'   => 'jade',
-                'hex'    => '#00A86B',
-                'family' => ColorFamily::GREEN,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-
-            // 🟡 YELLOW
-            self::COLOR_MUSTARD => [
-                'name'   => 'mustard',
-                'hex'    => '#E1AD01',
-                'family' => ColorFamily::YELLOW,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_OCHRE => [
-                'name'   => 'ochre',
-                'hex'    => '#CC7722',
-                'family' => ColorFamily::YELLOW,
+            self::COLOR_DEEP_BLACK => [
+                'name'   => 'deep_black',
+                'hex'    => '#0A0A0A',
+                'family' => ColorFamily::BLACK,
                 'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_HONEY => [
-                'name'   => 'honey',
-                'hex'    => '#D4AF37',
-                'family' => ColorFamily::YELLOW,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_GOLDEN => [
-                'name'   => 'golden',
-                'hex'    => '#FFD700',
-                'family' => ColorFamily::YELLOW,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_LEMON => [
-                'name'   => 'lemon',
-                'hex'    => '#FFF44F',
-                'family' => ColorFamily::YELLOW,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_BUTTER => [
-                'name'   => 'butter',
-                'hex'    => '#F6E27F',
-                'family' => ColorFamily::YELLOW,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_SAND_YELLOW => [
-                'name'   => 'sand_yellow',
-                'hex'    => '#E4D00A',
-                'family' => ColorFamily::YELLOW,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_CANARY => [
-                'name'   => 'canary',
-                'hex'    => '#FFFF99',
-                'family' => ColorFamily::YELLOW,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-
-            // 🟠 ORANGE
-            self::COLOR_BURNT_ORANGE => [
-                'name'   => 'burnt_orange',
-                'hex'    => '#CC5500',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_COPPER => [
-                'name'   => 'copper',
-                'hex'    => '#B87333',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_RUST => [
-                'name'   => 'rust',
-                'hex'    => '#B7410E',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_ORANGE_PEEL => [
-                'name'   => 'orange-peel',
-                'hex'    => '#FFA500',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_TANGERINE => [
-                'name'   => 'tangerine',
-                'hex'    => '#F28500',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_AMBER => [
-                'name'   => 'amber',
-                'hex'    => '#FFBF00',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_PEACH => [
-                'name'   => 'peach',
-                'hex'    => '#FFDAB9',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_APRICOT => [
-                'name'   => 'apricot',
-                'hex'    => '#FBCEB1',
-                'family' => ColorFamily::ORANGE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-
-            // 🩷 PINK
-            self::COLOR_RASPBERRY => [
-                'name'   => 'raspberry',
-                'hex'    => '#E30B5C',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_ROSE => [
-                'name'   => 'rose',
-                'hex'    => '#FF007F',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_HOT_PINK => [
-                'name'   => 'hot_pink',
-                'hex'    => '#FF69B4',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_FUCHSIA => [
-                'name'   => 'fuchsia',
-                'hex'    => '#FF00FF',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_BLUSH => [
-                'name'   => 'blush',
-                'hex'    => '#F4C2C2',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_DUSTY_PINK => [
-                'name'   => 'dusty_pink',
-                'hex'    => '#DCAE96',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_SALMON_PINK => [
-                'name'   => 'salmon_pink',
-                'hex'    => '#FF91A4',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_BABY_PINK => [
-                'name'   => 'baby_pink',
-                'hex'    => '#F9C2D1',
-                'family' => ColorFamily::PINK,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-
-            // 🟣 PURPLE
-            self::COLOR_INDIGO => [
-                'name'   => 'indigo',
-                'hex'    => '#4B0082',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_EGGPLANT => [
-                'name'   => 'eggplant',
-                'hex'    => '#311432',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_AMETHYST => [
-                'name'   => 'amethyst',
-                'hex'    => '#9966CC',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_VIOLET => [
-                'name'   => 'violet',
-                'hex'    => '#8F00FF',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_PLUM => [
-                'name'   => 'plum',
-                'hex'    => '#8E4585',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_LAVENDER => [
-                'name'   => 'lavender',
-                'hex'    => '#E6E6FA',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_LILAC => [
-                'name'   => 'lilac',
-                'hex'    => '#C8A2C8',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_MAUVE => [
-                'name'   => 'mauve',
-                'hex'    => '#E0B0ff',
-                'family' => ColorFamily::PURPLE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-
-            // 🟤 BROWN
-            self::COLOR_COFFEE => [
-                'name'   => 'coffee',
-                'hex'    => '#4B2E2A',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_CHOCOLATE => [
-                'name'   => 'chocolate',
-                'hex'    => '#7B3F00',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_MOCHA => [
-                'name'   => 'mocha',
-                'hex'    => '#6F4E37',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_WALNUT => [
-                'name'   => 'walnut',
-                'hex'    => '#5C4033',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_SEPIA => [
-                'name'   => 'sepia',
-                'hex'    => '#704214',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_CINNAMON => [
-                'name'   => 'cinnamon',
-                'hex'    => '#D2691E',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::VIBRANT
-            ],
-            self::COLOR_CARAMEL => [
-                'name'   => 'caramel',
-                'hex'    => '#C68E17',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::MEDIUM,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_BEIGE_BROWN => [
-                'name'   => 'beige-brown',
-                'hex'    => '#D2B48C',
-                'family' => ColorFamily::BROWN,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-
-            // ⚫ GRAY
-            self::COLOR_SLATE => [
-                'name'   => 'slate',
-                'hex'    => '#708090',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_GRAPHITE_GRAY => [
-                'name'   => 'graphite_gray',
-                'hex'    => '#474A51',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::DARK,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_STEEL => [
-                'name'   => 'steel',
-                'hex'    => '#71797E',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_SMOKE => [
-                'name'   => 'smoke',
-                'hex'    => '#848884',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::MEDIUM,
+            self::COLOR_JET_BLACK => [
+                'name'   => 'jet_black',
+                'hex'    => '#101010',
+                'family' => ColorFamily::BLACK,
+                'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_ASH_GRAY => [
-                'name'   => 'ash_gray',
-                'hex'    => '#B2BEB5',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::MEDIUM,
+            self::COLOR_CHARCOAL => [
+                'name'   => 'charcoal',
+                'hex'    => '#151515',
+                'family' => ColorFamily::BLACK,
+                'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_DOVE_GRAY => [
-                'name'   => 'dove_gray',
-                'hex'    => '#D3D3D3',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_SILVER => [
-                'name'   => 'silver',
-                'hex'    => '#C0C0C0',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::LIGHT,
+            self::COLOR_GRAY_BLACK => [
+                'name'   => 'gray_black',
+                'hex'    => '#1A1A1A',
+                'family' => ColorFamily::BLACK,
+                'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_MIST => [
-                'name'   => 'mist',
-                'hex'    => '#E3E3E3',
-                'family' => ColorFamily::GRAY,
-                'tone'   => ColorTone::LIGHT,
+            self::COLOR_NIGHT_BLACK => [
+                'name'   => 'night_black',
+                'hex'    => '#202020',
+                'family' => ColorFamily::BLACK,
+                'tone'   => ColorTone::DARK,
                 'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::SOFT
+                'sat'    => ColorSaturation::MUTED
+            ],
+            self::COLOR_SOFT_BLACK => [
+                'name'   => 'soft_black',
+                'hex'    => '#252525',
+                'family' => ColorFamily::BLACK,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::NEUTRAL,
+                'sat'    => ColorSaturation::MUTED
             ],
 
             // ⚪ WHITE
@@ -735,193 +213,673 @@ class ColorFixtures extends Fixture implements FixtureGroupInterface
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_SNOW => [
-                'name'   => 'snow',
-                'hex'    => '#FFFAFA',
-                'family' => ColorFamily::WHITE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_IVORY_WHITE => [
-                'name'   => 'ivory_white',
-                'hex'    => '#FFFFF0',
-                'family' => ColorFamily::WHITE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_MILK => [
-                'name'   => 'milk',
-                'hex'    => '#FBFBF7',
+            self::COLOR_ALMOST_WHITE => [
+                'name'   => 'almost_white',
+                'hex'    => '#FDFDFD',
                 'family' => ColorFamily::WHITE,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::SOFT
+                'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_CLOUD => [
-                'name'   => 'cloud',
+            self::COLOR_GHOST_WHITE => [
+                'name'   => 'ghost_white',
+                'hex'    => '#FAFAFA',
+                'family' => ColorFamily::WHITE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::NEUTRAL,
+                'sat'    => ColorSaturation::MUTED
+            ],
+            self::COLOR_OFF_WHITE => [
+                'name'   => 'off_white',
+                'hex'    => '#F8F8F8',
+                'family' => ColorFamily::WHITE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::NEUTRAL,
+                'sat'    => ColorSaturation::MUTED
+            ],
+            self::COLOR_SNOW_WHITE => [
+                'name'   => 'snow_white',
                 'hex'    => '#F5F5F5',
                 'family' => ColorFamily::WHITE,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_BONE => [
-                'name'   => 'bone',
-                'hex'    => '#EDE6D6',
-                'family' => ColorFamily::WHITE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::WARM,
-                'sat'    => ColorSaturation::MUTED
-            ],
-            self::COLOR_FROST => [
-                'name'   => 'frost',
-                'hex'    => '#F0F8FF',
-                'family' => ColorFamily::WHITE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::COOL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_PEARL => [
-                'name'   => 'pearl',
-                'hex'    => '#F8F6F0',
+            self::COLOR_GRAY_WHITE => [
+                'name'   => 'gray_white',
+                'hex'    => '#F0F0F0',
                 'family' => ColorFamily::WHITE,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::SOFT
+                'sat'    => ColorSaturation::MUTED
+            ],
+            self::COLOR_LIGHTEST_GRAY => [
+                'name'   => 'lightest_gray',
+                'hex'    => '#E8E8E8',
+                'family' => ColorFamily::WHITE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::NEUTRAL,
+                'sat'    => ColorSaturation::MUTED
+            ],
+            self::COLOR_GAINSBORO => [
+                'name'   => 'gainsboro',
+                'hex'    => '#DCDCDC',
+                'family' => ColorFamily::WHITE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::NEUTRAL,
+                'sat'    => ColorSaturation::MUTED
             ],
 
-            // ⚫ BLACK
-            self::COLOR_BLACK => [
-                'name'   => 'black',
-                'hex'    => '#000000',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            // ⚫ GRAY
+            self::COLOR_PURE_GRAY => [
+                'name'   => 'pure_gray',
+                'hex'    => '#808080',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_JET_BLACK => [
-                'name'   => 'jet_black',
-                'hex'    => '#0A0A0A',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            self::COLOR_DARK_GRAY => [
+                'name'   => 'dark_gray',
+                'hex'    => '#8A8A8A',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_CHARCOAL => [
-                'name'   => 'charcoal',
-                'hex'    => '#36454F',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            self::COLOR_SILVER => [
+                'name'   => 'silver',
+                'hex'    => '#909090',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_SOFT_BLACK => [
-                'name'   => 'soft_black',
-                'hex'    => '#1C1C1C',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            self::COLOR_MEDIUM_GRAY => [
+                'name'   => 'medium_gray',
+                'hex'    => '#9A9A9A',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_GRAPHITE => [
-                'name'   => 'graphite',
-                'hex'    => '#2B2B2B',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            self::COLOR_LIGHT_GRAY => [
+                'name'   => 'light_gray',
+                'hex'    => '#A0A0A0',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::MEDIUM,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_OFF_BLACK => [
-                'name'   => 'off_black',
-                'hex'    => '#121212',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            self::COLOR_BRIGHT_GRAY => [
+                'name'   => 'bright_gray',
+                'hex'    => '#A8A8A8',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_ASH_BLACK => [
-                'name'   => 'ash_black',
-                'hex'    => '#3A3A3A',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            self::COLOR_LIGHT_SILVER => [
+                'name'   => 'light_silver',
+                'hex'    => '#B0B0B0',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_SMOKY_BLACK => [
-                'name'   => 'smoky_black',
-                'hex'    => '#2F2F2F',
-                'family' => ColorFamily::BLACK,
-                'tone'   => ColorTone::DARK,
+            self::COLOR_MIST => [
+                'name'   => 'mist',
+                'hex'    => '#B8B8B8',
+                'family' => ColorFamily::GRAY,
+                'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::NEUTRAL,
                 'sat'    => ColorSaturation::MUTED
             ],
 
             // 🟫 BEIGE
-            self::COLOR_CREAM => [
-                'name'   => 'cream',
-                'hex'    => '#FFFDD0',
+            self::COLOR_BEIGE => [
+                'name'   => 'beige',
+                'hex'    => '#F5F5DC',
                 'family' => ColorFamily::BEIGE,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::WARM,
                 'sat'    => ColorSaturation::SOFT
             ],
-            self::COLOR_SAND => [
-                'name'   => 'sand',
-                'hex'    => '#C2B280',
+            self::COLOR_LIGHT_BEIGE => [
+                'name'   => 'light_beige',
+                'hex'    => '#E6E6D6',
                 'family' => ColorFamily::BEIGE,
                 'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::NEUTRAL,
+                'temp'   => ColorTemperature::WARM,
                 'sat'    => ColorSaturation::SOFT
             ],
-            self::COLOR_IVORY => [
-                'name'   => 'ivory',
-                'hex'    => '#FFFFF0',
+            self::COLOR_PALE_BEIGE => [
+                'name'   => 'pale_beige',
+                'hex'    => '#D3D3C7',
                 'family' => ColorFamily::BEIGE,
                 'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::NEUTRAL,
+                'temp'   => ColorTemperature::WARM,
                 'sat'    => ColorSaturation::SOFT
             ],
-            self::COLOR_ECRU => [
-                'name'   => 'ecru',
-                'hex'    => '#CDB891',
+            self::COLOR_SAND_BEIGE => [
+                'name'   => 'sand_beige',
+                'hex'    => '#C7C7B7',
                 'family' => ColorFamily::BEIGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_SOFT_SAND => [
+                'name'   => 'soft_sand',
+                'hex'    => '#B7B7A7',
+                'family' => ColorFamily::BEIGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_DARK_BEIGE => [
+                'name'   => 'dark_beige',
+                'hex'    => '#ADAD97',
+                'family' => ColorFamily::BEIGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+
+            // 🟤 BROWN
+            self::COLOR_PERU => [
+                'name'   => 'peru',
+                'hex'    => '#CD853F',
+                'family' => ColorFamily::BROWN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_CHOCOLATE => [
+                'name'   => 'chocolate',
+                'hex'    => '#D2691E',
+                'family' => ColorFamily::BROWN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_SIENNA => [
+                'name'   => 'sienna',
+                'hex'    => '#A0522D',
+                'family' => ColorFamily::BROWN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_BROWN_RED => [
+                'name'   => 'brown_red',
+                'hex'    => '#A52A2A',
+                'family' => ColorFamily::BROWN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_SADDLE_BROWN => [
+                'name'   => 'saddle_brown',
+                'hex'    => '#8B4513',
+                'family' => ColorFamily::BROWN,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_DARK_BROWN => [
+                'name'   => 'dark_brown',
+                'hex'    => '#654321',
+                'family' => ColorFamily::BROWN,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_MAROON => [
+                'name'   => 'maroon',
+                'hex'    => '#800000',
+                'family' => ColorFamily::BROWN,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+
+            // 🩷 PINK
+            self::COLOR_PASTEL_PINK => [
+                'name'   => 'pastel_pink',
+                'hex'    => '#FFD1DC',
+                'family' => ColorFamily::PINK,
                 'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::NEUTRAL,
+                'temp'   => ColorTemperature::WARM,
                 'sat'    => ColorSaturation::MUTED
             ],
-            self::COLOR_LINEN => [
-                'name'   => 'linen',
-                'hex'    => '#E9DCC9',
-                'family' => ColorFamily::BEIGE,
-                'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::SOFT
-            ],
-            self::COLOR_ALMOND => [
-                'name'   => 'almond',
-                'hex'    => '#EFDECD',
-                'family' => ColorFamily::BEIGE,
+            self::COLOR_PINK => [
+                'name'   => 'pink',
+                'hex'    => '#FFB6C1',
+                'family' => ColorFamily::PINK,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::WARM,
                 'sat'    => ColorSaturation::SOFT
             ],
-            self::COLOR_CHAMPAGNE => [
-                'name'   => 'champagne',
-                'hex'    => '#F7E7CE',
-                'family' => ColorFamily::BEIGE,
+            self::COLOR_SALMON_PINK => [
+                'name'   => 'salmon_pink',
+                'hex'    => '#FF91A4',
+                'family' => ColorFamily::PINK,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_HOT_PINK => [
+                'name'   => 'hot_pink',
+                'hex'    => '#FF69B4',
+                'family' => ColorFamily::PINK,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_PALE_VIOLET_RED => [
+                'name'   => 'pale_violet_red',
+                'hex'    => '#DB7093',
+                'family' => ColorFamily::PINK,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_DEEP_PINK => [
+                'name'   => 'deep_pink',
+                'hex'    => '#FF1493',
+                'family' => ColorFamily::PINK,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+
+            // 🔴 RED
+            self::COLOR_LIGHT_CORAL => [
+                'name'   => 'light_coral',
+                'hex'    => '#F08080',
+                'family' => ColorFamily::RED,
                 'tone'   => ColorTone::LIGHT,
                 'temp'   => ColorTemperature::WARM,
                 'sat'    => ColorSaturation::SOFT
             ],
-            self::COLOR_OAT => [
-                'name'   => 'oat',
-                'hex'    => '#D8CAB8',
-                'family' => ColorFamily::BEIGE,
+            self::COLOR_TOMATO => [
+                'name'   => 'tomato',
+                'hex'    => '#FF6347',
+                'family' => ColorFamily::RED,
                 'tone'   => ColorTone::LIGHT,
-                'temp'   => ColorTemperature::NEUTRAL,
-                'sat'    => ColorSaturation::MUTED
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_INDIAN_RED => [
+                'name'   => 'indian_red',
+                'hex'    => '#CD5C5C',
+                'family' => ColorFamily::RED,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_PURE_RED => [
+                'name'   => 'pure_red',
+                'hex'    => '#FF0000',
+                'family' => ColorFamily::RED,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_CRIMSON => [
+                'name'   => 'crimson',
+                'hex'    => '#DC143C',
+                'family' => ColorFamily::RED,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_BRICK_RED => [
+                'name'   => 'brick_red',
+                'hex'    => '#B22222',
+                'family' => ColorFamily::RED,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_DARK_RED => [
+                'name'   => 'dark_red',
+                'hex'    => '#8B0000',
+                'family' => ColorFamily::RED,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+
+            // 🟠 ORANGE
+            self::COLOR_PEACH => [
+                'name'   => 'peach',
+                'hex'    => '#FFCC99',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_LIGHT_ORANGE => [
+                'name'   => 'light_orange',
+                'hex'    => '#FFB347',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_ORANGE_PEEL => [
+                'name'   => 'orange_peel',
+                'hex'    => '#FFA500',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_ORANGE_GOLD => [
+                'name'   => 'orange_gold',
+                'hex'    => '#FF9933',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_DARK_ORANGE => [
+                'name'   => 'dark_orange',
+                'hex'    => '#FF8C00',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_CORAL => [
+                'name'   => 'coral',
+                'hex'    => '#FF7F50',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_MANGO_ORANGE => [
+                'name'   => 'mango_orange',
+                'hex'    => '#FF8040',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_BRIGHT_ORANGE => [
+                'name'   => 'bright_orange',
+                'hex'    => '#FF6600',
+                'family' => ColorFamily::ORANGE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+
+            // 🟡 YELLOW
+//            self::COLOR_PEACH_PUFF => [
+//                'name'   => 'peach_puff',
+//                'hex'    => '#FFDAB9',
+//                'family' => ColorFamily::YELLOW,
+//                'tone'   => ColorTone::LIGHT,
+//                'temp'   => ColorTemperature::WARM,
+//                'sat'    => ColorSaturation::SOFT
+//            ],
+            self::COLOR_MOCCASIN => [
+                'name'   => 'moccasin',
+                'hex'    => '#FFE4B5',
+                'family' => ColorFamily::YELLOW,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_LIGHT_GOLDEN => [
+                'name'   => 'light_golden',
+                'hex'    => '#FFE87C',
+                'family' => ColorFamily::YELLOW,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_PURE_YELLOW => [
+                'name'   => 'pure_yellow',
+                'hex'    => '#FFFF00',
+                'family' => ColorFamily::YELLOW,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_GOLD => [
+                'name'   => 'gold',
+                'hex'    => '#FFD700',
+                'family' => ColorFamily::YELLOW,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_BRIGHT_GOLD => [
+                'name'   => 'bright_gold',
+                'hex'    => '#FFC93C',
+                'family' => ColorFamily::YELLOW,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_GOLDENROD => [
+                'name'   => 'goldenrod',
+                'hex'    => '#DAA520',
+                'family' => ColorFamily::YELLOW,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_DARK_GOLDENROD => [
+                'name'   => 'dark_goldenrod',
+                'hex'    => '#B8860B',
+                'family' => ColorFamily::YELLOW,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::WARM,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+
+            // 🟢 GREEN
+            self::COLOR_LIGHT_GREEN => [
+                'name'   => 'light_green',
+                'hex'    => '#90EE90',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_PURE_GREEN => [
+                'name'   => 'pure_green',
+                'hex'    => '#00FF00',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_LIME => [
+                'name'   => 'lime',
+                'hex'    => '#32CD32',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_OLIVE_DRAB => [
+                'name'   => 'olive_drab',
+                'hex'    => '#6B8E23',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_FOREST => [
+                'name'   => 'forest',
+                'hex'    => '#228B22',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_SEA_GREEN => [
+                'name'   => 'sea_green',
+                'hex'    => '#2E8B57',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_OFFICE_GREEN => [
+                'name'   => 'office_green',
+                'hex'    => '#008000',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_DARK_OLIVE => [
+                'name'   => 'dark_olive',
+                'hex'    => '#556B2F',
+                'family' => ColorFamily::GREEN,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+
+            // 🔵 BLUE
+            self::COLOR_LIGHT_BLUE => [
+                'name'   => 'light_blue',
+                'hex'    => '#ADD8E6',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_SKY_BLUE => [
+                'name'   => 'sky_blue',
+                'hex'    => '#87CEEB',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_DEEP_SKY_BLUE => [
+                'name'   => 'deep_sky_blue',
+                'hex'    => '#00BFFF',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_DODGER_BLUE => [
+                'name'   => 'dodger_blue',
+                'hex'    => '#1E90FF',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_CORNFLOWER => [
+                'name'   => 'cornflower',
+                'hex'    => '#6495ED',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_ROYAL_BLUE => [
+                'name'   => 'royal_blue',
+                'hex'    => '#4169E1',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_PURE_BLUE => [
+                'name'   => 'pure_blue',
+                'hex'    => '#0000FF',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_NAVY => [
+                'name'   => 'navy',
+                'hex'    => '#000080',
+                'family' => ColorFamily::BLUE,
+                'tone'   => ColorTone::DARK,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+
+            // 🟣 PURPLE
+            self::COLOR_THISTLE => [
+                'name'   => 'thistle',
+                'hex'    => '#D8BFD8',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_PLUM => [
+                'name'   => 'plum',
+                'hex'    => '#DDA0DD',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::LIGHT,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_MEDIUM_PURPLE => [
+                'name'   => 'medium_purple',
+                'hex'    => '#9370DB',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_MEDIUM_ORCHID => [
+                'name'   => 'medium_orchid',
+                'hex'    => '#BA55D3',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::SOFT
+            ],
+            self::COLOR_DARK_ORCHID => [
+                'name'   => 'dark_orchid',
+                'hex'    => '#9932CC',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_DARK_VIOLET => [
+                'name'   => 'dark_violet',
+                'hex'    => '#9400D3',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_REBECCA_PURPLE => [
+                'name'   => 'rebecca_purple',
+                'hex'    => '#663399',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
+            ],
+            self::COLOR_PURE_PURPLE => [
+                'name'   => 'pure_purple',
+                'hex'    => '#800080',
+                'family' => ColorFamily::PURPLE,
+                'tone'   => ColorTone::MEDIUM,
+                'temp'   => ColorTemperature::COOL,
+                'sat'    => ColorSaturation::VIBRANT
             ],
         ];
 
@@ -936,12 +894,12 @@ class ColorFixtures extends Fixture implements FixtureGroupInterface
             $color->setTone($data['tone']);
             $color->setTemperature($data['temp']);
             $color->setSaturation($data['sat']);
-            $color->setR($rgb['r']);
-            $color->setG($rgb['g']);
-            $color->setB($rgb['b']);
-            $color->setH($hsv['h']);
-            $color->setS($hsv['s']);
-            $color->setV($hsv['v']);
+            $color->setR($rgb->r);
+            $color->setG($rgb->g);
+            $color->setB($rgb->b);
+            $color->setH($hsv->h);
+            $color->setS($hsv->s);
+            $color->setV($hsv->v);
             $manager->persist($color);
             $this->addReference($reference, $color);
         }

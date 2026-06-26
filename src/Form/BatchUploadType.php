@@ -13,12 +13,17 @@ use Symfony\Component\Validator\Constraints\All;
 use Symfony\Component\Validator\Constraints\Count;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @extends AbstractType<ClothingItem>
  */
 class BatchUploadType extends AbstractType
 {
+    public function __construct(private readonly TranslatorInterface $translator)
+    {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -34,8 +39,8 @@ class BatchUploadType extends AbstractType
                         new File(
                             maxSize: '10M',
                             mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
-                            maxSizeMessage: 'form.error.image_too_large',
-                            mimeTypesMessage: 'form.error.invalid_image',
+                            maxSizeMessage: $this->translator->trans('form.error.image_too_large'),
+                            mimeTypesMessage: $this->translator->trans('form.error.invalid_image'),
                         ),
                     ]),
                 ],

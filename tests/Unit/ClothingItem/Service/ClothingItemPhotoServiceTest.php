@@ -20,6 +20,9 @@ use ReflectionClass;
 use RuntimeException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * @group unit
+ */
 #[AllowMockObjectsWithoutExpectations]
 class ClothingItemPhotoServiceTest extends TestCase
 {

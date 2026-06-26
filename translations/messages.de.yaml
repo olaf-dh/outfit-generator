@@ -89,116 +89,6 @@ enum:
         tie_dye: Batik
         marl: Mehliert
 
-color:
-    name:
-        navy: Marineblau
-        midnight_blue: Mitternachtsblau
-        denim: Jeansblau
-        royal_blue: Königsblau
-        steel_blue: Stahlblau
-        baby_blue: Babyblau
-        sky_blue: Himmelblau
-        azure: Azurblau
-
-        crimson: Pupurrot
-        depp_red: Dunkelrot
-        soft_red: Zartrot
-        ruby: Rubinrot
-        brick_red: Ziegelrot
-        wine: Weinrot
-        coral_red: Korallenrot
-        tomato: Tomatenrot
-
-        mint: Minzgrün
-        forest: Waldgrün
-        lime: limettengrün
-        emerald: Smaragdgrün
-        olive: Olivgrün
-        jade: Jadegrün
-        sage: Salbeigrün
-        moss: Moosgrün
-
-        mustard: Senfgelb
-        lemon: Zitronengelb
-        butter: Buttergelb
-        gold: Goldgelb
-        sand_yellow: Sandgelb
-        honey: Honiggelb
-        canary: Kanariengelb
-        ochre: Ocker
-
-        burnt_orange: Dunkelorange
-        copper: Kupfer
-        rust: rostiges Orange
-        tangerine: Mandarine
-        amber: Bernstein
-        orange_peel: Orangenschale
-        peach: Pfirsich
-        apricot: Aprikose
-
-        lilac: Flieder
-        eggplant: Aubergine
-        purple: Lila
-        violet: Violett
-        plum: Pflaume
-        lavender: Lavendel
-        indigo: Indigo
-        mauve: Malve
-
-        rose: Rosé
-        blush: Zartrosa
-        hot_pink: Knallrosa
-        dusty_pink: Altrosa
-        salmon_pink: Lachsrosa
-        fuchsia: Fuchsia
-        baby_pink: Babyrosa
-        raspberry: Himbeerrosa
-
-        coffee: Kaffeebraun
-        chocolate: Schokoladenbraun
-        beige_brown: Beige-Braun
-        walnut: Walnussbraun
-        cinnamon: Zimtbraun
-        mocha: Mokka
-        caramel: Karamell
-        sepia: Sepia
-
-        slate: Schiefergrau
-        ash_gray: Aschgrau
-        smoke: Rauchgrau
-        dove_gray: Taubengrau
-        graphite_gray: Graphitegrau
-        mist: Nebelgrau
-        steel: Stahlgrau
-        silver: Silber
-
-        white: Weiß
-        snow: Schneeweiß
-        ivory_white: Elfenbeinweiß
-        milk: Milchweiß
-        cloud: Wolkenweiß
-        bone: Knochenweiß
-        pearl: Perlmutt
-        frost: Frostweiß
-
-        black: Schwarz
-        soft_black: Weichschwarz
-        charcoal: Anthrazit
-        jet_black: Tiefschwarz
-        graphite: Graphit
-        off_black: Off-Black (sehr dunkles Grau-Schwarz)
-        ash_black: Ascheschwarz
-        smoky_black: Rauchschwarz
-
-        cream: Creme
-        sand: Sand
-        ivory: Elfenbein
-        ecru: Ecru
-        linen: Leinen
-        almond: Mandel
-        champagne: Champgner
-        oat: Hafer
-
 material:
     name:
         cotton: Baumwolle
@@ -246,7 +136,7 @@ clothing_item:
             remove_material: Material entfernen
         materials:
             total: Gesamt
-            not_100: Materialanteile müssen 100% ergeben.
+            not_100: Anteile müssen 100% ergeben.
         label:
             name: Name
             category: Kategorie
@@ -256,6 +146,7 @@ clothing_item:
             max_layer_depth: Maximale Schichttiefe
             colors: Farben
             primary_color: Hauptfarbe
+            secondary_colors: Nebenfarben
             materials: Materialien
             patterns: Muster
             styles: Stile
@@ -277,11 +168,14 @@ clothing_item:
             invalid_image: Bitte ein gültiges Bild hochladen (JPG, PNG).
             image_too_large: Das Bild darf maximal 10 MB groß sein.
             background_removal: Hintergrundentfernung fehlgeschlagen. Bitte versuche es erneut.
+            max_secondary_colors: Sie können nur 2 Nebenfarben auswählen.
     index:
         uncategorized: Nicht kategorisiert
         no_subcategory: Kategorie fehlt
         action:
             complete: Vervollständigen
+    upload:
+        no_files: Keine Bilder hochgeladen.
 
 category:
     name:
@@ -473,3 +367,72 @@ batch_upload:
     review:
         progress: "Kleidungsstück %current% von %total%"
         empty: Alle Kleidungsstücke wurden bewertet.
+
+property:
+    entity_index:
+        title:
+            plural:
+                color: Farben
+                material: Materialien
+            singular:
+                color: Farbe
+                material: Material
+        table:
+            head:
+                name: Name
+                color_family: Familie
+                color_tone: Ton
+                color_temperature: Temperatur
+                color_saturation: Sättigung
+                color_show: Farbfeld
+                description: Beschreibung
+                category: Kategorie
+                material_warm: Wärmendes Material
+                sort_order: Sortierung
+                action: Aktion
+            button:
+                show: Details
+                edit: Bearbeiten
+                new: Neu anlegen
+
+    entity_new:
+        title:
+            color: Neue Farbe anlegen
+            material: Neues Material anlegen
+        flash:
+            success: "%type% %name% wurde erfolgreich angelegt."
+    entity_edit:
+        title:
+            color: Farbe bearbeiten
+            material: Material bearbeiten
+        flash:
+            success: "%type% %name% wurde erfolgreich aktualisiert."
+    entity_show:
+        title:
+            color: Details der Farbe anzeigen
+            material: Details des Materials anzeigen
+        index_route: Zurück zur Liste
+        edit_route: Bearbeiten
+
+    entity_delete:
+        button: Löschen
+        confirm: "Möchten Sie %name% wirklich löschen?"
+        flash:
+            success: "Objekt %type% %name% wurde erfolgreich entfernt!"
+
+    form:
+        button:
+            save: Speichern
+            cancel: Abbrechen
+        color:
+            label:
+                name: Farbe
+                hex_code: Hex-Code
+                family: Farbfamilie
+                tone: Farbton
+                temperature: Farbtemperatur
+                saturation: Farbsättigung
+            placeholder:
+                term: Farbbezeichnung
+                hex_code: "Hex-Code (z.B. #FF0000)"
+                select: Bitte wählen…

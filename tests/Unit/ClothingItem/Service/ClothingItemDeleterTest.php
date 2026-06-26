@@ -11,6 +11,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @group unit
+ */
 class ClothingItemDeleterTest extends TestCase
 {
     /** @var ClothingItemPhotoUploader&MockObject */

@@ -1,0 +1,8 @@
+flask>=3.0.0                      # API
+opencv-python-headless>=4.9.0.80  # For image processing (headless)
+Pillow>=10.0.0                    # Alternative library
+numpy>=1.26.0                     # Numeric calculations
+colorthief>=0.2.1                 # Extract dominant colors (recommended)
+scikit-learn>=1.4.0               # 👈 WICHTIG: Für K-Means-Clustering
+werkzeug>=3.0.0                   # For serving the app
+rich>=13.0.0                      # For pretty console output

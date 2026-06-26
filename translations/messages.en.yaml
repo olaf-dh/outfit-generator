@@ -1,0 +1,438 @@
+enum:
+    style:
+        casual: Casual
+        smart_casual: Smart Casual
+        business: Business
+        business_casual: Business Casual
+        elegant: Elegant
+        sporty: Sporty
+        streetwear: Streetwear
+        minimalist: Minimalist
+        vintage: Vintage
+        outdoor: Outdoor
+        fashion: Fashion
+        boho: Boho
+        preppy: Preppy
+
+    body_zone:
+        upper_body: Upper Body
+        lower_body: Lower Body
+        full_body: Full Body
+        outer_layer: Outer Layer
+        footwear: Footwear
+        head: Head
+        accessory: Accessory
+
+    season:
+        spring: Spring
+        summer: Summer
+        autumn: Autumn
+        winter: Winter
+
+    weather_condition:
+        sunny: Sonny
+        rainy: Rainy
+        windy: Windy
+        cold: Cold
+        mild: Mild
+        hot: Hot
+
+    color_family:
+        blue: Blue
+        red: Red
+        green: Green
+        yellow: Yellow
+        orange: Orange
+        purple: Purple
+        brown: Brown
+        black: Black
+        white: White
+        gray: Gray
+        beige: Beige
+        pink: Pink
+
+    color_tone:
+        light: Light
+        medium: Medium
+        dark: Dark
+
+    color_temperature:
+        warm: Warm
+        cool: Cool
+        neutral: Neutral
+
+    color_saturation:
+        muted: Muted
+        medium: Medium
+        soft: Soft
+        vibrant: Vibrant
+
+    pattern_type:
+        solid: Solid
+        vertical_stripes: Vertical Stripes
+        horizontal_stripes: Horizontal Stripes
+        checked: Checked
+        dotted: Dotted
+        floral: Floral
+        leaf: Leaf
+        print: Print
+        novelty: Novelty Print
+        multicolor: Multicolor
+        camouflage: Camouflage
+        paisley: Paisley
+        houndstooth: Houndstooth
+        chevron: Chevron
+        argyle: Argyle
+        zigzag: Zigzag
+        geometric: Geometric
+        abstract: Abstract
+        tie_dye: Tie-Dye
+        marl: Marl
+
+material:
+    name:
+        cotton: Cotton
+        linen: Linen
+        wool: Wool
+        cashmere: Cashmere
+        leather: Leather
+        denim: Denim
+        polyester: Polyester
+        silk: Silk
+        nylon: Nylon
+        elastane: Elastane
+        viscose: Viscose
+        fleece: Fleece
+        suede: Suede
+        corduroy: Corduroy
+        velvet: Velvet
+        down: Down
+        gore_tex: Gore-Tex
+        softshell: Softshell
+
+clothing_item:
+    list:
+        title: My Clothing Items
+        empty: No clothing items available.
+    add:
+        title: Create new clothing item
+        button: Create
+    edit:
+        title: Edit
+        button: Save
+    delete:
+        button: Delete
+        confirm: Do you really want to delete this clothing item?
+    photo:
+        upload: Upload photo
+        analyze: Start KI-Analysis
+        analyzing: "%count% photo(s) just analyzing..."
+        needs_review: "%count% clothing item(s) wait for your approval."
+    form:
+        back_to_dashboard: Back to dashboard
+        button:
+            cancel: Cancel
+            add_material: Add material
+            remove_material: Delete material
+        materials:
+            total: Total
+            not_100: Material components must be total 100%.
+        label:
+            name: Name
+            category: Category
+            subcategory: Subcategory
+            body_zone: Body zone
+            min_layer_depth: min-layer-depth
+            max_layer_depth: max-layer-depth
+            colors: Colors
+            primary_color: Primary color
+            secondary_colors: Secondary colors
+            materials: Materials
+            patterns: Patterns
+            styles: Styles
+            seasons: Seasons
+            weather_conditions: Weather conditions
+            notes: Notes
+            analysis_photo_preview: Analysis-Photo (preview)
+            current_display_photo: Current Display-Photo
+            photo_upload: Upload new photo.
+        hint:
+            display_photo: Background will be automatically removed.
+            analysis_photo: Will be used for the color analysis.
+        placeholder:
+            name: Name
+            select: Please select…
+            notes: Optional notes for clothing item.
+        error:
+            required: This field is required.
+            invalid_image: Please upload a valid image (JPG, PNG).
+            image_too_large: The image is too large. Maximum size is 10MB.
+            background_removal: Background removal failed. Please try again.
+            max_secondary_colors: You can only select up to 2 secondary colors.
+    index:
+        uncategorized: Not categorized
+        no_subcategory: Subcategory not set
+        action:
+            complete: Complete
+    upload:
+        no_files: No images uploaded.
+
+category:
+    name:
+        upper_body: Upper body
+        lower_body: Lower body
+        full_body: Full body
+        outer_layer: Outer layer
+        footwear: Footwear
+        head: Head
+        accessory: Accessory
+    list:
+        title: Categories
+    add:
+        title: Add category
+        button: Add
+
+subcategory:
+    name:
+        t_shirt: T-Shirt
+        polo_shirt: Polo-Shirt
+        button_down: Button-Down
+        hoodie: Hoodie
+        pullover: Pullover
+        vest: Vest
+        long_sleeve: Long-Sleeve
+        tank_top: Tank-Top
+        blouse: Blouse
+        sweater: Sweat-Shirt
+        cardigan: Cardigan
+        turtleneck: Turtleneck
+        crop_top: Belly-Shirt
+        tunica: Tunica
+        kimono: Kimono
+        poncho: Poncho
+        jeans: Jeans
+        chino: Chino
+        trousers: Trousers
+        shorts: Shorts
+        sweat_pants: Sweatpants
+        cargo_pants: Cargo-Pants
+        skirt: Skirt
+        maxi_skirt: Maxi-Skirt
+        suit: Suit
+        jumpsuit: Jumpsuit
+        dress: Dress
+        sportswear: Sportswear
+        pyjama: Pyjama
+        coat: Coat
+        jacket: Jacket
+        trenchcoat: Trenchcoat
+        blazer: Blazer
+        parka: Parka
+        sneaker: Sneaker
+        loafer: Loafer
+        business_shoes: Business-Shoes
+        boots: Boots
+        sandals: Sandals
+        high_heels: High-Heels
+        sport_shoes: Sport-Shoes
+        chelsea_boots: Chelsea-Boots
+        moccasins: Moccasins
+        espadrilles: Espadrilles
+        cap: Cap
+        beanie: Beanie
+        hat: Hat
+        scarf: Scarf
+        belt: Belt
+        bag: Bag
+        shoulder_bag: Shoulder-Bag
+        backpack: Backpack
+        necktie: Necktie
+        sun_glasses: Sunglasses
+        gloves: Gloves
+    list:
+        title: Subcategories
+    add:
+        title: Add subcategory
+        button: Add
+
+outfit:
+    generator:
+        title: Outfit-Generator
+        suggestions_title: Suggested Outfits
+        no_suggestions: No matching outfits found. Please select different settings.
+        hints:
+            select_items: Select 1-2 clothing items and start the search.
+        suggestions:
+            title: Suggestions
+            outfit: Outfit %number%
+            score: Score %score%
+        form:
+            placeholder:
+                select: Please select…
+                weather: All weather conditions
+            label:
+                season: Season
+                weather: Weather
+                style: Style
+                seed_items: Seed items
+            button:
+                generate: Generate outfits
+
+flash:
+    clothing_item:
+        created: Clothing item successfully created.
+        updated: Clothing item successfully updated.
+        deleted: Clothing item successfully deleted.
+    category:
+        created: Category successfully created.
+        deleted: Category successfully deleted.
+    outfit:
+        saved: Outfit successfully saved.
+
+registration:
+    controller:
+        success: Registration successful! Please log in.
+    form:
+        agreement: You should accept our Terms of Use and Privacy Policy.
+        password:
+            not_blank: Please set a password.
+            min_length: The password must have at least 8 characters.
+
+dashboard:
+    title: Home
+    welcome: Welcome back, {{ user }}!
+    last_items: Last clothing items
+    no_items: No clothing items available.
+    card:
+        clothing:
+            title: Clothing
+            text: You have saved {{ count }} clothing items.
+            button: Show
+        outfit:
+            title: Generate outfit
+            text: Put together an outfit using your existing clothes.
+            button: Start
+        batch_upload:
+            title: Upload photos
+            text: Upload multiple photos at once and have them analyzed automatically.
+            button: Upload
+
+base:
+    title: Outfit KI
+    login: Login
+    logout: Logout
+    site_name: Outfit-Manager
+
+form:
+    optional: (optional)
+
+security:
+    title: Login
+    please: Please login
+    email: E-Mail
+    password: Password
+    remember_me: Remember me
+    submit: Submit
+    error:
+        invalid_credentials: Wrong user name or password.
+        locked: Your account ist locked.
+        expired: Your account has expired.
+    message:
+        logged_in: You are logged in!
+
+batch_upload:
+    title: Upload multiple photos
+    subtitle: Upload up to 50 photos at once. Each photo is automatically analyzed.
+    no_files_selected: No files selected.
+    files_selected: Files selected %count%
+    max_files: Maximum %max% files allowed.
+    back: Back to list
+    drop_zone:
+        title: Drag & Drop files here
+        subtitle: or click to select files (JPG, PNG, WEBP)
+        button: Select files
+    form:
+        button:
+            upload: Upload and analyze
+    flash:
+        success: "%count% Clothing items(s) successfully created and will be analyzed."
+        errors: "%count% File(s) could not be uploaded."
+    hint:
+        title: Hint
+        text: >
+            After uploading, the photos are automatically analyzed.
+            The detected colors then appear in the list.
+            Please then edit each item of clothing to add the category,
+            style, and other attributes.
+    review:
+        progress: "Clothing item %current% of %total%"
+        empty: All clothing items were rated.
+
+property:
+    entity_index:
+        title:
+            plural:
+                color: Colors
+                material: Materials
+            singular:
+                color: Color
+                material: Material
+        table:
+            head:
+                name: Name
+                color_family: Family
+                color_tone: Tone
+                color_temperature: Temperature
+                color_saturation: Saturation
+                color_show: Color
+                description: Description
+                category: Category
+                material_warm: Warming Material
+                sort_order: Sort Order
+                action: Action
+            button:
+                show: Show
+                edit: Edit
+                new: Create new
+
+    entity_new:
+        title:
+            color: Create new color
+            material: Create new material
+        flash:
+            success: "%type% %name% was successfully created."
+    entity_edit:
+        title:
+            color: Edit color
+            material: Edit material
+        flash:
+            success: "%type% %name% was successfully updated."
+    entity_show:
+        title:
+            color: Show details of color
+            material: Show details of material
+        index_route: Back to list
+        edit_route: Edit
+
+    entity_delete:
+        button: Delete
+        confirm: "Do you really want to delete %name%?"
+        flash:
+            success: "Object %type% %name% was successful deleted!"
+
+    form:
+        button:
+            save: Save
+            cancel: Cancel
+        color:
+            label:
+                name: Color-Name
+                hex_code: Hex-Code
+                family: Color-Family
+                tone: Color-Tone
+                temperature: Color-Temperature
+                saturation: Color-Saturation
+            placeholder:
+                term: Color-Term
+                hex_code: "Hex-Code (e.g. #FF0000)"
+                select: Please select…

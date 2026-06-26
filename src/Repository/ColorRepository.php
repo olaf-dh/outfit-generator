@@ -16,6 +16,25 @@ class ColorRepository extends ServiceEntityRepository
         parent::__construct($registry, Color::class);
     }
 
+    /**
+     * @param list<string> $families
+     * @return list<Color> Returns a list of Color objects
+     */
+    public function findByColorFamily(array $families): array
+    {
+        /** @var list<Color> $return */
+        $return = $this->createQueryBuilder('c')
+            ->andWhere('c.family IN (:families)')
+            ->setParameter('families', $families)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(15)
+            ->getQuery()
+            ->getResult()
+        ;
+
+        return $return;
+    }
+
     //    /**
     //     * @return Color[] Returns an array of Color objects
     //     */
