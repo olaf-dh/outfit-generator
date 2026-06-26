@@ -41,14 +41,14 @@ color:
         dark_goldenrod: Dark Goldenrod
 
         ## Family orange
-        pure_orange: Orange
-        dark_orange: Dark Orange
-        coral: Coral
-        peach_orange: Peach Orange
-        bright_orange: Bright Orange
+        peach: Peach
         light_orange: Light Orange
         orange_gold: Orange Gold
+        dark_orange: Dark Orange
+        coral: Coral
         mango_orange: Mango-Orange
+        bright_orange: Bright Orange
+        orange_peel: Orange
 
         ## Family purple
         pure_purple: Purple
